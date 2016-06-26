@@ -7,26 +7,31 @@ associated routes, so the nesting of your bolded components must
 _**exactly**_ match the nesting of your routes.)
 
 * **App**
-  * NotebooksIndex
-    * Search
-    * NotebookIndexItem
-    * NotebookForm
-  * **NotesIndex**
-    * NoteForm
-    * NoteIndexItem
-    * **NoteDetail**
-      * NoteTags
-      * NoteEditArea
-
+* Homepage
+  * CreateRoute
+    * **RouteForm**
+  * DiscoverRoutesIndex
+    * **RouteDetail**
+    * CommentsIndex
+    * CommentsForm
+  * Friends
+    * **FriendsIndex**
+      * **UserDetail**
+      * completedRoutesIndex
+        * **RouteDetail**
+        * CommentsIndex
+        * CommentsForm
+  * CompletedRoutesIndex
+    * **RouteDetail**
+    * CommentsIndex
+    * CommentsForm
 
 ## Routes
 
-* **component:** `App` **path:** `/`
-  * **component:** `NotesIndex` **path:** index
-  * **component:** `NotesIndex` **path:** `notebooks/:notebookId`
-    * **component:** `NoteDetail` **path:** `notes/:noteId`
-  * **component:** `NotesIndex` **path:** none
-    * **component:** `NoteDetail` **path:** `notes/:noteId`
-
-For Routes that have no `notebookId`, `NotesIndex` will render all
-notes.
+* **component:** 'App' **path:** '/'
+  * **component:** 'HomePage' **path:** IndexRoute
+  * **component:** 'RouteForm' **path:** 'routes/create'
+  * **component:** 'RouteDetail' **path:** 'routes/:routeId'
+    * **component:** 'Comments' **path:** 'comments'
+  * **component:** 'UserDetail' **path:** 'user/:userId'
+    * **component:** 'FriendsIndex' **path:** 'friends'
