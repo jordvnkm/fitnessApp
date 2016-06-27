@@ -1,22 +1,34 @@
 # View Wireframes
 
-## New User
-![new-user]
+## routes create
+[routes-create]
 
-## New Session
+## user profile
+![user-profile]
+
+## friends
+![friends]
+
+## route detail
+![route-detail]
+
+## discover routes
+![discover-routes]
+
+## new session
 ![new-session]
 
-## NotesIndex / NoteIndexItem / NoteForm
-![notes]
+## new user
+![new-user]
 
-## NotebooksIndex / NotebookIndexItem
-![notebooks]
+## homepage
+![homepage]
 
-## NotebookForm
-![notebook-form]
-
-[new-user]: ./wireframes/new_user.png
-[new-session]: ./wireframes/new_session.png
-[notes]: ./wireframes/root_notes.png
-[notebooks]: ./wireframes/root_notebooks.png
-[notebook-form]: ./wireframes/notebook_form.png
+[routes-create]: ./wireframes/IMG_2484.JPG
+[user-profile]: ./wireframes/IMG_2485.JPG
+[friends]: ./wireframes/IMG_2486.JPG
+[route-detail]: ./wireframes/IMG_2487.JPG
+[discover-routes]: ./wireframes/IMG_2488.JPG
+[new-session]: ./wireframes/IMG_2489.JPG
+[new-user]: ./wireframes/IMG_2490.JPG
+[homepage]: ./wireframes/IMG_2491.JPG
