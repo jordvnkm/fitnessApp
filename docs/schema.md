@@ -1,46 +1,45 @@
 # Schema Information
 
-## notes
+## friends
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-title       | string    | not null
-body        | text      | not null
-author_id   | integer   | not null, foreign key (references users), indexed
-notebook_id | integer   | not null, foreign key (references notebooks), indexed
-archived    | boolean   | not null, default: false
+user1_id    | integer   | not null
+user2_id    | integer   | not null
 
-## notebooks
+## comments
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 author_id   | integer   | not null, foreign key (references users), indexed
-title       | string    | not null
-description | string    | 
+content     | string    | not null
+route_id    | string    | not null, foreign key (references routes), indexed
 
-## reminders
+## routes
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
+author_id   | integer   | not null, foreign key (references users), indexed
+location_id | integer   | not null, foreign key (references locations), indexed
+
+## locations
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+name        | string    | not null
+NE_lat      | integer   | not null
+NE_lng      | integer   | not null
+SW_lat      | integer   | not null
+SW_lng      | integer   | not null
+
+## completed_routes
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+route_id    | integer   | not null, foreign key (references routes), indexed
 user_id     | integer   | not null, foreign key (references users), indexed
-note_id     | string    | not null, foreign key (references notes), indexed
-date        | datetime  | not null
-type        | string    | not null
-prev_id     | integer   | foreign key (references reminders), indexed
-
-## tags
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-name        | string    | not null
-
-## taggings
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-name        | string    | not null
-note_id     | integer   | not null, foreign key (references notes), indexed, unique [tag_id]
-tag_id      | integer   | not null, foreign key (references tags), indexed
+date        | date      | not null
+notes       | text      | 
 
 ## users
 column name     | data type | details

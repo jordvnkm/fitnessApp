@@ -9,29 +9,38 @@ _**exactly**_ match the nesting of your routes.)
 * **App**
 * Homepage
   * CreateRoute
-    * **RouteForm**
-  * DiscoverRoutesIndex
-    * **RouteDetail**
-    * CommentsIndex
-    * CommentsForm
+    * **RouteCreate**
+    * RouteForm
+    * MapComponent
   * Friends
     * **FriendsIndex**
-      * **UserDetail**
+      * FriendsIndexItem
+      * SearchBar
+  * User
+    * **UserProfile**
       * completedRoutesIndex
+      * completedRoutesIndexItem
+      * MapComponent
+      * UserImage
+      * UserDetail
+  * DiscoverRoutesIndex
+    * DiscoverRoutesIndexItem
+    * **DiscoverRoutes**
+      * mapComponent
+      * RoutesIndex
+      * RoutesIndexItem
         * **RouteDetail**
-        * CommentsIndex
-        * CommentsForm
-  * CompletedRoutesIndex
-    * **RouteDetail**
-    * CommentsIndex
-    * CommentsForm
-
+          * RouteSpecs
+          * mapComponent
+          * CommentsIndex
+            * CommentsIndexItem
+          * CommentsForm
 ## Routes
 
 * **component:** 'App' **path:** '/'
   * **component:** 'HomePage' **path:** IndexRoute
-  * **component:** 'RouteForm' **path:** 'routes/create'
-  * **component:** 'RouteDetail' **path:** 'routes/:routeId'
-    * **component:** 'Comments' **path:** 'comments'
-  * **component:** 'UserDetail' **path:** 'user/:userId'
-    * **component:** 'FriendsIndex' **path:** 'friends'
+  * **component:** 'RouteCreate' **path:** 'routes/create'
+  * **component:** 'FriendsIndex' **path:** 'user/:userId/friends'
+  * **component:** 'UserProfile'  **path:** 'user/:userId'
+  * **component:** 'DiscoverRoutes' **path:** 'routes/:locationId'
+    * **component:** 'RouteDetail' **path:** ':routeId'
