@@ -32,7 +32,7 @@ const App = React.createClass({
   },
 
   onUserChange: function(){
-    this.setState({currentUser: UserStore.currentUser(), userErrors: UserStore.errors()});
+    this.setState({modalOpen: false, currentUser: UserStore.currentUser(), userErrors: UserStore.errors()});
   },
 
   closeModal: function(){
@@ -46,45 +46,45 @@ const App = React.createClass({
 
   login: function(event){
     event.preventDefault();
-    this.setState({modalForm: <LoginForm onSubmit={this.closeModal}/>, modalOpen: true});
+    this.setState({modalForm: <LoginForm />, modalOpen: true});
 
   },
 
   signup: function(event){
     event.preventDefault();
-    this.setState({modalForm: <SignUpForm onSubmit={this.closeModal}/>, modalOpen: true});
+    this.setState({modalForm: <SignUpForm />, modalOpen: true});
   },
 
 
 
   button: function(){
     if (this.state.currentUser){
+      let profileText = this.state.currentUser.username;
+      profileText += "'s profile";
       return (
-        <span>
+        <span className="navButton">
           <button onClick={this.logout} className="loginButton">Log Out</button>
+          <button onClick={this.profileButton} className="loginButton">{profileText}</button>
         </span>
       );
     }
     else {
       return (
-        <span>
-          <button onClick={this.login} className="loginButton">Log In</button> &nbsp;
+        <span className="navButton">
+          <button onClick={this.login} className="loginButton">Log In</button>
           <button onClick={this.signup} className="loginButton">Sign Up</button>
         </span>
       );
     }
   },
 
-  currentUser: function(){
-    let user;
-    if (this.state.currentUser){
-      user = <span>hello {this.state.currentUser.username}</span>
-    }
-    return user;
+  profileButton: function(){
+    //TODO link to profile page
   },
 
   logo: function(){
-    return <span><img id="logo" src="http://www.clipartbest.com/cliparts/7ia/Rdd/7iaRddzxT.jpeg"></img></span>
+    // return <span id="logo"></span>
+    return <img id="logo" src="http://www.clipartbest.com/cliparts/7ia/Rdd/7iaRddzxT.jpeg"></img>
   },
 
   modal: function(){
@@ -95,22 +95,25 @@ const App = React.createClass({
         left            : 0,
         right           : 0,
         bottom          : 0,
-        backgroundColor : 'rgba(255, 255, 255, 0.75)',
+        backgroundColor : 'rgba(169, 169, 169, 0.75)',
       },
       content: {
-        position        : 'fixed',
-        top             : '100px',
-        left            : '150px',
-        right           : '150px',
-        bottom          : '100px',
-        border          : '1px solid #ccc',
-        padding         : '50px'
+        // position        : 'fixed',
+        // top             : '100px',
+        // left            : '150px',
+        // right           : '150px',
+        // bottom          : '100px',
+        // border          : '1px solid #ccc',
+        padding         : '50px',
+        width           : '30%',
+        height          : '40%',
+        backgroundColor : 'white'
       }
     };
 
 
     return (
-      <Modal isOpen={this.state.modalOpen} onRequestClose={this.closeModal} style={modalStyle}>
+      <Modal className="modal" isOpen={this.state.modalOpen} onRequestClose={this.closeModal} style={modalStyle}>
         <button onClick={this.closeModal}>X</button>
         {this.state.modalForm}
       </Modal>
@@ -123,7 +126,6 @@ const App = React.createClass({
         <div className="nav">
           {this.logo()}
           {this.button()}
-          {this.currentUser()}
         </div>
         {this.errors()}
         {this.modal()}

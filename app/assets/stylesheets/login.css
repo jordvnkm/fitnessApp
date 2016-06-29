@@ -1,12 +1,16 @@
+.navButton {
+  background-color: white;
+}
+
 
 .loginButton {
   display: inline-block;
   float: right;
   padding: 10px;
-  margin-right: 1%;
-  margin-top: .75%;
-  margin-bottom: 1%;
+  height: 100%;
+  width: 100px;
   text-align: center;
+  background-color: white;
 }
 
 .loginForm {
@@ -30,7 +34,7 @@
 .formInput {
   display: inline-block;
   float: left;
-  width: 40%;
+  width: 35%;
   margin-left: 2%;
   margin-right: 12%;
   margin-top: 10%;
@@ -38,10 +42,12 @@
 }
 
 
-.formButton {
-  display: inline-block;
+.formSubmit {
+  display: block;
   float: left;
-  text-align: center;
+  width: 90%;
+  margin-left: 4.5%;
+  margin-right: 4.5%;
   margin-top: 10%;
-
+  text-align: center;
 }

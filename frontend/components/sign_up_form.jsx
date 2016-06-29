@@ -44,7 +44,6 @@ const SignUpForm = React.createClass({
 
   onSubmit: function(event){
     event.preventDefault();
-    this.props.onSubmit();
     UserActions.signUp({
       username: this.state.username,
       password: this.state.password,
@@ -60,13 +59,12 @@ const SignUpForm = React.createClass({
       password: "password",
       email: "guest@guest.com"
     });
-    this.props.onSubmit();
   },
 
   render: function(){
     return (
-      <div>
-        <form onSubmit={this.onSubmit}  className="loginForm">
+      <div className="loginForm">
+        <form onSubmit={this.onSubmit}>
           <label className="formText" >Username</label>
           <input className="formInput" type="text" onChange={this.usernameChange} value={this.state.username} />
           <br></br>
@@ -76,10 +74,12 @@ const SignUpForm = React.createClass({
           <br></br>
           <label className="formText" >Password</label>
           <input className="formInput" type="password" onChange={this.passwordChange} value={this.state.password}/>
-          <br></br>
-          <input type="submit" value="Sign Up" />
-          <span> Or </span>
-          <button onClick={this.guestLogin} onSubmit={this.props.onSubmit}>Login as Guest</button>
+
+          <div className="formSubmit">
+            <input type="submit" value="Sign Up" />
+            <span>&nbsp; &nbsp; Or &nbsp; &nbsp; </span>
+            <button onClick={this.guestLogin}>Login as Guest</button>
+          </div>
         </form>
       </div>
     );
