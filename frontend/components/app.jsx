@@ -19,7 +19,7 @@ const App = React.createClass({
   button: function(){
     let buttonText;
     let funct;
-    if (window.currentUser){
+    if (this.state.currentUser){
       buttonText = "Log Out"
       funct = this.logout;
     }
@@ -31,7 +31,7 @@ const App = React.createClass({
 
   render: function(){
     let user;
-    if (window.currentUser){
+    if (this.state.currentUser){
       user = <span>hello {window.currentUser}</span>
     }
 
