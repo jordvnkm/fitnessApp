@@ -6,9 +6,10 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 
+
   <% if current_user %>
     <script type="text/javascript">
-      window.currentUser = <%= current_user.to_json.html_safe %>
+        window.currentUser = <%= render("api/users/user.json.jbuilder", user: current_user).html_safe %>
     </script>
   <% end %>
 </head>

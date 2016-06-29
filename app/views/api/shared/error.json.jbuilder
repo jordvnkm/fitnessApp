@@ -1,1 +1,1 @@
-json.error @errors
+json.errors @errors

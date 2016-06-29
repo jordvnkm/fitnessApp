@@ -6,26 +6,31 @@ const hashHistory = require("react-router").hashHistory;
 
 const SignUpForm = React.createClass({
   getInitialState: function(){
-    return {username: "", password: "", currentUser: UserStore.currentUser(),
-            userErrors: UserStore.errors()};
+    return {username: "", password: "", email: ""};
   },
 
   componentDidMount: function(){
-    this.listener = UserStore.addListener(this.updateUser);
-    if (UserStore.currentUser()){
-      window.currentUser = UserStore.currentUser();
-      hashHistory.push("/");
-    }
+    this.userListener = UserStore.addListener(this.updateUser);
+  },
 
+  componentWillUnmount: function(){
+    this.userListener.remove();
+  },
+
+  emailChange: function(event){
+    this.setState({email: event.target.value});
   },
 
 
   updateUser: function(){
     if (UserStore.currentUser()){
-      window.currentUser = UserStore.currentUser();
       hashHistory.push("/");
+      return;
     }
-    this.setState({userErrors: UserStore.errors()});
+    else{
+      this.setState({userErrors: UserStore.errors()});
+    }
+
   },
 
 
@@ -37,40 +42,44 @@ const SignUpForm = React.createClass({
     this.setState({password: event.target.value});
   },
 
-  onSubmit: function(){
+  onSubmit: function(event){
+    event.preventDefault();
+    this.props.onSubmit();
     UserActions.signUp({
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
+      email: this.state.email
     });
   },
 
-  errors: function(){
-    if (!this.state.userErrors){
-      return;
-    }
-    var self = this;
-    return (<ul>
-    {
-      Object.keys(this.state.userErrors).map(function(key, i){
-        return (<li key={i}>{self.state.userErrors[key]}</li>);
-      })
-    }
-    </ul>);
+  guestLogin: function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    UserActions.logIn({
+      username: "guest",
+      password: "password",
+      email: "guest@guest.com"
+    });
+    this.props.onSubmit();
   },
 
   render: function(){
     return (
       <div>
-        {this.errors()}
-        <form onSubmit={this.onSubmit}>
-          <label>Username</label>
-          <input type="text" onChange={this.usernameChange} value={this.state.username} />
-
+        <form onSubmit={this.onSubmit}  className="loginForm">
+          <label className="formText" >Username</label>
+          <input className="formInput" type="text" onChange={this.usernameChange} value={this.state.username} />
           <br></br>
-          <label>Password</label>
-          <input type="password" onChange={this.passwordChange} value={this.state.password}/>
+
+          <label className="formText" >Email</label>
+          <input className="formInput" type="text" onChange={this.emailChange} value={this.state.email}></input>
+          <br></br>
+          <label className="formText" >Password</label>
+          <input className="formInput" type="password" onChange={this.passwordChange} value={this.state.password}/>
           <br></br>
           <input type="submit" value="Sign Up" />
+          <span> Or </span>
+          <button onClick={this.guestLogin} onSubmit={this.props.onSubmit}>Login as Guest</button>
         </form>
       </div>
     );

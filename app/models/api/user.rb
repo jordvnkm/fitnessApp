@@ -1,7 +1,8 @@
 class Api::User < ActiveRecord::Base
   attr_reader :password
-  validates :username, :password_digest, :session_token, presence: true
-  validates :password, length: {minimum: 6, allow_nil: true}
+  validates :username, :password_digest, :email, :session_token, presence: true
+  validates :password, length: {minimum: 6}, allow_nil: true
+  validates :username, :email, uniqueness: true
 
   after_initialize :ensure_session_token
 
@@ -22,21 +23,23 @@ class Api::User < ActiveRecord::Base
   end
 
   def ensure_session_token
-    reset_session_token!
+
+   self.session_token ||= SecureRandom.urlsafe_base64
   end
 
   def reset_session_token!
     self.session_token = SecureRandom.urlsafe_base64
-    self.save!
+    self.save
     self.session_token
   end
 
   def password=(password)
+    @password = password
     self.password_digest = BCrypt::Password.create(password)
   end
 
   def is_password?(password)
-    BCrypt::Password.new(self.password_digets).is_password(password)
+    BCrypt::Password.new(self.password_digest).is_password?(password)
   end
 
 end

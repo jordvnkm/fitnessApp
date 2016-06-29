@@ -1,0 +1,47 @@
+
+.loginButton {
+  display: inline-block;
+  float: right;
+  padding: 10px;
+  margin-right: 1%;
+  margin-top: .75%;
+  margin-bottom: 1%;
+  text-align: center;
+}
+
+.loginForm {
+  display: block
+  width: 100%;
+  margin-top: 5%;
+  height: 80%;
+  border: 2px solid grey;
+}
+
+.formText {
+  display: inline-block;
+  float: left;
+  width: 40%;
+  margin-left: 2%;
+  margin-right: 3%;
+  margin-top: 10%;
+  text-align: center
+}
+
+.formInput {
+  display: inline-block;
+  float: left;
+  width: 40%;
+  margin-left: 2%;
+  margin-right: 12%;
+  margin-top: 10%;
+  text-align: center
+}
+
+
+.formButton {
+  display: inline-block;
+  float: left;
+  text-align: center;
+  margin-top: 10%;
+
+}

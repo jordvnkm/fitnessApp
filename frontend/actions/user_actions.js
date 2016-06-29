@@ -30,7 +30,7 @@ const UserActions = {
     AppDispatcher.dispatch({
       actionType: UserConstants.ERROR,
       errors: error.responseJSON.errors
-    })
+    });
   },
 
   removeCurrentUser: function(){

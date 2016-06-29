@@ -21,6 +21,7 @@ class Api::SessionsController < ApplicationController
     else
       @errors = nil
       render "api/shared/error", status: 404
+    end
   end
 
   def destroy
@@ -33,5 +34,6 @@ class Api::SessionsController < ApplicationController
       @errors = ['nobody logged in']
       render "api/shared/error", status: 404
     end
+
   end
 end

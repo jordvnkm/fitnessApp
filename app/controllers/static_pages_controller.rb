@@ -1,5 +1,8 @@
+require 'byebug'
+
 class StaticPagesController < ApplicationController
   def index
-    render :index
+
+    # debugger
   end
 end
