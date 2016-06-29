@@ -2,25 +2,23 @@ module.exports = {
   context: __dirname,
   entry: "./frontend/fitness_app.jsx",
   output: {
-    path: './app/assets/javascripts/',
-    filename: "bundle.js",
-    devtoolModuleFilenameTemplate: '[resourcePath]',
-    devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
+    path: "./app/assets/javascripts/",
+    filename: "bundle.js"
   },
   module: {
     loaders: [
       {
         test: [/\.jsx?$/, /\.js?$/],
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         loader: 'babel',
         query: {
-          presets: ['es2015', 'react']
+          presets: ['react', 'es2015']
         }
       }
     ]
   },
-  devtool: 'source-maps',
   resolve: {
-    extensions: ["", ".js", ".jsx" ]
-  }
+    extensions: ["", ".js", ".jsx"]
+  },
+  devtool: 'source-map'
 };

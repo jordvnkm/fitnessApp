@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20160628185728) do
     t.string   "username",        null: false
     t.string   "password_digest", null: false
     t.string   "session_token",   null: false
-    t.string   "profile_img_url", null: false
+    t.string   "profile_img_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

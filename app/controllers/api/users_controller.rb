@@ -1,4 +1,4 @@
-class Api::UsersControllerController < ApplicationController
+class Api::UsersController < ApplicationController
 
 
   def create
@@ -8,7 +8,7 @@ class Api::UsersControllerController < ApplicationController
       render '/api/users/show'
     else
       @error = @user.errors.full_messages
-      render "api/shared/error" status: 422
+      render "api/shared/error", status: 422
     end
   end
 

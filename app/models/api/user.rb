@@ -17,6 +17,10 @@ class Api::User < ActiveRecord::Base
     end
   end
 
+  def profile_img_url=(url)
+    self.profile_img_url = url
+  end
+
   def ensure_session_token
     reset_session_token!
   end
