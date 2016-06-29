@@ -15,7 +15,7 @@ Ultimate Fitness Challenge is a web application inspired by MapMyRun wthat will 
   - [ ] Smooth, bug-free navigation
   - [ ] Adequate seed data to demonstrate the site's features
   - [ ] Adequate CSS styling
-- [ ] Allow users to "friend" other users
+- [ ] Allow users to "follow" other users
   - [ ] Smooth, bug-free navigation
   - [ ] Adequate seed data to demonstrate the site's features
   - [ ] Adequate CSS styling
@@ -43,7 +43,7 @@ Ultimate Fitness Challenge is a web application inspired by MapMyRun wthat will 
 
 ## Implementation Timeline
 
-### Phase 1: Backend setup and Front End User Authentication (1 day, W1 Tu 6pm)
+### Phase 1: user authentication and user profile(1 days, W1 Wed 6pm)
 
 **Objective:** Functioning rails project with Authentication
 
@@ -51,10 +51,13 @@ Ultimate Fitness Challenge is a web application inspired by MapMyRun wthat will 
 - [ ] create `User` model
 - [ ] authentication
 - [ ] user signup/signin pages
-- [ ] blank landing page after signin
+- [ ] front end auth
+- [ ] guest demo login
+- [ ] user profiles
+- [ ] user settings
 
 
-### Phase 2: Routes Model, API, and basic APIUtil (1.5 days, W1 Th 12pm)
+### Phase 2: Routes Model, API, and basic APIUtil (2 days, W1 fri 6pm)
 
 **Objective:** Routes can be created, read, edited and destroyed through
 the API.
@@ -66,14 +69,18 @@ the API.
 - [ ] setup Webpack & Flux scaffold
 - [ ] setup `APIUtil` to interact with the API
 - [ ] test out API interaction in the console.
+- [ ] style route index, route detail, map and profile page
+- [ ] navbar
+- [ ] be able to favorite routes
 
 
 
-### Phase 3: Flux Architecture and Router (2 days, W2 M 12pm)
+### Phase 3: Route creation(3 days, W2 M 6pm)
 
 **Objective:** Routes can be created, read, edited and destroyed with the
 user interface.
 
+- [ ] setup waypoints table and model
 - [ ] setup the flux loop with skeleton files
 - [ ] setup React Router
 - implement each Route component, building out the flux loop as needed.
@@ -83,52 +90,45 @@ user interface.
   - [ ] `MapComponent`
 - [ ] save Routes to the DB when the form loses focus or is left idle
   after editing.
+- [ ] style routes components
 
 
-### Phase 4: Start Styling (0.5 days, W2 M 6pm)
+### Phase 4: followers and comments (1 days, W2 Tu 6pm)
 
-**Objective:** Existing pages (including signup/signin) will look good.
+**Objective:** allow users to follow other users and create comments on routes
 
-- [ ] create a basic style guide
-- [ ] position elements on the page
-- [ ] add basic colors & styles
-
-### Phase 5: Friends (0.5 days day, W2 Tu 12pm)
-
-**Objective:** Allow users to befriend other users.
-- [ ] create `friends` database table
-- build out api, flux loop and components for:
-  - [ ] current user befriends another user.
-
-### Phase 6: Locations (1 days, W2 Wed 12pm)
-
-**Objective:** Routes can be discovered by looking at location.
-
-- [ ] create `Location` model
-- build out API, Flux loop, and components for:
-  - [ ] fetching routes for a certain location
-  - [ ] updating RoutesIndex if needed
-- [ ] Style new elements
+- [ ] create following join table
+- [ ] create follow button on user profiles
+- [ ] implement user search bar
+- [ ] allow routes to be commented on
+- [ ] style comments nad seed routes and comments with data
 
 
-### Phase 7: Show completed routes on user profiles (1 days, W2 Thu 12pm)
+### Phase 5: discover routes page (1 days day, W2 Wed 6pm)
 
-**objective:** Show completed routes on user profiles
+**Objective:** allow users to search for routes by city or name
 
-- [ ] Create `completed_routes` join table
-- build out API, Flux loop, and components for:
-  - [ ] CompleteRoutesIndex
-  - [ ] CompletedRoutesIndexItem
-  - [ ] Fetching completed routes for user id
+- [ ] implement search bar component
+- [ ] implement routes index
+- [ ] style discover page
+
+### Phase 6: homepage (1 days, W2 Thu 6pm)
+
+**Objective:** create homepage component
+
+- [ ] create homepage component
+- [ ] discover routes component inside homepage
+- [ ] style homepage
 
 
-### Phase 8: Styling Cleanup and Seeding (1 day, W2 F 6pm)
+### Phase 1: production readme(1 days, W2 F 6pm)
 
-**objective:** Make the site feel more cohesive and awesome.
+**objective:** create a production readme
 
-- [ ] Get feedback on my UI from others
-- [ ] Refactor HTML classes & CSS rules
-- [ ] Add modals, transitions, and other styling flourishes.
+- [ ] to be determined
+
+
+
 
 ### Bonus Features (TBD)
 - [ ] Search through notes for blocks of text
