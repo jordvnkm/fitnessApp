@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+guest = Api::User.new(username: "guest", password: "password",
+                      email: "guest@guest.com",
+                      profile_img_url: "https://supermanherbs.com/wp-content/uploads/2014/09/spartan300.jpg")
+
+guest.save

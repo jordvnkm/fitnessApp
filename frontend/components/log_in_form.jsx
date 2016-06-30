@@ -59,11 +59,10 @@ const LoginForm = React.createClass({
 
   render: function(){
     return (
-      <div  className="loginForm">
-        <form onSubmit={this.onSubmit}>
+      <div className="modalForm">
+        <form onSubmit={this.onSubmit}  className="loginForm">
           <label className="formText" value="Username">Username</label>
           <input className="formInput" type="text" onChange={this.usernameChange} value={this.state.username} />
-          <br></br>
 
           <label className="formText" value="Password">Password</label>
           <input className="formInput" type="password" onChange={this.passwordChange} value={this.state.password} />

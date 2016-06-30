@@ -19,9 +19,11 @@ html {
 }
 
 .nav {
+  display: flex;
   width: 100%;
   background-color: white;
   height: 100px;
+  border-bottom: 1px solid grey;
 }
 
 .ReactModal__Overlay {
@@ -48,7 +50,7 @@ body {
   margin-left: 34.5%;
   margin-right: 34.5%;
   border-radius: 25px;
-
+  padding: 20px;
 }
 
 #logo {

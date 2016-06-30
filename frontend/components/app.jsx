@@ -62,18 +62,18 @@ const App = React.createClass({
       let profileText = this.state.currentUser.username;
       profileText += "'s profile";
       return (
-        <span className="navButton">
+        <div className="navButton">
           <button onClick={this.logout} className="loginButton">Log Out</button>
           <button onClick={this.profileButton} className="loginButton">{profileText}</button>
-        </span>
+        </div>
       );
     }
     else {
       return (
-        <span className="navButton">
+        <div className="navButton">
           <button onClick={this.login} className="loginButton">Log In</button>
           <button onClick={this.signup} className="loginButton">Sign Up</button>
-        </span>
+        </div>
       );
     }
   },
@@ -104,7 +104,6 @@ const App = React.createClass({
         // right           : '150px',
         // bottom          : '100px',
         // border          : '1px solid #ccc',
-        padding         : '50px',
         width           : '30%',
         height          : '40%',
         backgroundColor : 'white'
@@ -114,7 +113,6 @@ const App = React.createClass({
 
     return (
       <Modal className="modal" isOpen={this.state.modalOpen} onRequestClose={this.closeModal} style={modalStyle}>
-        <button onClick={this.closeModal}>X</button>
         {this.state.modalForm}
       </Modal>
     )

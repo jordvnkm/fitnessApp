@@ -11,10 +11,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160629163012) do
+ActiveRecord::Schema.define(version: 20160630003124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "completed_routes", force: :cascade do |t|
+    t.integer  "route_id",   null: false
+    t.integer  "user_id",    null: false
+    t.date     "date",       null: false
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "completed_routes", ["date"], name: "index_completed_routes_on_date", using: :btree
+  add_index "completed_routes", ["route_id"], name: "index_completed_routes_on_route_id", using: :btree
+  add_index "completed_routes", ["user_id"], name: "index_completed_routes_on_user_id", using: :btree
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "route_id",   null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "favorites", ["route_id"], name: "index_favorites_on_route_id", using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name",                      null: false
+    t.decimal  "NE_lat",     precision: 10, null: false
+    t.decimal  "NE_lng",     precision: 10, null: false
+    t.decimal  "SW_lat",     precision: 10, null: false
+    t.decimal  "SW_lng",     precision: 10, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
+
+  create_table "routes", force: :cascade do |t|
+    t.integer  "author_id",   null: false
+    t.string   "name",        null: false
+    t.integer  "location_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "routes", ["author_id"], name: "index_routes_on_author_id", using: :btree
+  add_index "routes", ["location_id"], name: "index_routes_on_location_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false
@@ -28,5 +74,16 @@ ActiveRecord::Schema.define(version: 20160629163012) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+
+  create_table "waypoints", force: :cascade do |t|
+    t.decimal  "lat",        precision: 10, null: false
+    t.decimal  "lng",        precision: 10, null: false
+    t.integer  "route_id",                  null: false
+    t.integer  "order",                     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "waypoints", ["route_id"], name: "index_waypoints_on_route_id", using: :btree
 
 end

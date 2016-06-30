@@ -63,15 +63,13 @@ const SignUpForm = React.createClass({
 
   render: function(){
     return (
-      <div className="loginForm">
-        <form onSubmit={this.onSubmit}>
+      <div className="modalForm">
+        <form onSubmit={this.onSubmit} className="loginForm">
           <label className="formText" >Username</label>
           <input className="formInput" type="text" onChange={this.usernameChange} value={this.state.username} />
-          <br></br>
 
           <label className="formText" >Email</label>
           <input className="formInput" type="text" onChange={this.emailChange} value={this.state.email}></input>
-          <br></br>
           <label className="formText" >Password</label>
           <input className="formInput" type="password" onChange={this.passwordChange} value={this.state.password}/>
 
