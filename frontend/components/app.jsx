@@ -2,13 +2,13 @@ const React = require("react");
 const UserStore = require("../stores/users_store");
 const hashHistory = require("react-router").hashHistory;
 const UserActions = require("../actions/user_actions");
-const Modal = require("react-modal");
+const Modal = require("react-bootstrap").Modal;
 
-// const Navbar = require("react-bootstrap").Navbar;
-// const Nav = require("react-bootstrap").Nav;
-// const NavItem = require("react-bootstrap").NavItem;
-// const NavDropdown = require("react-bootstrap").NavDropdown;
-// const MenuItem = require("react-bootstrap").MenuItem;
+const Navbar = require("react-bootstrap").Navbar;
+const Nav = require("react-bootstrap").Nav;
+const NavItem = require("react-bootstrap").NavItem;
+const NavDropdown = require("react-bootstrap").NavDropdown;
+const MenuItem = require("react-bootstrap").MenuItem;
 
 
 const LoginForm = require("./log_in_form");
@@ -34,16 +34,16 @@ const App = React.createClass({
     </ul>);
   },
 
+  closeModal: function(){
+    this.setState({modalOpen: false})
+  },
+
   componentDidMount: function(){
     this.userListener = UserStore.addListener(this.onUserChange);
   },
 
   onUserChange: function(){
     this.setState({modalOpen: false, currentUser: UserStore.currentUser(), userErrors: UserStore.errors()});
-  },
-
-  closeModal: function(){
-    this.setState({modalOpen: false});
   },
 
   logout: function(event){
@@ -68,65 +68,71 @@ const App = React.createClass({
     hashHistory.push(url);
   },
 
-  button: function(){
-    if (this.state.currentUser){
-      let profileText = this.state.currentUser.username;
-      profileText += "'s profile";
+  navButtons: function(){
+    if (this.state.currentUser === null){
       return (
-        <div className="navButton">
-          <button onClick={this.logout} className="loginButton">Log Out</button>
-          <button onClick={this.profileButton} className="loginButton">{profileText}</button>
-        </div>
+        <Nav pullRight>
+          <NavItem onClick={this.login}>Log In</NavItem>
+          <NavItem onClick={this.signup}>Sign Up</NavItem>
+        </Nav>
       );
     }
     else {
+      let title = this.state.currentUser.username;
       return (
-        <div className="navButton">
-          <button onClick={this.login} className="loginButton">Log In</button>
-          <button onClick={this.signup} className="loginButton">Sign Up</button>
-        </div>
-      );
+        <Nav pullRight>
+          <NavItem onClick={this.logout}>Log Out</NavItem>
+          <NavDropdown eventkey={3} title={title} id="basic-nav-dropdown">
+            <MenuItem onClick={this.profileButton}>Profile</MenuItem>
+            <MenuItem >Settings</MenuItem>
+          </NavDropdown>
+        </Nav>
+      )
     }
   },
 
-  logo: function(){
-    // return <span id="logo"></span>
-    return <img id="logo" src="http://www.clipartbest.com/cliparts/7ia/Rdd/7iaRddzxT.jpeg"></img>
+  navBar: function(){
+    return (
+      <Navbar inverse>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a onClick={this.homeButton}>GoTheDistance</a>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+
+        <Navbar.Collapse>
+          {this.navButtons()}
+        </Navbar.Collapse>
+      </Navbar>
+    );
   },
 
   modal: function(){
-    const modalStyle = {
-      overlay: {
-        position        : 'fixed',
-        top             : 0,
-        left            : 0,
-        right           : 0,
-        bottom          : 0,
-        backgroundColor : 'rgba(169, 169, 169, 0.75)',
-      },
-      content: {
-        width           : '30%',
-        height          : '40%',
-        backgroundColor : 'white'
+    const FormModal = React.createClass({
+
+      render: function(){
+
+        return (
+          <Modal {...this.props} bsSize="small" aria-labelledby="contained-modal-title-sm">
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title-sm">GoTheDistance</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {this.props.modalForm}
+            </Modal.Body>
+          </Modal>
+        );
       }
-    };
+    });
 
-
-    return (
-      <Modal className="modal" isOpen={this.state.modalOpen} onRequestClose={this.closeModal} style={modalStyle}>
-        {this.state.modalForm}
-      </Modal>
-    )
+    return <FormModal modalForm={this.state.modalForm} show={this.state.modalOpen} onHide={this.closeModal}/>
   },
-
 
   render: function(){
     return (
-      <div>
-        <div className="nav">
-          {this.logo()}
-          {this.button()}
-        </div>
+      <div className="modal-container">
+        {this.navBar()}
         {this.errors()}
         {this.modal()}
         {this.props.children}

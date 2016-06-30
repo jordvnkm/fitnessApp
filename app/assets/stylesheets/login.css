@@ -1,20 +1,4 @@
-.navButton {
-  margin-left: auto;
-  background-color: white;
-  display: flex;
-}
 
-
-.loginButton {
-  display: inline-block;
-  padding: 10px;
-  height: 100%;
-  width: 100px;
-  text-align: center;
-  background-color: white;
-  border-top: 0px;
-  border-bottom: 0px;
-}
 
 .modalForm {
   display: flex;
@@ -66,18 +50,4 @@
   /*display: block;*/
   width: 100%;
   margin-bottom: 10%;
-}
-
-
-.formSubmit {
-
-  /* display: flex; */
-  /* float: left; */
-  /* width: 90%; */
-  /* margin-left: 4.5%; */
-  /* margin-right: 4.5%; */
-  /* margin-top: 10%; */
-  /* text-align: center; */
-  /* align-content: center; */
-  /* justify-content: center; */
 }

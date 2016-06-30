@@ -2,7 +2,7 @@ const React = require("react");
 const UserStore = require("../stores/users_store");
 const UserActions = require("../actions/user_actions");
 const hashHistory = require("react-router").hashHistory;
-
+const Button = require("react-bootstrap").Button;
 
 const SignUpForm = React.createClass({
   getInitialState: function(){
@@ -74,9 +74,9 @@ const SignUpForm = React.createClass({
           <input className="formInput" type="password" onChange={this.passwordChange} value={this.state.password}/>
 
           <div className="formSubmit">
-            <input type="submit" value="Sign Up" />
+            <Button type="submit">Login</Button>
             <span>&nbsp; &nbsp; Or &nbsp; &nbsp; </span>
-            <button onClick={this.guestLogin}>Login as Guest</button>
+            <Button onClick={this.guestLogin}>Login as Guest</Button>
           </div>
         </form>
       </div>

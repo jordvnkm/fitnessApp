@@ -18,42 +18,26 @@ html {
   height: 100%;
 }
 
-.nav {
-  display: flex;
-  width: 100%;
-  background-color: white;
-  height: 100px;
-  border-bottom: 1px solid grey;
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
 }
 
-.ReactModal__Overlay {
+
+/*.ReactModal__Overlay {
   display: block;
-}
+}*/
 
-body {
+/*body {
   height: 100%;
   width: 100%;
   background-size: cover;
-  /*background: url("Running-Wallpaper-6.jpg") repeat 0 0;*/
   background-color: lightgrey;
   margin: 0px;
-}
-.content {
+}*/
+/*.content {
   height: 100%;
   width: 100%;
-}
-
-.modal {
-  float: left;
-  margin-top: 10%;
-  margin-bottom: 29.5%;
-  margin-left: 34.5%;
-  margin-right: 34.5%;
-  border-radius: 25px;
-  padding: 20px;
-}
-
-#logo {
-  /*background: url("LogoMakr.png") repeat 0 0;*/
-  height: 100%;
-}
+}*/
