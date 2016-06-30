@@ -76,10 +76,10 @@ ActiveRecord::Schema.define(version: 20160630003124) do
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "waypoints", force: :cascade do |t|
-    t.decimal  "lat",        precision: 10, null: false
-    t.decimal  "lng",        precision: 10, null: false
-    t.integer  "route_id",                  null: false
-    t.integer  "order",                     null: false
+    t.decimal  "lat",        precision: 10, scale: 6, null: false
+    t.decimal  "lng",        precision: 10, scale: 6, null: false
+    t.integer  "route_id",                            null: false
+    t.integer  "order",                               null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

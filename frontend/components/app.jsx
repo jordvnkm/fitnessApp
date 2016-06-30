@@ -4,6 +4,13 @@ const hashHistory = require("react-router").hashHistory;
 const UserActions = require("../actions/user_actions");
 const Modal = require("react-modal");
 
+// const Navbar = require("react-bootstrap").Navbar;
+// const Nav = require("react-bootstrap").Nav;
+// const NavItem = require("react-bootstrap").NavItem;
+// const NavDropdown = require("react-bootstrap").NavDropdown;
+// const MenuItem = require("react-bootstrap").MenuItem;
+
+
 const LoginForm = require("./log_in_form");
 const SignUpForm = require("./sign_up_form");
 
@@ -42,6 +49,7 @@ const App = React.createClass({
   logout: function(event){
     event.preventDefault();
     UserActions.logout();
+    hashHistory.push("/")
   },
 
   login: function(event){
@@ -55,7 +63,10 @@ const App = React.createClass({
     this.setState({modalForm: <SignUpForm />, modalOpen: true});
   },
 
-
+  profileButton: function(event){
+    let url = `users/${this.state.currentUser.id}`;
+    hashHistory.push(url);
+  },
 
   button: function(){
     if (this.state.currentUser){
@@ -78,10 +89,6 @@ const App = React.createClass({
     }
   },
 
-  profileButton: function(){
-    //TODO link to profile page
-  },
-
   logo: function(){
     // return <span id="logo"></span>
     return <img id="logo" src="http://www.clipartbest.com/cliparts/7ia/Rdd/7iaRddzxT.jpeg"></img>
@@ -98,12 +105,6 @@ const App = React.createClass({
         backgroundColor : 'rgba(169, 169, 169, 0.75)',
       },
       content: {
-        // position        : 'fixed',
-        // top             : '100px',
-        // left            : '150px',
-        // right           : '150px',
-        // bottom          : '100px',
-        // border          : '1px solid #ccc',
         width           : '30%',
         height          : '40%',
         backgroundColor : 'white'
@@ -117,6 +118,7 @@ const App = React.createClass({
       </Modal>
     )
   },
+
 
   render: function(){
     return (

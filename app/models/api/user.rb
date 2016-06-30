@@ -6,6 +6,29 @@ class Api::User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  has_many :authored_routes,
+    class_name: :Route,
+    foreign_key: :author_id,
+    primary_key: :id
+
+  has_many :completed,
+    class_name: :CompletedRoute,
+    foreign_key: :user_id,
+    primary_key: :id
+
+  has_many :favorites,
+    class_name: :Favorite,
+    foreign_key: :user_id,
+    primary_key: :id
+
+  has_many :completed_routes,
+    through: :completed,
+    source: :route
+
+  has_many :favorite_routes,
+    through: :favorites,
+    source: :route
+
   def self.find_by_credentials(username, password)
     user = Api::User.find_by(username: username)
 

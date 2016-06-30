@@ -11,10 +11,12 @@ const IndexRoute = reactRouter.IndexRoute;
 const UserActions = require("./actions/user_actions");
 const App = require("./components/app");
 const SignUpForm = require("./components/sign_up_form");
-const LoginForm = require("./components/log_in_form")
+const LoginForm = require("./components/log_in_form");
+const UserProfile = require("./components/user_profile");
 
 let routes = (<Router history={hashHistory}>
   <Route path="/" component={App}>
+    <Route path="users/:userId" component={UserProfile}></Route>
   </Route>
 </Router>);
 
