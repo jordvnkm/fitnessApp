@@ -17,9 +17,8 @@ const UserSettings = require("./components/user_settings")
 
 let routes = (<Router history={hashHistory}>
   <Route path="/" component={App}>
-    <Route path="users/:userId" component={UserProfile}>
-      <Route path="settings" component={UserSettings}></Route>
-    </Route>
+    <Route path="users/:userId" component={UserProfile}></Route>
+    <Route path="users/:userId/settings" component={UserSettings}></Route>
   </Route>
 </Router>);
 

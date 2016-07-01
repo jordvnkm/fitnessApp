@@ -68,6 +68,11 @@ const App = React.createClass({
     hashHistory.push(url);
   },
 
+  settingsButton: function(event){
+    let url = `users/${this.state.currentUser.id}/settings`;
+    hashHistory.push(url);
+  },
+
   navButtons: function(){
     if (this.state.currentUser === null){
       return (
@@ -84,7 +89,7 @@ const App = React.createClass({
           <NavItem onClick={this.logout}>Log Out</NavItem>
           <NavDropdown eventkey={3} title={title} id="basic-nav-dropdown">
             <MenuItem onClick={this.profileButton}>Profile</MenuItem>
-            <MenuItem >Settings</MenuItem>
+            <MenuItem onClick={this.settingsButton}>Settings</MenuItem>
           </NavDropdown>
         </Nav>
       )

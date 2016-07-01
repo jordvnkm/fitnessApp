@@ -5,6 +5,8 @@ const CompletedRoutesIndex = require("./completed_routes_index");
 const FavoriteRoutesIndex = require("./favorite_routes_index");
 const AuthoredRoutesIndex = require("./authored_routes_index");
 
+
+
 const UserProfile = React.createClass({
   getInitialState: function(){
     return {profile: ProfileStore.find(this.props.params.userId)};
@@ -34,11 +36,18 @@ const UserProfile = React.createClass({
     return routesIndexes;
   },
 
+  createRoutesButton: function(){
+    return (
+      <div></div>
+    );
+  },
+
   render: function(){
     let text = `hello userid = ${this.props.params.userId}`;
     return (
       <div>
         {text}
+        {this.createRoutesButton()}
         {this.routes()}
       </div>
     );
