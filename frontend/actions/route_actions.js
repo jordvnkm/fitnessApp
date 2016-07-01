@@ -15,6 +15,10 @@ const RouteActions = {
     });
   },
 
+  createRoute: function(route){
+    RouteApiUtil.createRoute(route, RouteActions.receiveRoute, RouteActions.handleError);
+  },
+
 
   receiveRoutes: function(routes){
     AppDispatcher.dispatch({

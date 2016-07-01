@@ -4,6 +4,8 @@ const ProfileActions = require("../actions/profile_actions");
 const CompletedRoutesIndex = require("./completed_routes_index");
 const FavoriteRoutesIndex = require("./favorite_routes_index");
 const AuthoredRoutesIndex = require("./authored_routes_index");
+const hashHistory = require("react-router").hashHistory;
+
 
 const ButtonToolbar = require("react-bootstrap").ButtonToolbar;
 const Button = require("react-bootstrap").Button;
@@ -42,6 +44,8 @@ const UserProfile = React.createClass({
 
   createRoute: function(){
     console.log("create route clicked");
+    hashHistory.push(`/routes/create`)
+
   },
 
   followedProfiles: function(){

@@ -11,7 +11,6 @@ const UserSettings = React.createClass({
 
   componentDidMount: function(){
     this.userListener = UserStore.addListener(this.updateUser);
-    UserActions.fetchCurrentUser();
   },
 
   componentWillUnmount: function(){

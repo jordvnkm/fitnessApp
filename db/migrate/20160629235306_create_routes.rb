@@ -4,6 +4,7 @@ class CreateRoutes < ActiveRecord::Migration
       t.integer :author_id, null: false
       t.string :name, null: false
       t.integer :location_id, null: false
+      t.text :notes
 
       t.timestamps
     end

@@ -18,7 +18,6 @@ const Map = React.createClass({
   },
 
   componentDidMount: function(){
-    console.log(this.props.waypoints);
     let waypoints = this.props.waypoints;
     const directionsDisplay = new google.maps.DirectionsRenderer();
     const directionsService = new google.maps.DirectionsService();

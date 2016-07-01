@@ -13,6 +13,22 @@ const RouteApiUtil = {
       }
     });
   },
+
+  createRoute: function(route, successCallback, errorCallback){
+    let params = {route: route}
+    $.ajax({
+      url: '/api/routes',
+      type: "POST",
+      data: params,
+      success: function(route){
+        successCallback(route);
+      },
+
+      error: function(error){
+        errorCallback(error);
+      }
+    })
+  }
 };
 
 
