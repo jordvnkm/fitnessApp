@@ -18,6 +18,11 @@
   padding: 10px;*/
 }
 
+.formSubmit span {
+  font-weight: bold;
+  margin-right: 10px;
+  margin-left: 10px;
+}
 
 .formInput {
   /* display: flex; */
@@ -31,4 +36,11 @@
   /*display: block;*/
   width: 100%;
   margin-bottom: 10%;
+}
+
+.formSubmit {
+  display: flex;
+  justify-content: center;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  align-items: center;
 }

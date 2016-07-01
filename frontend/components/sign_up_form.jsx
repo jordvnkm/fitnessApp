@@ -4,6 +4,11 @@ const UserActions = require("../actions/user_actions");
 const hashHistory = require("react-router").hashHistory;
 const Button = require("react-bootstrap").Button;
 
+const FormGroup = require("react-bootstrap").FormGroup;
+const ControlLabel = require("react-bootstrap").ControlLabel;
+const FormControl = require("react-bootstrap").FormControl;
+const HelpBlock = require("react-bootstrap").HelpBlock;
+
 const SignUpForm = React.createClass({
   getInitialState: function(){
     return {username: "", password: "", email: ""};
@@ -61,21 +66,43 @@ const SignUpForm = React.createClass({
     });
   },
 
+  passwordValidation: function(){
+    const length = this.state.password.length;
+    if (length >= 6) {
+      return "success";
+    }
+    else if (length > 0){
+      return "error";
+    }
+  },
+
   render: function(){
     return (
       <div className="modalForm">
-        <form onSubmit={this.onSubmit} className="loginForm">
-          <label className="formText" >Username</label>
-          <input className="formInput" type="text" onChange={this.usernameChange} value={this.state.username} />
+        <form onSubmit={this.onSubmit}>
+          <FormGroup controlId="formControlsText">
+            <ControlLabel>Username</ControlLabel>
+            <FormControl type="text" placeholder="Enter Username"
+              onChange={this.usernameChange} value={this.state.username} />
+          </FormGroup>
 
-          <label className="formText" >Email</label>
-          <input className="formInput" type="text" onChange={this.emailChange} value={this.state.email}></input>
-          <label className="formText" >Password</label>
-          <input className="formInput" type="password" onChange={this.passwordChange} value={this.state.password}/>
+          <FormGroup controlId="formControlsEmail">
+            <ControlLabel>Email</ControlLabel>
+            <FormControl type="email" placeholder="Enter Email"
+              onChange={this.emailChange} value={this.state.email} />
+          </FormGroup>
+
+          <FormGroup controlId="formControlsPassword" validationState={this.passwordValidation()}>
+            <ControlLabel>Password</ControlLabel>
+            <FormControl type="password" placeholder="Enter Password"
+              onChange={this.passwordChange} value={this.state.password}/>
+            <FormControl.Feedback />
+            <HelpBlock>Passwords must be at least 6 characters</HelpBlock>
+          </FormGroup>
 
           <div className="formSubmit">
             <Button type="submit">Sign Up</Button>
-            <span>&nbsp; Or &nbsp;</span>
+            <span>Or</span>
             <Button onClick={this.guestLogin}>Login as Guest</Button>
           </div>
         </form>
