@@ -18,6 +18,10 @@ html {
   height: 100%;
 }
 
+.navbar-brand {
+  cursor: pointer;
+}
+
 .modal-container {
   position: relative;
 }
@@ -25,6 +29,14 @@ html {
   position: absolute;
 }
 
+.userToolbar {
+  display: flex;
+  justify-content: center;
+}
+
+.routeIndexItem {
+  cursor: pointer;
+}
 
 /*.ReactModal__Overlay {
   display: block;

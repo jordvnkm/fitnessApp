@@ -1,0 +1,7 @@
+
+
+module.exports = {
+  ROUTE_RECEIVED: "ROUTE_RECEIVED",
+  ERROR: "ERROR",
+  ROUTES_RECEIVED: "ROUTES_RECEIVED"
+};

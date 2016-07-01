@@ -13,12 +13,15 @@ const App = require("./components/app");
 const SignUpForm = require("./components/sign_up_form");
 const LoginForm = require("./components/log_in_form");
 const UserProfile = require("./components/user_profile");
-const UserSettings = require("./components/user_settings")
+const UserSettings = require("./components/user_settings");
+const RouteDetail = require("./components/route_detail");
+
 
 let routes = (<Router history={hashHistory}>
   <Route path="/" component={App}>
     <Route path="users/:userId" component={UserProfile}></Route>
     <Route path="users/:userId/settings" component={UserSettings}></Route>
+    <Route path="routes/:routeId" component={RouteDetail}></Route>
   </Route>
 </Router>);
 

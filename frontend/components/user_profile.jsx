@@ -5,6 +5,10 @@ const CompletedRoutesIndex = require("./completed_routes_index");
 const FavoriteRoutesIndex = require("./favorite_routes_index");
 const AuthoredRoutesIndex = require("./authored_routes_index");
 
+const ButtonToolbar = require("react-bootstrap").ButtonToolbar;
+const Button = require("react-bootstrap").Button;
+const MenuItem = require("react-bootstrap").MenuItem;
+
 
 
 const UserProfile = React.createClass({
@@ -36,9 +40,22 @@ const UserProfile = React.createClass({
     return routesIndexes;
   },
 
-  createRoutesButton: function(){
+  createRoute: function(){
+    console.log("create route clicked");
+  },
+
+  followedProfiles: function(){
+    console.log("followed profiles clicked");
+  },
+
+  userNavButtons: function(){
     return (
-      <div></div>
+      <div className="userToolbar">
+        <ButtonToolbar>
+          <Button onClick={this.createRoute}>CreateRoute</Button>
+          <Button onClick={this.followedProfiles}>Followed Profiles</Button>
+        </ButtonToolbar>
+      </div>
     );
   },
 
@@ -46,8 +63,7 @@ const UserProfile = React.createClass({
     let text = `hello userid = ${this.props.params.userId}`;
     return (
       <div>
-        {text}
-        {this.createRoutesButton()}
+        {this.userNavButtons()}
         {this.routes()}
       </div>
     );
