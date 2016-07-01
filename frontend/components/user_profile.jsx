@@ -5,6 +5,7 @@ const CompletedRoutesIndex = require("./completed_routes_index");
 const FavoriteRoutesIndex = require("./favorite_routes_index");
 const AuthoredRoutesIndex = require("./authored_routes_index");
 const hashHistory = require("react-router").hashHistory;
+const ProfileMap = require("./profile_map");
 
 
 const ButtonToolbar = require("react-bootstrap").ButtonToolbar;
@@ -43,9 +44,7 @@ const UserProfile = React.createClass({
   },
 
   createRoute: function(){
-    console.log("create route clicked");
     hashHistory.push(`/routes/create`)
-
   },
 
   followedProfiles: function(){
@@ -63,11 +62,24 @@ const UserProfile = React.createClass({
     );
   },
 
+  aggregateRoutes: function(){
+    const myCompleted = this.state.profile.completed_routes;
+    const myFavorited = this.state.profile.favorite_routes;
+    const myAuthored = this.state.profile.authored_routes;
+    return {completed: myCompleted, favorited: myFavorited, authored: myAuthored};
+  },
+
+  profileMap: function(){
+    if (this.state.profile){
+      return <ProfileMap routes={this.aggregateRoutes()}/>
+    }
+  },
+
   render: function(){
-    let text = `hello userid = ${this.props.params.userId}`;
     return (
       <div>
         {this.userNavButtons()}
+        {this.profileMap()}
         {this.routes()}
       </div>
     );

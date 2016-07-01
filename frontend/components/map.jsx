@@ -21,7 +21,7 @@ const Map = React.createClass({
     let waypoints = this.props.waypoints;
     const directionsDisplay = new google.maps.DirectionsRenderer();
     const directionsService = new google.maps.DirectionsService();
-    const mapDOMNode = ReactDOM.findDOMNode(this.refs.map);
+    const mapDOMNode = ReactDOM.findDOMNode(this.refs.routeMap);
     const mapOptions = {
       center: {lat: 37.7758, lng: -122.435} , // this is SF
       zoom: 13
@@ -56,7 +56,7 @@ const Map = React.createClass({
 
   render: function(){
     return(
-      <div className='map' ref='map'>
+      <div className='map' ref='routeMap'>
         hello from map
       </div>
     );
