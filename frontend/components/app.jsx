@@ -91,6 +91,10 @@ const App = React.createClass({
     }
   },
 
+  homeButton: function(){
+    hashHistory.push("/");
+  },
+
   navBar: function(){
     return (
       <Navbar inverse>

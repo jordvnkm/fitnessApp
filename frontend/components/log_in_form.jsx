@@ -70,7 +70,7 @@ const LoginForm = React.createClass({
 
           <div className="formSubmit">
             <Button type="submit">Login</Button>
-            <label>Or</label>
+            <span> &nbsp; &nbsp; Or &nbsp; &nbsp; </span>
             <Button onClick={this.guestLogin}>Login as Guest</Button>
           </div>
         </form>

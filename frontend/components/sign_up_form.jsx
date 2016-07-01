@@ -74,8 +74,8 @@ const SignUpForm = React.createClass({
           <input className="formInput" type="password" onChange={this.passwordChange} value={this.state.password}/>
 
           <div className="formSubmit">
-            <Button type="submit">Login</Button>
-            <span>&nbsp; &nbsp; Or &nbsp; &nbsp; </span>
+            <Button type="submit">Sign Up</Button>
+            <span>&nbsp; Or &nbsp;</span>
             <Button onClick={this.guestLogin}>Login as Guest</Button>
           </div>
         </form>
