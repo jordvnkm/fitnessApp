@@ -19,7 +19,7 @@ class Api::SessionsController < ApplicationController
     if @user
       render "api/users/show"
     else
-      @errors = nil
+      @errors = ['Invalid username/password']
       render "api/shared/error", status: 404
     end
   end

@@ -28,6 +28,7 @@ UserStore.errors = function(){
   if (_errors){
     return [].slice.call(_errors);
   }
+  return null;
 },
 
 UserStore.currentUser = function(){

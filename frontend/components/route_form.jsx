@@ -25,6 +25,10 @@ const RouteForm = React.createClass({
     this.setState({location})
   },
 
+  selectItems: function(){
+
+  },
+
   onSubmit: function(){
 
   },
@@ -46,7 +50,7 @@ const RouteForm = React.createClass({
 
           {this.selectItems()}
 
-          <Button type="Submit">Create Route</Button>
+          <Button type="submit">Create Route</Button>
         </form>
       </div>
     );

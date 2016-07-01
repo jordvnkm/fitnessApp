@@ -20,22 +20,22 @@ const App = React.createClass({
             modalForm: null, userErrors: UserStore.errors()};
   },
 
-  errors: function(){
-    if (!this.state.userErrors){
+  errors: function(myerrors){
+    if (!myerrors){
       return;
     }
     var self = this;
     return (<ul>
     {
-      Object.keys(this.state.userErrors).map(function(key, i){
-        return (<li key={i}>{self.state.userErrors[key]}</li>);
+      Object.keys(myerrors).map(function(key, i){
+        return (<li key={i}>{myerrors[key]}</li>);
       })
     }
     </ul>);
   },
 
   closeModal: function(){
-    this.setState({modalOpen: false})
+    this.setState({modalOpen: false, userErrors: null});
   },
 
   componentDidMount: function(){
@@ -43,7 +43,14 @@ const App = React.createClass({
   },
 
   onUserChange: function(){
-    this.setState({modalOpen: false, currentUser: UserStore.currentUser(), userErrors: UserStore.errors()});
+    if (UserStore.errors()){
+      this.setState({currentUser: UserStore.currentUser(), userErrors: UserStore.errors()});
+      return;
+    }
+    else{
+      this.setState({modalOpen: false, currentUser: UserStore.currentUser(), userErrors: UserStore.errors()});
+      return;
+    }
   },
 
   logout: function(event){
@@ -117,7 +124,7 @@ const App = React.createClass({
     );
   },
 
-  modal: function(){
+  modal: function(errors){
     const FormModal = React.createClass({
 
       render: function(){
@@ -128,6 +135,7 @@ const App = React.createClass({
               <Modal.Title id="contained-modal-title-sm">GoTheDistance</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+              {this.props.errorHandler(this.props.errors)}
               {this.props.modalForm}
             </Modal.Body>
           </Modal>
@@ -135,7 +143,8 @@ const App = React.createClass({
       }
     });
 
-    return <FormModal modalForm={this.state.modalForm} show={this.state.modalOpen} onHide={this.closeModal}/>
+    return <FormModal errorHandler={this.errors} errors={errors}
+            modalForm={this.state.modalForm} show={this.state.modalOpen} onHide={this.closeModal}/>
   },
 
   render: function(){
@@ -143,7 +152,7 @@ const App = React.createClass({
       <div className="modal-container">
         {this.navBar()}
         {this.errors()}
-        {this.modal()}
+        {this.modal(this.state.userErrors)}
         {this.props.children}
       </div>
     );
