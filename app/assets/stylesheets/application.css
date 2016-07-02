@@ -30,19 +30,16 @@ html {
   position: absolute;
 }
 
-.userToolbar {
-  display: flex;
-  justify-content: center;
-}
-
-.routeIndexItem {
-  cursor: pointer;
-}
 
 .map {
   width: 500px;
   height: 500px;
 }
+
+
+
+
+
 
 /*.ReactModal__Overlay {
   display: block;

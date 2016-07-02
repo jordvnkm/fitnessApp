@@ -16,8 +16,8 @@ const AuthoredRoutesIndex = React.createClass({
 
   render: function(){
     return (
-      <div>
-        <h3>Authored Routes</h3>
+      <div className="routesIndex">
+        <h3 id="authoredRoutesTitle">Authored Routes</h3>
         {this.routesIndexItems()}
       </div>
     );

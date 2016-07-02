@@ -34,7 +34,7 @@ const UserProfile = React.createClass({
   routes: function(){
     let routesIndexes = null;
     if (this.state.profile){
-      routesIndexes = <div className="RoutesIndexes">
+      routesIndexes = <div className="routesIndexes">
           <CompletedRoutesIndex routes={this.state.profile.completed_routes}/>
           <FavoriteRoutesIndex routes={this.state.profile.favorite_routes}/>
           <AuthoredRoutesIndex routes={this.state.profile.authored_routes}/>
@@ -77,7 +77,7 @@ const UserProfile = React.createClass({
 
   render: function(){
     return (
-      <div>
+      <div className="userProfile">
         {this.userNavButtons()}
         {this.profileMap()}
         {this.routes()}

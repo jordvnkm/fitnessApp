@@ -17,8 +17,8 @@ const FavoriteRoutesIndex = React.createClass({
 
   render: function(){
     return (
-      <div>
-        <h3>Favorite Routes</h3>
+      <div className="routesIndex">
+        <h3 id="favoritedRoutesTitle">Favorite Routes</h3>
         {this.routesIndexItems()}
       </div>
     );

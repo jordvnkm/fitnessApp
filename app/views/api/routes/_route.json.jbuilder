@@ -1,3 +1,4 @@
-json.(route, :id, :author_id, :name)
+json.(route, :id, :name)
+json.author route.author.username
 json.location route.location.name
 json.waypoints route.waypoints

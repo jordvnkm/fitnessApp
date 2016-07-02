@@ -18,8 +18,8 @@ const CompletedRoutesIndex = React.createClass({
 
   render: function(){
     return (
-      <div>
-        <h3>Completed Routes</h3>
+      <div className="routesIndex">
+        <h3 id="completedRoutesTitle">Completed Routes</h3>
         {this.routesIndexItems()}
       </div>
     );
