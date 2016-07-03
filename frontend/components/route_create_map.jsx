@@ -5,23 +5,37 @@ const RouteCreateMap = React.createClass({
   getInitialState: function(){
     return {};
   },
+  componentWillReceiveProps: function(newProps){
+    if (newProps.location){
+      let centerLat = parseFloat(newProps.location.center_lat);
+      let centerLng = parseFloat(newProps.location.center_lng);
+      this.map.setCenter({lat: centerLat, lng: centerLng});
+    }
+  },
 
   componentDidMount: function(){
     const mapDOMNode = ReactDOM.findDOMNode(this.refs.routeCreateMap);
-    // const location = this.props.location_center;
+
+    let centerLat;
+    let centerLng;
+
+    if (this.props.location){
+      centerLat = parseFloat(this.props.location.center_lat);
+      centerLng = parseFloat(this.props.location.center_lng);
+    }
+    else {
+      centerLat = 34.0395;
+      centerLng = -118.288;
+    }
     const mapOptions = {
-      center: {lat: 37.7758, lng: -122.435},
+      center: {lat: centerLat, lng: centerLng},
       zoom: 12
     };
 
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
     google.maps.event.addListener(this.map, 'click', (event) => {
-      this.addWaypoints(event.latLng);
+      this.props.clickHandler(event.latLng);
     });
-  },
-
-  addWaypoints: function(){
-
   },
 
   render: function(){

@@ -1,6 +1,6 @@
 const Store = require("flux/utils").Store;
 const AppDispatcher = require("../dispatcher/dispatcher");
-const LocationConstants = require("../constants/Location_constants");
+const LocationConstants = require("../constants/location_constants");
 
 let LocationStore = new Store(AppDispatcher);
 

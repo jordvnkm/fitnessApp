@@ -15,7 +15,7 @@ const HelpBlock = require("react-bootstrap").HelpBlock;
 
 const RouteForm = React.createClass({
   getInitialState: function(){
-    return {name: "", notes: "", locations: LocationStore.all(), locationId: null,
+    return {name: "", notes: "", locations: LocationStore.all(), currentLocation: null,
             locationErrors: LocationStore.errors(), routeErrors: RouteStore.errors()};
   },
 
@@ -41,7 +41,7 @@ const RouteForm = React.createClass({
   },
 
   locationChange: function(event){
-    this.setState({location_id: event.value});
+    this.setState({currentLocation: LocationStore.find(event.target.value)});
   },
 
   selectItems: function(){
@@ -49,9 +49,10 @@ const RouteForm = React.createClass({
       return (
         <FormGroup controlId="formControlsSelect">
           <ControlLabel>Select Location</ControlLabel>
-          <FormControl componentClass="select" placeholder="select">
+          <FormControl onChange={this.locationChange} componentClass="select" placeholder="select">
+            <option key="start" value="0">select city</option>
             {this.state.locations.map((location) => {
-              return <option value={location.id}>{location.name}</option> ;
+              return <option key={location.id} value={location.id}>{location.name}</option> ;
             })}
           </FormControl>
         </FormGroup>
@@ -60,7 +61,11 @@ const RouteForm = React.createClass({
   },
 
   onSubmit: function(){
+    console.log("submit clicked");
+  },
 
+  addWaypoint: function(){
+    console.log("add waypoint clicked");
   },
   render: function(){
     return(
@@ -83,7 +88,7 @@ const RouteForm = React.createClass({
           <Button type="submit">Create Route</Button>
         </form>
 
-        <RouteCreateMap locationId={this.state.locationId} clickHandler={this.addWaypoint}/>
+        <RouteCreateMap location={this.state.currentLocation} clickHandler={this.addWaypoint}/>
       </div>
     );
   }
