@@ -1,5 +1,10 @@
 const React = require("react");
+const LocationStore = require("../stores/location_store");
 const RouteActions = require("../actions/route_actions");
+const LocationActions = require("../actions/location_actions");
+const RouteStore = require("../stores/routes_store");
+const RouteCreateMap = require("./route_create_map");
+
 const hashHistory = require("react-router").hashHistory;
 const Button = require("react-bootstrap").Button;
 
@@ -10,7 +15,21 @@ const HelpBlock = require("react-bootstrap").HelpBlock;
 
 const RouteForm = React.createClass({
   getInitialState: function(){
-    return {name: "", notes: "", location_id: null};
+    return {name: "", notes: "", locations: LocationStore.all(), locationId: null,
+            locationErrors: LocationStore.errors(), routeErrors: RouteStore.errors()};
+  },
+
+  componentDidMount: function(){
+    this.locationListener = LocationStore.addListener(this.updateLocations);
+    LocationActions.fetchAllLocations();
+  },
+
+  componenetWillUnmount: function(){
+    this.locationListener.remove();
+  },
+
+  updateLocations: function(){
+    this.setState({locations: LocationStore.all(), locationErrors: LocationStore.errors()});
   },
 
   nameChange: function(event){
@@ -22,11 +41,22 @@ const RouteForm = React.createClass({
   },
 
   locationChange: function(event){
-    this.setState({location})
+    this.setState({location_id: event.value});
   },
 
   selectItems: function(){
-
+    if (this.state.locations){
+      return (
+        <FormGroup controlId="formControlsSelect">
+          <ControlLabel>Select Location</ControlLabel>
+          <FormControl componentClass="select" placeholder="select">
+            {this.state.locations.map((location) => {
+              return <option value={location.id}>{location.name}</option> ;
+            })}
+          </FormControl>
+        </FormGroup>
+      );
+    }
   },
 
   onSubmit: function(){
@@ -52,6 +82,8 @@ const RouteForm = React.createClass({
 
           <Button type="submit">Create Route</Button>
         </form>
+
+        <RouteCreateMap locationId={this.state.locationId} clickHandler={this.addWaypoint}/>
       </div>
     );
   }

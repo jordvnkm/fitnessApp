@@ -3,9 +3,6 @@ const ReactDOM = require("react-dom");
 const hashHistory = require("react-router").hashHistory;
 
 const ProfileMap = React.createClass({
-
-
-
   componentDidMount: function(){
     const mapDOMNode = ReactDOM.findDOMNode(this.refs.profileMap);
     const mapOptions = {

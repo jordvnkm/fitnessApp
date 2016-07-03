@@ -1,6 +1,5 @@
 const React = require("react");
 const RouteForm = require("./route_form");
-const RouteCreateMap = require("./route_create_map");
 
 const RouteCreate = React.createClass({
   componentDidMount: function(){
@@ -11,7 +10,6 @@ const RouteCreate = React.createClass({
     return(
       <div>
         <RouteForm />
-        <RouteCreateMap />
       </div>
     );
   }

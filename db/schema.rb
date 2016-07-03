@@ -41,10 +41,8 @@ ActiveRecord::Schema.define(version: 20160630003124) do
 
   create_table "locations", force: :cascade do |t|
     t.string   "name",                                null: false
-    t.decimal  "NE_lat",     precision: 10, scale: 6, null: false
-    t.decimal  "NE_lng",     precision: 10, scale: 6, null: false
-    t.decimal  "SW_lat",     precision: 10, scale: 6, null: false
-    t.decimal  "SW_lng",     precision: 10, scale: 6, null: false
+    t.decimal  "center_lat", precision: 10, scale: 6, null: false
+    t.decimal  "center_lng", precision: 10, scale: 6, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
