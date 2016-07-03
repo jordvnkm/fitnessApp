@@ -1,7 +1,7 @@
 const UserApiUtil = require("../util/user_api_util");
 const AppDispatcher = require("../dispatcher/dispatcher");
 const UserConstants = require("../constants/user_constants");
-
+const ErrorConstants = require("../constants/error_constants");
 const UserActions = {
   fetchCurrentUser: function(){
     UserApiUtil.fetchCurrentUser(UserActions.receiveCurrentUser, UserActions.handleError);
@@ -28,7 +28,7 @@ const UserActions = {
 
   handleError: function(error){
     AppDispatcher.dispatch({
-      actionType: UserConstants.ERROR,
+      actionType: ErrorConstants.ERROR,
       errors: error.responseJSON.errors
     });
   },

@@ -3,6 +3,7 @@ const UserStore = require("../stores/users_store");
 const hashHistory = require("react-router").hashHistory;
 const UserActions = require("../actions/user_actions");
 const Modal = require("react-bootstrap").Modal;
+const ErrorStore = require("../stores/error_store");
 
 const Navbar = require("react-bootstrap").Navbar;
 const Nav = require("react-bootstrap").Nav;
@@ -17,7 +18,7 @@ const SignUpForm = require("./sign_up_form");
 const App = React.createClass({
   getInitialState: function(){
     return {currentUser: UserStore.currentUser(), modalOpen: false,
-            modalForm: null, userErrors: UserStore.errors()};
+            modalForm: null, userErrors: ErrorStore.all()};
   },
 
   errors: function(myerrors){
@@ -40,17 +41,20 @@ const App = React.createClass({
 
   componentDidMount: function(){
     this.userListener = UserStore.addListener(this.onUserChange);
+    this.errorListener = ErrorStore.addListener(this.onErrorChange);
+  },
+
+  componentWillUnmount: function(){
+    this.userListener.remove();
+    this.errorListener.remove();
   },
 
   onUserChange: function(){
-    if (UserStore.errors()){
-      this.setState({currentUser: UserStore.currentUser(), userErrors: UserStore.errors()});
-      return;
-    }
-    else{
-      this.setState({modalOpen: false, currentUser: UserStore.currentUser(), userErrors: UserStore.errors()});
-      return;
-    }
+    this.setState({modalOpen: false, currentUser: UserStore.currentUser(), userErrors: ErrorStore.all()});
+  },
+
+  onErrorChange: function(){
+    this.setState({userErrors: ErrorStore.all()});
   },
 
   logout: function(event){

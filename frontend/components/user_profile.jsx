@@ -23,13 +23,14 @@ const UserProfile = React.createClass({
     ProfileActions.fetchProfile(this.props.params.userId);
   },
 
+  componentWillUnmount: function(){
+    this.profileListener.remove();
+  },
+
   profileChange: function(){
     this.setState({profile: ProfileStore.find(this.props.params.userId)});
   },
 
-  componentWillUnmount: function(){
-    this.profileListener.remove();
-  },
 
   routes: function(){
     let routesIndexes = null;

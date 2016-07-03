@@ -1,6 +1,9 @@
 const LocationApiUtil = require("../util/location_api_util");
 const AppDispatcher = require("../dispatcher/dispatcher");
 const LocationConstants = require("../constants/location_constants");
+const ErrorConstants = require("../constants/error_constants");
+
+
 
 const LocationActions = {
   fetchAllLocations: function(){
@@ -27,7 +30,7 @@ const LocationActions = {
 
   handleError: function(error){
     AppDispatcher.dispatch({
-      actionType: LocationConstants.ERROR,
+      actionType: ErrorConstants.ERROR,
       errors: error.responseJSON.errors
     });
   }

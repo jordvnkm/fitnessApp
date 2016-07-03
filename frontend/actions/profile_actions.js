@@ -1,6 +1,7 @@
 const ProfileApiUtil = require("../util/profile_api_util");
 const AppDispatcher = require("../dispatcher/dispatcher");
 const ProfileConstants = require("../constants/profile_constants");
+const ErrorConstants = require("../constants/error_constants");
 
 const ProfileActions = {
   fetchProfile: function(userId){
@@ -23,7 +24,7 @@ const ProfileActions = {
 
   handleError: function(error){
     AppDispatcher.dispatch({
-      actionType: ProfileConstants.ERROR,
+      actionType: ErrorConstants.ERROR,
       errors: error.responseJSON.errors
     });
   },

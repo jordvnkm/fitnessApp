@@ -6,7 +6,6 @@ const RouteConstants = require("../constants/route_constants");
 let RouteStore = new Store(AppDispatcher);
 
 let _routes = {};
-let _errors;
 
 RouteStore.__onDispatch = function(payload){
   switch (payload.actionType) {
@@ -16,10 +15,6 @@ RouteStore.__onDispatch = function(payload){
     break;
   case RouteConstants.ROUTES_RECEIVED:
     resetRoutes(payload.routes);
-    RouteStore.__emitChange();
-    break;
-  case RouteConstants.ERROR:
-    setErrors(payload.errors);
     RouteStore.__emitChange();
     break;
   }
@@ -36,19 +31,9 @@ const resetRoutes = function(routes){
   });
 };
 
-const setErrors = function(errors){
-  _errors = errors;
-};
 
 RouteStore.find = function(routeId){
   return _routes[routeId]
-};
-
-
-RouteStore.errors = function(){
-  if (_errors){
-    return [].slice.call(_errors);
-  }
 };
 
 

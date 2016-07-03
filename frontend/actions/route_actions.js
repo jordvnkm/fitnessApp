@@ -1,7 +1,7 @@
 const RouteApiUtil = require("../util/route_api_util");
 const AppDispatcher = require("../dispatcher/dispatcher");
 const RouteConstants = require("../constants/route_constants");
-
+const ErrorConstants = require("../constants/error_constants");
 
 const RouteActions = {
   fetchRoute: function(routeId){
@@ -29,7 +29,7 @@ const RouteActions = {
 
   handleError: function(error){
     AppDispatcher.dispatch({
-      actionType: RouteConstants.ERROR,
+      actionType: ErrorConstants.ERROR,
       errors: error.responseJSON.errors
     });
   }

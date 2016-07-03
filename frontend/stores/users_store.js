@@ -5,7 +5,6 @@ const UserConstants = require("../constants/user_constants");
 let UserStore = new Store(AppDispatcher);
 
 let _currentUser = null;
-let _errors;
 
 UserStore.__onDispatch = function(payload){
   switch (payload.actionType){
@@ -17,19 +16,8 @@ UserStore.__onDispatch = function(payload){
     logoutUser();
     UserStore.__emitChange();
     break;
-  case UserConstants.ERROR:
-    setErrors(payload.errors);
-    UserStore.__emitChange();
-    break;
   }
 };
-
-UserStore.errors = function(){
-  if (_errors){
-    return [].slice.call(_errors);
-  }
-  return null;
-},
 
 UserStore.currentUser = function(){
   if (_currentUser){
@@ -38,18 +26,13 @@ UserStore.currentUser = function(){
   return null;
 };
 
-const setErrors = function(errors){
-  _errors = errors;
-};
 
 const loginUser = function(user){
   _currentUser = user;
-  _errors = null;
 };
 
 const logoutUser = function(){
   _currentUser = null;
-  _errors = null;
 };
 
 

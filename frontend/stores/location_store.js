@@ -5,7 +5,6 @@ const LocationConstants = require("../constants/location_constants");
 let LocationStore = new Store(AppDispatcher);
 
 let _locations = {};
-let _errors;
 
 
 LocationStore.__onDispatch = function(payload){
@@ -18,16 +17,8 @@ LocationStore.__onDispatch = function(payload){
     addLocation(payload.location);
     LocationStore.__emitChange();
     break;
-  case LocationConstants.ERROR:
-    setErrors(payload.errors);
-    LocationStore.__emitChange();
-    break;
   }
 }
-
-const setErrors = function(errors){
-  _errors = errors;
-};
 
 
 const addLocation = function(location){
@@ -51,11 +42,6 @@ LocationStore.all = function(){
   return allLocations;
 }
 
-LocationStore.errors = function(){
-  if (_errors){
-    return [].slice.call(_errors);
-  }
-}
 
 LocationStore.find = function(id){
   return _locations[id]

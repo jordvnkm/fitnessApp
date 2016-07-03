@@ -6,7 +6,6 @@ let ProfileStore = new Store(AppDispatcher);
 
 
 let _profiles = {};
-let _errors;
 
 // profiles are users with more information
 
@@ -18,10 +17,6 @@ ProfileStore.__onDispatch = function(payload){
     break;
   case ProfileConstants.PROFILES_RECEIVED:
     resetProfiles(payload.profiles);
-    ProfileStore.__emitChange();
-    break;
-  case ProfileConstants.ERROR:
-    setErrors(payload.errors);
     ProfileStore.__emitChange();
     break;
   }
@@ -36,11 +31,6 @@ ProfileStore.all = function(){
   return allProfiles;
 };
 
-ProfileStore.errors = function(){
-  if (_errors){
-    return [].slice.call(_errors);
-  }
-}
 
 ProfileStore.find = function(user_id){
   return _profiles[user_id];
@@ -57,8 +47,5 @@ const resetProfiles = function(profiles){
   });
 };
 
-const setErrors = function(errors){
-  _errors = errors
-};
 
 module.exports = ProfileStore;
