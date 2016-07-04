@@ -9,32 +9,49 @@ const hashHistory = require("react-router").hashHistory;
 
 const FavoriteActions = require("../actions/favorite_actions");
 const FavoriteStore = require("../stores/favorites_store");
+const CompleteActions = require("../actions/complete_actions");
+const CompletedStore = require("../stores/completed_store");
 
 const RouteDetail = React.createClass({
   getInitialState: function(){
     return {route: null, currentUser: UserStore.currentUser(),
-            favorite: null};
+            favorite: null, completed: null};
   },
 
   componentDidMount: function(){
     this.routeListener = RouteStore.addListener(this.updateRoute);
-    this.userListener = UserStore.addListener(this.updateUser);
+    // this.userListener = UserStore.addListener(this.updateUser);
     this.favoriteListener = FavoriteStore.addListener(this.updateFavorite);
+    this.completedListener = CompletedStore.addListener(this.updateCompleted);
     RouteActions.fetchRoute(this.props.params.routeId);
-    UserActions.fetchCurrentUser();
+  },
+
+  updateCompleted: function(){
+    if (CompletedStore.find(this.state.currentUser.id, this.state.route.id)){
+      this.setState({completed: CompletedStore.find(this.state.currentUser.id, this.state.route.id)});
+    }
+    else{
+      this.setState({completed: undefined});
+    }
   },
 
   updateFavorite: function(){
-    this.setState({favorite: FavoriteStore.find(this.state.currentUser.id, this.state.route.id)});
+    if (FavoriteStore.find(this.state.currentUser.id, this.state.route.id)){
+      this.setState({favorite: FavoriteStore.find(this.state.currentUser.id, this.state.route.id)});
+    }
+    else{
+      this.setState({favorite: undefined});
+    }
   },
 
   updateUser: function(){
-    FavoriteActions.fetchFavoritesForUser(this.state.currentUser.id);
     this.setState({currentUser: UserStore.currentUser()});
   },
 
   updateRoute: function(){
     if (RouteStore.find(this.props.params.routeId)){
+      FavoriteActions.fetchFavoritesForUser(this.state.currentUser.id);
+      CompleteActions.fetchCompletedForUser(this.state.currentUser.id);
       this.setState({route: RouteStore.find(this.props.params.routeId)});
     }
     else {
@@ -44,8 +61,9 @@ const RouteDetail = React.createClass({
 
   componentWillUnmount: function(){
     this.routeListener.remove();
-    this.userListener.remove();
+    // this.userListener.remove();
     this.favoriteListener.remove();
+    this.completedListener.remove();
   },
 
   map: function(){
@@ -73,17 +91,14 @@ const RouteDetail = React.createClass({
       user_id: this.state.currentUser.id,
       route_id: this.state.route.id
     })
-    console.log("add favorite clicked");
   },
 
   removeFavorite: function(){
     FavoriteActions.deleteFavorite(this.state.favorite);
-    console.log("remove favorite clicked");
   },
 
   favoriteButton: function(){
     if (this.state.route){
-      console.log(this.state.favorite)
       if (this.state.favorite){
         return (
           <Button onClick={this.removeFavorite}>Unfavorite</Button>
@@ -98,13 +113,28 @@ const RouteDetail = React.createClass({
   },
 
   addCompleted: function(){
-    console.log(this.state.currentUser);
-    console.log("add completed clicked");
+    let today = new Date();
+
+    CompleteActions.createCompleted({
+      route_id: this.state.route.id,
+      user_id: this.state.currentUser.id,
+      date: today
+    });
+  },
+
+  removeCompleted: function(){
+    console.log(this.state.completed);
+    CompleteActions.deleteCompleted(this.state.completed.id);
   },
 
   completedButton: function(){
     if (this.state.route){
-      if (!this.state.currentUser.completed.includes(this.state.route.id)){
+      if (this.state.completed){
+        return (
+          <Button onClick={this.removeCompleted}>Mark as not completed</Button>
+        );
+      }
+      else {
         return (
           <Button onClick={this.addCompleted}>Mark route as completed</Button>
         );

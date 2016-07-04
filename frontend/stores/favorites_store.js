@@ -39,10 +39,11 @@ const addFavorite = function(favorite){
 }
 
 const removeFavorite = function(favorite){
-  _faves = {}
-  Object.keys(_faves).forEach((id) => {
-    if (id !== favorite.id){
-      _faves[id] = _faves[id];
+  let faves = Object.assign({}, _faves);
+  _faves = {};
+  Object.keys(faves).forEach((id) => {
+    if (parseInt(id) !== favorite.id){
+      _faves[id] = faves[id];
     }
   })
 }
@@ -55,7 +56,7 @@ const resetFavorites = function(faves){
 };
 
 FavoriteStore.all = function(){
-  return Object.assing({}, _faves);
+  return Object.assign({}, _faves);
 };
 
 

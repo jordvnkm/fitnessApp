@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     resources :locations, only: [:index, :show]
     resources :waypoints, only: [:show, :create]
     resources :favorites, only: [:show, :create, :destroy]
+    resources :completed_routes, only: [:show, :create, :destroy]
   end
 end
