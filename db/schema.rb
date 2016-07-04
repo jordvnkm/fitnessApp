@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160630003124) do
+ActiveRecord::Schema.define(version: 20160704214343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "author_id", null: false
+    t.text    "content",   null: false
+    t.integer "route_id",  null: false
+  end
+
+  add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
+  add_index "comments", ["route_id"], name: "index_comments_on_route_id", using: :btree
 
   create_table "completed_routes", force: :cascade do |t|
     t.integer  "route_id",   null: false
@@ -38,6 +47,16 @@ ActiveRecord::Schema.define(version: 20160630003124) do
 
   add_index "favorites", ["route_id"], name: "index_favorites_on_route_id", using: :btree
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
+
+  create_table "followings", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "fan_id",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "followings", ["fan_id"], name: "index_followings_on_fan_id", using: :btree
+  add_index "followings", ["user_id"], name: "index_followings_on_user_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "name",                                null: false

@@ -11,6 +11,11 @@ class Api::Route < ActiveRecord::Base
     foreign_key: :location_id,
     primary_key: :id
 
+  has_many :comments,
+  class_name: :Comment,
+  foreign_key: :route_id,
+  primary_key: :id
+
   has_many :waypoints, dependent: :destroy
 
 end

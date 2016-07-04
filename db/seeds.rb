@@ -52,3 +52,22 @@ favorite1 = Api::Favorite.create(user_id: 1, route_id: 2)
 # completed routes
 date1 = Date.parse('18-12-2015')
 completed1 = Api::CompletedRoute.create(date: date1, route_id: 3, user_id: 1)
+
+# comments for user id 1
+comment1 = Api::Comment.create(author_id: 1, content: "hello from comment1", route_id: 1)
+comment1 = Api::Comment.create(author_id: 1, content: "hello from comment2", route_id: 2)
+comment1 = Api::Comment.create(author_id: 1, content: "hello from comment3", route_id: 3)
+
+
+comment1 = Api::Comment.create(author_id: 1, content: "hello from comment1", route_id: 1)
+comment1 = Api::Comment.create(author_id: 1, content: "hello from comment2", route_id: 2)
+comment1 = Api::Comment.create(author_id: 1, content: "hello from comment3", route_id: 3)
+comment1 = Api::Comment.create(author_id: 1, content: "hello from comment1", route_id: 1)
+comment1 = Api::Comment.create(author_id: 1, content: "hello from comment2", route_id: 2)
+comment1 = Api::Comment.create(author_id: 1, content: "hello from comment3", route_id: 3)
+
+
+comment1 = Api::Comment.create(author_id: 1, content: "hello from comment1", route_id: 1)
+comment1 = Api::Comment.create(author_id: 1, content: "hello from comment2", route_id: 2)
+comment1 = Api::Comment.create(author_id: 1, content: "hello from comment3", route_id: 3)
+comment1 = Api::Comment.create(author_id: 1, content: "hello from comment3", route_id: 3)

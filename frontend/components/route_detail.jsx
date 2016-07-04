@@ -7,6 +7,7 @@ const UserStore = require('../stores/users_store');
 const UserActions = require("../actions/user_actions");
 const hashHistory = require("react-router").hashHistory;
 
+const CommentsForm = require("./comments_form");
 const FavoriteActions = require("../actions/favorite_actions");
 const FavoriteStore = require("../stores/favorites_store");
 const CompleteActions = require("../actions/complete_actions");
@@ -20,7 +21,6 @@ const RouteDetail = React.createClass({
 
   componentDidMount: function(){
     this.routeListener = RouteStore.addListener(this.updateRoute);
-    // this.userListener = UserStore.addListener(this.updateUser);
     this.favoriteListener = FavoriteStore.addListener(this.updateFavorite);
     this.completedListener = CompletedStore.addListener(this.updateCompleted);
     RouteActions.fetchRoute(this.props.params.routeId);
@@ -61,7 +61,6 @@ const RouteDetail = React.createClass({
 
   componentWillUnmount: function(){
     this.routeListener.remove();
-    // this.userListener.remove();
     this.favoriteListener.remove();
     this.completedListener.remove();
   },
@@ -123,7 +122,6 @@ const RouteDetail = React.createClass({
   },
 
   removeCompleted: function(){
-    console.log(this.state.completed);
     CompleteActions.deleteCompleted(this.state.completed.id);
   },
 
@@ -142,6 +140,12 @@ const RouteDetail = React.createClass({
     }
   },
 
+  commentsForm: function(){
+    if (this.state.route){
+      return <CommentsForm routeId={this.state.route.id}/>;
+    }
+  },
+
   render: function(){
     let text;
     if (this.state.route){
@@ -154,6 +158,7 @@ const RouteDetail = React.createClass({
         {this.favoriteButton()}
         {this.completedButton()}
         {this.map()}
+        {this.commentsForm()}
       </div>
     );
   }

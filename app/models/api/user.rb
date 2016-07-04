@@ -29,6 +29,29 @@ class Api::User < ActiveRecord::Base
     through: :favorites,
     source: :route
 
+  has_many :comments,
+  class_name: :Comment,
+  foreign_key: :author_id,
+  primary_key: :id
+
+  has_many :followings_as_user,
+  class_name: :Following,
+  foreign_key: :user_id,
+  primary_key: :id
+
+  has_many :followings_as_fan,
+  class_name: :Following,
+  foreign_key: :fan_id,
+  primary_key: :id
+
+  has_many :followers,
+    through: :followings_as_user,
+    source: :fan
+
+  has_many :followed_users,
+    through: :followings_as_fan,
+    source: :user
+
   def self.find_by_credentials(username, password)
     user = Api::User.find_by(username: username)
 
