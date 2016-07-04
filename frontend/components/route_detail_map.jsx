@@ -2,7 +2,7 @@ const React = require("react");
 const ReactDOM = require("react-dom");
 
 
-const Map = React.createClass({
+const RouteDetailMap = React.createClass({
 
   createLatLngs: function(array){
     let points = [];
@@ -23,7 +23,7 @@ const Map = React.createClass({
     const directionsService = new google.maps.DirectionsService();
     const mapDOMNode = ReactDOM.findDOMNode(this.refs.routeMap);
     const mapOptions = {
-      center: {lat: 37.7758, lng: -122.435} , // this is SF
+      center: {lat: 37.7758, lng: -122.435} , // this is LA
       zoom: 13
     };
 
@@ -64,4 +64,4 @@ const Map = React.createClass({
 });
 
 
-module.exports = Map;
+module.exports = RouteDetailMap;

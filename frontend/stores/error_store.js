@@ -8,7 +8,6 @@ let _errors;
 
 ErrorStore.__onDispatch = function(payload){
   if (payload.actionType === ErrorConstants.ERROR){
-    console.log("error store")
     setErrors(payload.errors);
     ErrorStore.__emitChange();
   }

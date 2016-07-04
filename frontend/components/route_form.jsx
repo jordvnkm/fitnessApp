@@ -4,6 +4,7 @@ const RouteActions = require("../actions/route_actions");
 const LocationActions = require("../actions/location_actions");
 const RouteStore = require("../stores/routes_store");
 const RouteCreateMap = require("./route_create_map");
+const ErrorStore = require("../stores/error_store");
 
 const hashHistory = require("react-router").hashHistory;
 const Button = require("react-bootstrap").Button;
@@ -16,20 +17,26 @@ const HelpBlock = require("react-bootstrap").HelpBlock;
 const RouteForm = React.createClass({
   getInitialState: function(){
     return {name: "", notes: "", locations: LocationStore.all(), currentLocation: null,
-            locationErrors: LocationStore.errors(), routeErrors: RouteStore.errors()};
+            errors: ErrorStore.all(), waypoints: []};
   },
 
   componentDidMount: function(){
     this.locationListener = LocationStore.addListener(this.updateLocations);
+    this.errorListener = ErrorStore.addListener(this.errorChange);
     LocationActions.fetchAllLocations();
   },
 
-  componenetWillUnmount: function(){
+  componentWillUnmount: function(){
     this.locationListener.remove();
+    this.errorListener.remove();
+  },
+
+  errorChange: function(){
+    this.setState({errors: ErrorStore.all()});
   },
 
   updateLocations: function(){
-    this.setState({locations: LocationStore.all(), locationErrors: LocationStore.errors()});
+    this.setState({locations: LocationStore.all()});
   },
 
   nameChange: function(event){
@@ -61,15 +68,57 @@ const RouteForm = React.createClass({
   },
 
   onSubmit: function(){
-    console.log("submit clicked");
   },
 
-  addWaypoint: function(){
-    console.log("add waypoint clicked");
+  addWaypoint: function(latLng){
+    let myWaypoints = this.state.waypoints.concat([latLng]);
+    this.setState({waypoints: myWaypoints});
   },
+
+  waypointsAdded: function(){
+    if (this.state.waypoints.length > 0){
+      let index = 0;
+      return (
+        <div>
+          <ul>
+            {
+              this.state.waypoints.map((latLng) => {
+                index += 1;
+                return <li key={index}> Lat : {latLng.lat()}, Lng : {latLng.lng()}</li>
+              })
+            }
+          </ul>
+        </div>
+      );
+    }
+  },
+
+  routeCreateMap: function(){
+    if (this.state.currentLocation){
+      return <RouteCreateMap location={this.state.currentLocation} clickHandler={this.addWaypoint}/> ;
+    }
+  },
+
+  errors: function(myerrors){
+    if (!myerrors){
+      return;
+    }
+    var self = this;
+    return (<ul>
+    {
+      Object.keys(myerrors).map(function(key, i){
+        return (<li key={i}>{myerrors[key]}</li>);
+      })
+    }
+    </ul>);
+  },
+
+
+
   render: function(){
     return(
       <div>
+        {this.errors()}
         <form onSubmit={this.onSubmit}>
           <FormGroup controlId="formControlsText">
             <ControlLabel>Route Name</ControlLabel>
@@ -87,8 +136,8 @@ const RouteForm = React.createClass({
 
           <Button type="submit">Create Route</Button>
         </form>
-
-        <RouteCreateMap location={this.state.currentLocation} clickHandler={this.addWaypoint}/>
+        {this.waypointsAdded()}
+        {this.routeCreateMap()}
       </div>
     );
   }

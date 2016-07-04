@@ -1,7 +1,7 @@
 const React = require("react");
 const RouteActions = require("../actions/route_actions");
 const RouteStore = require("../stores/routes_store");
-const Map = require("./map");
+const RouteDetailMap = require("./route_detail_map");
 
 const RouteDetail = React.createClass({
   getInitialState: function(){
@@ -23,7 +23,7 @@ const RouteDetail = React.createClass({
 
   map: function(){
     if (this.state.route){
-      return <Map waypoints={this.state.route.waypoints} />;
+      return <RouteDetailMap waypoints={this.state.route.waypoints} />;
     }
   },
 
