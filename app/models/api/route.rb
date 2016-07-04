@@ -12,4 +12,5 @@ class Api::Route < ActiveRecord::Base
     primary_key: :id
 
   has_many :waypoints
+
 end

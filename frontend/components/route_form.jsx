@@ -5,6 +5,9 @@ const LocationActions = require("../actions/location_actions");
 const RouteStore = require("../stores/routes_store");
 const RouteCreateMap = require("./route_create_map");
 const ErrorStore = require("../stores/error_store");
+const UserStore = require("../stores/users_store");
+const WaypointActions = require("../actions/waypoint_actions");
+const WaypointStore = require("../stores/waypoint_store");
 
 const hashHistory = require("react-router").hashHistory;
 const Button = require("react-bootstrap").Button;
@@ -16,19 +19,52 @@ const HelpBlock = require("react-bootstrap").HelpBlock;
 
 const RouteForm = React.createClass({
   getInitialState: function(){
-    return {name: "", notes: "", locations: LocationStore.all(), currentLocation: null,
+    return {currentUser: UserStore.currentUser(), name: "", notes: "",
+            locations: LocationStore.all(), currentLocation: null,
             errors: ErrorStore.all(), waypoints: []};
   },
 
   componentDidMount: function(){
+    if (!this.state.currentUser){
+      alert("must be logged in to create route");
+      hashHistory.push("/");
+    }
     this.locationListener = LocationStore.addListener(this.updateLocations);
     this.errorListener = ErrorStore.addListener(this.errorChange);
+    this.routeListener = RouteStore.addListener(this.routeChange);
+    this.waypointListener = WaypointStore.addListener(this.waypointChange);
     LocationActions.fetchAllLocations();
   },
 
   componentWillUnmount: function(){
     this.locationListener.remove();
     this.errorListener.remove();
+    this.routeListener.remove();
+    this.waypointListener.remove();
+  },
+
+  routeChange: function(){
+    this.createWaypoints(RouteStore.lastAdded().id);
+  },
+
+  waypointChange: function(){
+    const length = WaypointStore.all().length;
+    if (length === this.waypointsNeeded){
+      hashHistory.push(`/users/${this.state.currentUser.id}`);
+    }
+  },
+
+  createWaypoints: function(routeId){
+    this.waypointsNeeded = this.state.waypoints.length;
+
+    for (let i = 0 ; i < this.state.waypoints.length; i ++){
+      WaypointActions.createWaypoint({
+        lat: this.state.waypoints[i].lat(),
+        lng: this.state.waypoints[i].lng(),
+        route_id: routeId,
+        order: i
+      })
+    }
   },
 
   errorChange: function(){
@@ -40,14 +76,20 @@ const RouteForm = React.createClass({
   },
 
   nameChange: function(event){
+    event.preventDefault();
+    event.stopPropagation();
     this.setState({name: event.target.value});
   },
 
   noteChange: function(event){
+    event.preventDefault();
+    event.stopPropagation();
     this.setState({notes: event.target.value});
   },
 
   locationChange: function(event){
+    event.preventDefault();
+    event.stopPropagation();
     this.setState({currentLocation: LocationStore.find(event.target.value)});
   },
 
@@ -67,7 +109,27 @@ const RouteForm = React.createClass({
     }
   },
 
-  onSubmit: function(){
+  onSubmit: function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.state.currentLocation === null){
+      RouteActions.handleError({
+        responseJSON: {errors: ["must specify location"]}
+      })
+    }
+    else if (this.state.waypoints.length < 2){
+      RouteActions.handleError({
+        responseJSON: {errors: ["must choose at least 2 waypoints"]}
+      })
+    }
+    else{
+      RouteActions.createRoute({
+        name: this.state.name,
+        notes: this.state.notes,
+        location_id: this.state.currentLocation.id,
+        author_id: this.state.currentUser.id
+      });
+    }
   },
 
   addWaypoint: function(latLng){
@@ -99,15 +161,15 @@ const RouteForm = React.createClass({
     }
   },
 
-  errors: function(myerrors){
-    if (!myerrors){
+  errors: function(){
+    if (!(this.state.errors)){
       return;
     }
     var self = this;
     return (<ul>
     {
-      Object.keys(myerrors).map(function(key, i){
-        return (<li key={i}>{myerrors[key]}</li>);
+      Object.keys(self.state.errors).map(function(key, i){
+        return (<li key={i}>{self.state.errors[key]}</li>);
       })
     }
     </ul>);

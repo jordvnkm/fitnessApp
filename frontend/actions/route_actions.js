@@ -28,6 +28,7 @@ const RouteActions = {
   },
 
   handleError: function(error){
+    console.log(error);
     AppDispatcher.dispatch({
       actionType: ErrorConstants.ERROR,
       errors: error.responseJSON.errors

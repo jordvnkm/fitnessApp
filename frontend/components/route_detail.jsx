@@ -5,7 +5,7 @@ const RouteDetailMap = require("./route_detail_map");
 
 const RouteDetail = React.createClass({
   getInitialState: function(){
-    return {route: RouteStore.find(this.props.params.routeId)};
+    return {route: null};
   },
 
   componentDidMount: function(){
@@ -23,6 +23,7 @@ const RouteDetail = React.createClass({
 
   map: function(){
     if (this.state.route){
+      console.log(this.state.route);
       return <RouteDetailMap waypoints={this.state.route.waypoints} />;
     }
   },

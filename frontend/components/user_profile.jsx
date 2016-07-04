@@ -6,6 +6,7 @@ const FavoriteRoutesIndex = require("./favorite_routes_index");
 const AuthoredRoutesIndex = require("./authored_routes_index");
 const hashHistory = require("react-router").hashHistory;
 const ProfileMap = require("./profile_map");
+const WaypointActions = require("../actions/waypoint_actions");
 
 
 const ButtonToolbar = require("react-bootstrap").ButtonToolbar;
@@ -67,6 +68,7 @@ const UserProfile = React.createClass({
     const myCompleted = this.state.profile.completed_routes;
     const myFavorited = this.state.profile.favorite_routes;
     const myAuthored = this.state.profile.authored_routes;
+    console.log(myAuthored);
     return {completed: myCompleted, favorited: myFavorited, authored: myAuthored};
   },
 

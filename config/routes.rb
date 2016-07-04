@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :profiles, only: [:show]
     resources :routes, only: [:show, :create]
     resources :locations, only: [:index, :show]
+    resources :waypoints, only: [:show, :create]
   end
 end

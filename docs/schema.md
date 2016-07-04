@@ -44,10 +44,8 @@ column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 name        | string    | not null
-NE_lat      | integer   | not null
-NE_lng      | integer   | not null
-SW_lat      | integer   | not null
-SW_lng      | integer   | not null
+center_lat  | decimal   | not null
+center_lng  | decimal   | not null
 
 ## completed_routes
 column name | data type | details

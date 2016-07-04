@@ -4,7 +4,7 @@ const ErrorConstants = require("../constants/error_constants");
 
 let ErrorStore = new Store(AppDispatcher);
 
-let _errors;
+let _errors = [];
 
 ErrorStore.__onDispatch = function(payload){
   if (payload.actionType === ErrorConstants.ERROR){
@@ -13,7 +13,6 @@ ErrorStore.__onDispatch = function(payload){
   }
   else {
     resetErrors();
-    ErrorStore.__emitChange();
   }
 }
 
@@ -25,7 +24,11 @@ ErrorStore.all = function(){
 };
 
 const resetErrors = function(){
+  if (_errors.length === 0){
+    return;
+  }
   _errors = [];
+  ErrorStore.__emitChange();
 };
 
 

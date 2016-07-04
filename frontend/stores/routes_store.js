@@ -6,6 +6,7 @@ const RouteConstants = require("../constants/route_constants");
 let RouteStore = new Store(AppDispatcher);
 
 let _routes = {};
+let _lastAdded = {};
 
 RouteStore.__onDispatch = function(payload){
   switch (payload.actionType) {
@@ -20,8 +21,14 @@ RouteStore.__onDispatch = function(payload){
   }
 };
 
+
+RouteStore.lastAdded = function(){
+  return Object.assign({}, _lastAdded);
+};
+
 const addRoute = function(route){
   _routes[route.id] = route;
+  _lastAdded = route;
 };
 
 const resetRoutes = function(routes){

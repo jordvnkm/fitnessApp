@@ -15,14 +15,14 @@ const LoginForm = require("./components/log_in_form");
 const UserProfile = require("./components/user_profile");
 const UserSettings = require("./components/user_settings");
 const RouteDetail = require("./components/route_detail");
-const RouteCreate = require("./components/route_create");
+const RouteForm = require("./components/route_form");
 
 
 let routes = (<Router history={hashHistory}>
   <Route path="/" component={App}>
     <Route path="users/:userId/settings" component={UserSettings}></Route>
     <Route path="users/:userId" component={UserProfile}></Route>
-    <Route path="routes/create" component={RouteCreate}></Route>
+    <Route path="routes/create" component={RouteForm}></Route>
     <Route path="routes/:routeId" component={RouteDetail}></Route>
   </Route>
 </Router>);

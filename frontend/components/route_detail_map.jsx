@@ -17,8 +17,16 @@ const RouteDetailMap = React.createClass({
     return points;
   },
 
+  sortWaypoints: function(array){
+    let sorted = [];
+    for (let i = 0 ; i < array.length; i++ ){
+      sorted.push(array[i]);
+    }
+    return sorted;
+  },
+
   componentDidMount: function(){
-    let waypoints = this.props.waypoints;
+    let waypoints = this.sortWaypoints(this.props.waypoints);
     const directionsDisplay = new google.maps.DirectionsRenderer();
     const directionsService = new google.maps.DirectionsService();
     const mapDOMNode = ReactDOM.findDOMNode(this.refs.routeMap);
@@ -32,8 +40,9 @@ const RouteDetailMap = React.createClass({
 
     const start = waypoints[0];
     const end = waypoints[(waypoints.length - 1)];
-    const middlePoints = waypoints.splice(1, (waypoints.length - 2));
 
+
+    const middlePoints = waypoints.splice(1, (waypoints.length - 2));
     const startLatLng = {lat: parseFloat(start.lat), lng: parseFloat(start.lng)};
     const endLatLng = {lat: parseFloat(end.lat), lng: parseFloat(end.lng)};
 
