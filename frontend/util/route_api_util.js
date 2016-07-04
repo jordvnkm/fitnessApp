@@ -28,6 +28,20 @@ const RouteApiUtil = {
         errorCallback(error);
       }
     })
+  },
+
+  deleteRoute: function(routeId , successCallback, errorCallback){
+    $.ajax({
+      url: `/api/routes/${routeId}`,
+      type: "DELETE",
+      success: function(route){
+        successCallback(route);
+      },
+
+      error: function(error){
+        errorCallback(error);
+      }
+    });
   }
 };
 

@@ -1,5 +1,5 @@
-json.(route, :id, :name)
-json.author route.author.username
+json.(route, :id, :name, :created_at)
+json.author route.author
 json.location route.location.name
 
 mywaypoints = route.waypoints.sort_by do |waypoint|

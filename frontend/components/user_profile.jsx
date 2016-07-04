@@ -68,7 +68,6 @@ const UserProfile = React.createClass({
     const myCompleted = this.state.profile.completed_routes;
     const myFavorited = this.state.profile.favorite_routes;
     const myAuthored = this.state.profile.authored_routes;
-    console.log(myAuthored);
     return {completed: myCompleted, favorited: myFavorited, authored: myAuthored};
   },
 

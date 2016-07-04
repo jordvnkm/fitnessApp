@@ -15,6 +15,17 @@ const RouteActions = {
     });
   },
 
+  deleteRoute: function(routeId){
+    RouteApiUtil.deleteRoute(routeId, RouteActions.removeRoute, RouteActions.handleError);
+  },
+
+  removeRoute: function(route){
+    AppDispatcher.dispatch({
+      actionType: RouteConstants.ROUTE_REMOVED,
+      route: route
+    });
+  },
+
   createRoute: function(route){
     RouteApiUtil.createRoute(route, RouteActions.receiveRoute, RouteActions.handleError);
   },

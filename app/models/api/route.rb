@@ -11,6 +11,6 @@ class Api::Route < ActiveRecord::Base
     foreign_key: :location_id,
     primary_key: :id
 
-  has_many :waypoints
+  has_many :waypoints, dependent: :destroy
 
 end

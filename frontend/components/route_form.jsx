@@ -112,15 +112,20 @@ const RouteForm = React.createClass({
   onSubmit: function(event){
     event.preventDefault();
     event.stopPropagation();
-    if (this.state.currentLocation === null){
+    if (this.state.name.length === 0){
       RouteActions.handleError({
-        responseJSON: {errors: ["must specify location"]}
-      })
+        responseJSON: {errors: ["Please specify route name"]}
+      });
+    }
+    else if (this.state.currentLocation === null){
+      RouteActions.handleError({
+        responseJSON: {errors: ["please select location"]}
+      });
     }
     else if (this.state.waypoints.length < 2){
       RouteActions.handleError({
         responseJSON: {errors: ["must choose at least 2 waypoints"]}
-      })
+      });
     }
     else{
       RouteActions.createRoute({

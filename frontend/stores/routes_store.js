@@ -18,7 +18,17 @@ RouteStore.__onDispatch = function(payload){
     resetRoutes(payload.routes);
     RouteStore.__emitChange();
     break;
+  case RouteConstants.ROUTE_REMOVED:
+    removeRoute(payload.route);
+    RouteStore.__emitChange();
+    break;
   }
+};
+
+
+
+const removeRoute = function(route){
+  _routes[route.id] = undefined;
 };
 
 
