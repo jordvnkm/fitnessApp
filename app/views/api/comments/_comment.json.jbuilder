@@ -1,1 +1,1 @@
-json.extract! comment, :id, :author_id, :content, :route_id
+json.extract! comment, :id, :author, :content, :route_id

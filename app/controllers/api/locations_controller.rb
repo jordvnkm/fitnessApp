@@ -1,4 +1,4 @@
-require 'byebug'
+
 class Api::LocationsController < ApplicationController
   def index
     @locations = Api::Location.all

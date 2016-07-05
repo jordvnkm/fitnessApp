@@ -15,6 +15,7 @@ const CommentsApiUtil = {
   },
 
   createComment: function(comment, successCallback, errorCallback){
+    let params = {comment: comment};
     $.ajax({
       url: `/api/comments`,
       type: "POST",

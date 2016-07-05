@@ -50,8 +50,10 @@ const RouteDetail = React.createClass({
 
   updateRoute: function(){
     if (RouteStore.find(this.props.params.routeId)){
-      FavoriteActions.fetchFavoritesForUser(this.state.currentUser.id);
-      CompleteActions.fetchCompletedForUser(this.state.currentUser.id);
+      if (this.state.currentUser){
+        FavoriteActions.fetchFavoritesForUser(this.state.currentUser.id);
+        CompleteActions.fetchCompletedForUser(this.state.currentUser.id);
+      }
       this.setState({route: RouteStore.find(this.props.params.routeId)});
     }
     else {
@@ -76,7 +78,7 @@ const RouteDetail = React.createClass({
   },
 
   deleteButton: function(){
-    if (this.state.route){
+    if (this.state.route && this.state.currentUser){
       if (this.state.route.author.id === this.state.currentUser.id){
         return (
           <Button onClick={this.deleteRoute}>Delete Route</Button>
@@ -97,7 +99,7 @@ const RouteDetail = React.createClass({
   },
 
   favoriteButton: function(){
-    if (this.state.route){
+    if (this.state.route && this.state.currentUser){
       if (this.state.favorite){
         return (
           <Button onClick={this.removeFavorite}>Unfavorite</Button>
@@ -126,7 +128,7 @@ const RouteDetail = React.createClass({
   },
 
   completedButton: function(){
-    if (this.state.route){
+    if (this.state.route && this.state.currentUser){
       if (this.state.completed){
         return (
           <Button onClick={this.removeCompleted}>Mark as not completed</Button>

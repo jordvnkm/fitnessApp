@@ -58,16 +58,16 @@ comment1 = Api::Comment.create(author_id: 1, content: "hello from comment1", rou
 comment1 = Api::Comment.create(author_id: 1, content: "hello from comment2", route_id: 2)
 comment1 = Api::Comment.create(author_id: 1, content: "hello from comment3", route_id: 3)
 
+# comments for user id 2
+comment1 = Api::Comment.create(author_id: 2, content: "hello from comment4", route_id: 1)
+comment1 = Api::Comment.create(author_id: 2, content: "hello from comment5", route_id: 2)
+comment1 = Api::Comment.create(author_id: 2, content: "hello from comment6", route_id: 3)
+comment1 = Api::Comment.create(author_id: 2, content: "hello from comment7", route_id: 1)
+comment1 = Api::Comment.create(author_id: 2, content: "hello from comment8", route_id: 2)
+comment1 = Api::Comment.create(author_id: 2, content: "hello from comment9", route_id: 3)
 
-comment1 = Api::Comment.create(author_id: 1, content: "hello from comment1", route_id: 1)
-comment1 = Api::Comment.create(author_id: 1, content: "hello from comment2", route_id: 2)
-comment1 = Api::Comment.create(author_id: 1, content: "hello from comment3", route_id: 3)
-comment1 = Api::Comment.create(author_id: 1, content: "hello from comment1", route_id: 1)
-comment1 = Api::Comment.create(author_id: 1, content: "hello from comment2", route_id: 2)
-comment1 = Api::Comment.create(author_id: 1, content: "hello from comment3", route_id: 3)
 
-
-comment1 = Api::Comment.create(author_id: 1, content: "hello from comment1", route_id: 1)
-comment1 = Api::Comment.create(author_id: 1, content: "hello from comment2", route_id: 2)
-comment1 = Api::Comment.create(author_id: 1, content: "hello from comment3", route_id: 3)
-comment1 = Api::Comment.create(author_id: 1, content: "hello from comment3", route_id: 3)
+comment1 = Api::Comment.create(author_id: 3, content: "hello from comment10", route_id: 1)
+comment1 = Api::Comment.create(author_id: 3, content: "hello from comment11", route_id: 2)
+comment1 = Api::Comment.create(author_id: 3, content: "hello from comment12", route_id: 3)
+comment1 = Api::Comment.create(author_id: 3, content: "hello from comment13", route_id: 1)

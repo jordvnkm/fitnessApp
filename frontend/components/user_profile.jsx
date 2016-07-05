@@ -7,7 +7,8 @@ const AuthoredRoutesIndex = require("./authored_routes_index");
 const hashHistory = require("react-router").hashHistory;
 const ProfileMap = require("./profile_map");
 const WaypointActions = require("../actions/waypoint_actions");
-
+const UserStore = require("../stores/users_store");
+const UserActions = require("../actions/user_actions");
 
 const ButtonToolbar = require("react-bootstrap").ButtonToolbar;
 const Button = require("react-bootstrap").Button;
@@ -17,11 +18,16 @@ const MenuItem = require("react-bootstrap").MenuItem;
 
 const UserProfile = React.createClass({
   getInitialState: function(){
-    return {profile: ProfileStore.find(this.props.params.userId)};
+    return {profile: ProfileStore.find(this.props.params.userId), currentUser: UserStore.currentUser()};
   },
   componentDidMount: function(){
     this.profileListener = ProfileStore.addListener(this.profileChange);
+    UserActions.fetchCurrentUser();
     ProfileActions.fetchProfile(this.props.params.userId);
+  },
+
+  componentWillReceiveProps: function(newProps){
+    ProfileActions.fetchProfile(newProps.params.userId);
   },
 
   componentWillUnmount: function(){
@@ -49,15 +55,37 @@ const UserProfile = React.createClass({
     hashHistory.push(`/routes/create`)
   },
 
+
+  createFollow: function(){
+    console.log("create follow clicked");
+  },
+
   followedProfiles: function(){
     console.log("followed profiles clicked");
+    console.log(this.state.profile);
+  },
+
+  followButton: function(){
+    if (this.state.currentUser){
+      if (this.state.currentUser.id !== parseInt(this.props.params.userId)){
+        return <Button onClick={this.createFollow}>Follow this profile</Button>
+      }
+    }
+  },
+
+  createRouteButton: function(){
+    if (this.state.currentUser && this.state.currentUser.id === parseInt(this.props.params.userId)){
+      return <Button onClick={this.createRoute}>CreateRoute</Button> ;
+    }
   },
 
   userNavButtons: function(){
+
     return (
       <div className="userToolbar">
         <ButtonToolbar>
-          <Button onClick={this.createRoute}>CreateRoute</Button>
+          {this.createRouteButton()}
+          {this.followButton()}
           <Button onClick={this.followedProfiles}>Followed Profiles</Button>
         </ButtonToolbar>
       </div>
