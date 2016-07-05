@@ -88,4 +88,8 @@ class Api::User < ActiveRecord::Base
     BCrypt::Password.new(self.password_digest).is_password?(password)
   end
 
+  def follower_count
+    self.followers.length
+  end
+
 end

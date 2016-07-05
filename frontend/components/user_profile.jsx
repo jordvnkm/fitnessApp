@@ -11,17 +11,21 @@ const UserStore = require("../stores/users_store");
 const UserActions = require("../actions/user_actions");
 const FollowActions = require("../actions/follow_actions");
 const FollowsStore = require("../stores/follows_store");
+const FollowersIndex = require("./followers_index");
+
+
 
 const ButtonToolbar = require("react-bootstrap").ButtonToolbar;
 const Button = require("react-bootstrap").Button;
 const MenuItem = require("react-bootstrap").MenuItem;
-
+const Tabs = require("react-bootstrap").Tabs;
+const Tab = require("react-bootstrap").Tab;
 
 
 const UserProfile = React.createClass({
   getInitialState: function(){
     return {profile: ProfileStore.find(this.props.params.userId), currentUser: UserStore.currentUser(),
-            following: null};
+            following: null, followedSection: "followers"};
 
   },
 
@@ -65,10 +69,21 @@ const UserProfile = React.createClass({
     let routesIndexes = null;
     if (this.state.profile){
       routesIndexes = <div className="routesIndexes">
-          <CompletedRoutesIndex routes={this.state.profile.completed_routes}/>
-          <FavoriteRoutesIndex routes={this.state.profile.favorite_routes}/>
-          <AuthoredRoutesIndex routes={this.state.profile.authored_routes}/>
-        </div>
+        <Tabs defaultActiveKey={1} id="routesIndexTabs">
+          <Tab eventKey={1} title="Completed">
+            <CompletedRoutesIndex routes={this.state.profile.completed_routes}/>
+
+          </Tab>
+          <Tab eventKey={2} title="Favorites">
+            <FavoriteRoutesIndex routes={this.state.profile.favorite_routes}/>
+
+          </Tab>
+          <Tab eventKey={3} title="Authored">
+            <AuthoredRoutesIndex routes={this.state.profile.authored_routes}/>
+
+          </Tab>
+        </Tabs>
+      </div>
     }
     return routesIndexes;
   },
@@ -79,20 +94,15 @@ const UserProfile = React.createClass({
 
 
   createFollow: function(){
-    console.log("create follow clicked");
     FollowActions.createFollow({
       user_id: this.props.params.userId,
       fan_id: this.state.currentUser.id
     })
   },
 
-  removeFollow: function(){
+  removeFollow: function(event){
+    event.preventDefault();
     FollowActions.deleteFollow(this.state.following.id);
-  },
-
-  followedProfiles: function(){
-    console.log("followed profiles clicked");
-    console.log(this.state.profile);
   },
 
   isFollowing: function(){
@@ -124,15 +134,33 @@ const UserProfile = React.createClass({
     }
   },
 
+
+  followersList: function(){
+    let followings = FollowsStore.allUserFollowers();
+    let followers = [];
+    followings.forEach((following) => {
+      followers.push(following.fan);
+    })
+    return followers;
+  },
+
+  followingsList: function(){
+    let followings = FollowsStore.allFollowingsAsFan();
+    let followed = [];
+    followings.forEach((following) => {
+      followed.push(following.user);
+    })
+    return followed;
+  },
+
   userNavButtons: function(){
 
     return (
       <div className="userToolbar">
-        <ButtonToolbar>
-          {this.createRouteButton()}
-          {this.followButton()}
-          <Button onClick={this.followedProfiles}>Followed Profiles</Button>
-        </ButtonToolbar>
+        <Tabs defaultActiveKey={1} id="followingTab">
+          <Tab eventKey={1} title="Following"><FollowersIndex emptyText="Followed Profiles" users={this.followingsList()}/></Tab>
+          <Tab eventKey={2} title="Followers"><FollowersIndex emptyText="Followers"users={this.followersList()}/></Tab>
+        </Tabs>
       </div>
     );
   },
@@ -153,9 +181,13 @@ const UserProfile = React.createClass({
   render: function(){
     return (
       <div className="userProfile">
-        {this.userNavButtons()}
+        {this.createRouteButton()}
+        {this.followButton()}
         {this.profileMap()}
-        {this.routes()}
+        <div className="userInfo">
+          {this.routes()}
+          {this.userNavButtons()}
+        </div>
       </div>
     );
   }

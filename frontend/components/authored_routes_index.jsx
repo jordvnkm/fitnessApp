@@ -1,23 +1,28 @@
 const React = require("react");
 const RoutesIndexItem = require("./routes_index_item");
+const ListGroup = require("react-bootstrap").ListGroup;
+const ListGroupItem = require("react-bootstrap").ListGroupItem
+
 
 const AuthoredRoutesIndex = React.createClass({
   routesIndexItems: function(){
+    if (this.props.routes.length === 0){
+      return <ListGroup><ListGroupItem>No Authored Routes</ListGroupItem></ListGroup>
+    }
     return (
-      <ul>
+      <ListGroup>
         {
           this.props.routes.map((route) => {
-            return <li key={route.id}><RoutesIndexItem route={route}/></li>
+            return <RoutesIndexItem key={route.id} route={route}/>
           })
         }
-      </ul>
+      </ListGroup>
     )
   },
 
   render: function(){
     return (
       <div className="routesIndex">
-        <h3 id="authoredRoutesTitle">Authored Routes</h3>
         {this.routesIndexItems()}
       </div>
     );
