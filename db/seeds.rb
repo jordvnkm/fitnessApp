@@ -55,19 +55,25 @@ completed1 = Api::CompletedRoute.create(date: date1, route_id: 3, user_id: 1)
 
 # comments for user id 1
 comment1 = Api::Comment.create(author_id: 1, content: "hello from comment1", route_id: 1)
-comment1 = Api::Comment.create(author_id: 1, content: "hello from comment2", route_id: 2)
-comment1 = Api::Comment.create(author_id: 1, content: "hello from comment3", route_id: 3)
+comment2 = Api::Comment.create(author_id: 1, content: "hello from comment2", route_id: 2)
+comment3 = Api::Comment.create(author_id: 1, content: "hello from comment3", route_id: 3)
 
 # comments for user id 2
-comment1 = Api::Comment.create(author_id: 2, content: "hello from comment4", route_id: 1)
-comment1 = Api::Comment.create(author_id: 2, content: "hello from comment5", route_id: 2)
-comment1 = Api::Comment.create(author_id: 2, content: "hello from comment6", route_id: 3)
-comment1 = Api::Comment.create(author_id: 2, content: "hello from comment7", route_id: 1)
-comment1 = Api::Comment.create(author_id: 2, content: "hello from comment8", route_id: 2)
-comment1 = Api::Comment.create(author_id: 2, content: "hello from comment9", route_id: 3)
+comment4 = Api::Comment.create(author_id: 2, content: "hello from comment4", route_id: 1)
+comment5 = Api::Comment.create(author_id: 2, content: "hello from comment5", route_id: 2)
+comment6 = Api::Comment.create(author_id: 2, content: "hello from comment6", route_id: 3)
+comment7 = Api::Comment.create(author_id: 2, content: "hello from comment7", route_id: 1)
+comment8 = Api::Comment.create(author_id: 2, content: "hello from comment8", route_id: 2)
+comment9 = Api::Comment.create(author_id: 2, content: "hello from comment9", route_id: 3)
+
+# comments for user 3
+comment10 = Api::Comment.create(author_id: 3, content: "hello from comment10", route_id: 1)
+comment11 = Api::Comment.create(author_id: 3, content: "hello from comment11", route_id: 2)
+comment12 = Api::Comment.create(author_id: 3, content: "hello from comment12", route_id: 3)
+comment13 = Api::Comment.create(author_id: 3, content: "hello from comment13", route_id: 1)
 
 
-comment1 = Api::Comment.create(author_id: 3, content: "hello from comment10", route_id: 1)
-comment1 = Api::Comment.create(author_id: 3, content: "hello from comment11", route_id: 2)
-comment1 = Api::Comment.create(author_id: 3, content: "hello from comment12", route_id: 3)
-comment1 = Api::Comment.create(author_id: 3, content: "hello from comment13", route_id: 1)
+follows1 = Api::Following.create(user_id: 1, fan_id: 2)
+follows2 = Api::Following.create(user_id: 1, fan_id: 3)
+follows3 = Api::Following.create(user_id: 2, fan_id: 1)
+follows4 = Api::Following.create(user_id: 3, fan_id: 1)

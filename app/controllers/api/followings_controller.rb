@@ -16,7 +16,7 @@ class Api::FollowingsController < ApplicationController
     @followings_as_fan = Api::Following.where(fan_id: params[:id])
 
     if @followings || @followings_as_fan
-      render '/api/followings/show'
+      render '/api/followings/index'
     else
       @errors = ["could not find any followings for id"]
       render '/api/shared/error', status: 404

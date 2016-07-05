@@ -9,6 +9,8 @@ const ProfileMap = require("./profile_map");
 const WaypointActions = require("../actions/waypoint_actions");
 const UserStore = require("../stores/users_store");
 const UserActions = require("../actions/user_actions");
+const FollowActions = require("../actions/follow_actions");
+const FollowsStore = require("../stores/follows_store");
 
 const ButtonToolbar = require("react-bootstrap").ButtonToolbar;
 const Button = require("react-bootstrap").Button;
@@ -18,20 +20,40 @@ const MenuItem = require("react-bootstrap").MenuItem;
 
 const UserProfile = React.createClass({
   getInitialState: function(){
-    return {profile: ProfileStore.find(this.props.params.userId), currentUser: UserStore.currentUser()};
+    return {profile: ProfileStore.find(this.props.params.userId), currentUser: UserStore.currentUser(),
+            following: null};
+
   },
+
+
   componentDidMount: function(){
     this.profileListener = ProfileStore.addListener(this.profileChange);
-    UserActions.fetchCurrentUser();
+    this.userListener = UserStore.addListener(this.userChange);
+    this.followListener = FollowsStore.addListener(this.followChange);
     ProfileActions.fetchProfile(this.props.params.userId);
+    FollowActions.fetchFollowsForUser(this.props.params.userId);
   },
 
   componentWillReceiveProps: function(newProps){
     ProfileActions.fetchProfile(newProps.params.userId);
+    UserActions.fetchCurrentUser();
+    FollowActions.fetchFollowsForUser(newProps.params.userId)
   },
 
   componentWillUnmount: function(){
     this.profileListener.remove();
+    this.userListener.remove();
+    this.followListener.remove();
+  },
+
+  followChange: function(){
+    if (this.state.profile && this.state.currentUser){
+      this.setState({following: FollowsStore.find(this.state.profile.user.id, this.state.currentUser.id)});
+    }
+  },
+
+  userChange: function(){
+    this.setState({currentUser: UserStore.currentUser()});
   },
 
   profileChange: function(){
@@ -58,6 +80,14 @@ const UserProfile = React.createClass({
 
   createFollow: function(){
     console.log("create follow clicked");
+    FollowActions.createFollow({
+      user_id: this.props.params.userId,
+      fan_id: this.state.currentUser.id
+    })
+  },
+
+  removeFollow: function(){
+    FollowActions.deleteFollow(this.state.following.id);
   },
 
   followedProfiles: function(){
@@ -65,10 +95,25 @@ const UserProfile = React.createClass({
     console.log(this.state.profile);
   },
 
+  isFollowing: function(){
+    let followers = this.state.profile.followers;
+    let answer = false;
+    followers.forEach((user) => {
+      if (user.id === this.state.currentUser.id){
+        answer = true;
+      }
+    });
+
+    return answer;
+  },
+
   followButton: function(){
-    if (this.state.currentUser){
-      if (this.state.currentUser.id !== parseInt(this.props.params.userId)){
+    if (this.state.currentUser && this.state.profile){
+      if (this.state.currentUser.id !== parseInt(this.props.params.userId) && !this.state.following){
         return <Button onClick={this.createFollow}>Follow this profile</Button>
+      }
+      else if (this.state.currentUser.id !== parseInt(this.props.params.userId)){
+        return <Button onClick={this.removeFollow}>Unfollow this profile</Button>
       }
     }
   },
