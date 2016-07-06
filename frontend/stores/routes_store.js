@@ -43,7 +43,8 @@ const addRoute = function(route){
 
 const resetRoutes = function(routes){
   _routes = {};
-  routes.forEach((route) => {
+
+  routes.routes.forEach((route) => {
     _routes[route.id] = route;
   });
 };
@@ -55,7 +56,11 @@ RouteStore.find = function(routeId){
 
 
 RouteStore.all = function(){
-  return Object.assign({}, _routes);
+  let allRoutes = [];
+  Object.keys(_routes).forEach((id) => {
+    allRoutes.push(_routes[id]);
+  })
+  return allRoutes;
 };
 
 

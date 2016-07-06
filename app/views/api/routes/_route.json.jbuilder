@@ -6,3 +6,4 @@ mywaypoints = route.waypoints.sort_by do |waypoint|
   waypoint[:order]
 end
 json.waypoints mywaypoints
+json.favorite_count route.favorites.length

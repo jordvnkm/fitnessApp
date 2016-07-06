@@ -16,6 +16,11 @@ class Api::Route < ActiveRecord::Base
   foreign_key: :route_id,
   primary_key: :id
 
+  has_many :favorites,
+  class_name: :Favorite,
+  foreign_key: :route_id,
+  primary_key: :id
+
   has_many :waypoints, dependent: :destroy
 
 end

@@ -14,6 +14,21 @@ const RouteApiUtil = {
     });
   },
 
+  fetchRoutesForLocation: function(locationId, successCallback, errorCallback){
+    let params = {location_id: locationId};
+    $.ajax({
+      url: `api/routes/`,
+      data: params,
+      success: function(routes){
+        successCallback(routes);
+      },
+
+      error: function(error){
+        errorCallback(error);
+      }
+    })
+  },
+
   createRoute: function(route, successCallback, errorCallback){
     let params = {route: route}
     $.ajax({

@@ -6,6 +6,7 @@ let UserStore = new Store(AppDispatcher);
 
 let _currentUser = null;
 let _allUsers = [];
+
 UserStore.__onDispatch = function(payload){
   switch (payload.actionType){
   case UserConstants.LOGIN:
@@ -22,6 +23,15 @@ UserStore.__onDispatch = function(payload){
     break;
   }
 };
+
+UserStore.all = function(){
+  if (_allUsers.length > 0){
+    return _allUsers.slice();
+  }
+  else{
+    return [];
+  }
+}
 
 UserStore.currentUser = function(){
   if (_currentUser){

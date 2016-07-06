@@ -8,6 +8,17 @@ const RouteActions = {
     RouteApiUtil.fetchRoute(routeId, RouteActions.receiveRoute, RouteActions.handleError);
   },
 
+  fetchRoutesForLocation: function(locationId){
+    RouteApiUtil.fetchRoutesForLocation(locationId, RouteActions.receiveAllRoutes, RouteActions.handleError);
+  },
+
+  receiveAllRoutes: function(routes){
+    AppDispatcher.dispatch({
+      actionType: RouteConstants.ROUTES_RECEIVED,
+      routes: routes
+    });
+  },
+
   receiveRoute: function(route){
     AppDispatcher.dispatch({
       actionType: RouteConstants.ROUTE_RECEIVED,

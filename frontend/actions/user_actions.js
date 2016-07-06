@@ -12,7 +12,6 @@ const UserActions = {
   },
 
   receiveAllUsers: function(users){
-    console.log(users);
     AppDispatcher.dispatch({
       actionType: UserConstants.USERS_RECEIVED,
       users: users

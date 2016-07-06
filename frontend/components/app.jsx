@@ -1,25 +1,32 @@
 const React = require("react");
+const ReactDOM = require("react-dom");
 const UserStore = require("../stores/users_store");
 const hashHistory = require("react-router").hashHistory;
 const UserActions = require("../actions/user_actions");
 const Modal = require("react-bootstrap").Modal;
 const ErrorStore = require("../stores/error_store");
+const LocationStore = require("../stores/location_store");
+const LocationActions = require("../actions/location_actions");
 
 const Navbar = require("react-bootstrap").Navbar;
 const Nav = require("react-bootstrap").Nav;
 const NavItem = require("react-bootstrap").NavItem;
 const NavDropdown = require("react-bootstrap").NavDropdown;
 const MenuItem = require("react-bootstrap").MenuItem;
-const Button = require("react-bootstrap").Button
-
+const Button = require("react-bootstrap").Button;
+const FormGroup = require("react-bootstrap").FormGroup;
+const FormControl = require("react-bootstrap").FormControl;
 
 const LoginForm = require("./log_in_form");
 const SignUpForm = require("./sign_up_form");
+const LocationSearchBar = require("./location_search_bar");
 
 const App = React.createClass({
   getInitialState: function(){
     return {currentUser: UserStore.currentUser(), modalOpen: false,
-            modalForm: null, userErrors: ErrorStore.all()};
+            modalForm: null, userErrors: ErrorStore.all(), allUsers: UserStore.all(),
+            locationText: "", allLocations: LocationStore.all(),
+            userText: ""};
   },
 
   errors: function(myerrors){
@@ -43,15 +50,24 @@ const App = React.createClass({
   componentDidMount: function(){
     this.userListener = UserStore.addListener(this.onUserChange);
     this.errorListener = ErrorStore.addListener(this.onErrorChange);
+    this.locationListener = LocationStore.addListener(this.locationChange);
+    UserActions.fetchAllUsers();
+    LocationActions.fetchAllLocations();
   },
 
   componentWillUnmount: function(){
     this.userListener.remove();
     this.errorListener.remove();
+    this.locationListener.remove();
+  },
+
+  locationChange: function(){
+    this.setState({allLocations: LocationStore.all()});
   },
 
   onUserChange: function(){
-    this.setState({modalOpen: false, currentUser: UserStore.currentUser(), userErrors: ErrorStore.all()});
+    this.setState({modalOpen: false, currentUser: UserStore.currentUser(), userErrors: ErrorStore.all(),
+                  allUsers: UserStore.all()});
   },
 
   onErrorChange: function(){
@@ -108,12 +124,51 @@ const App = React.createClass({
     }
   },
 
-  homeButton: function(){
+  homeButton: function(event){
+    event.preventDefault();
     hashHistory.push("/");
   },
 
-  locationSeach: function(){
-    // TODO
+  locationTextChange: function(text){
+    this.setState({locationText: text});
+  },
+
+  searchPlaces: function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    console.log(this.state.locationText);
+    if (this.state.locationText === ""){
+      return;
+    }
+    let locationId = this.getLocationId(this.state.locationText);
+    console.log(locationId);
+    hashHistory.push(`locations/${locationId}`);
+
+  },
+
+  getLocationId: function(locationText){
+    let id = 0;
+    this.state.allLocations.forEach((location) =>{
+      if (location.name.toLowerCase() === locationText.toLowerCase()){
+        id = location.id
+      }
+    })
+    return id;
+  },
+
+  locationSearchBar: function(){
+    return (
+      <Nav>
+        <Navbar.Form  pullLeft>
+          <form >
+            <FormGroup>
+              <LocationSearchBar textChange={this.locationTextChange} text={this.state.locationText} locations={this.state.allLocations}/>
+            </FormGroup>
+          </form>
+        </Navbar.Form>
+        <NavItem onClick={this.searchPlaces}>Search</NavItem>
+      </Nav>
+    );
   },
 
   navBar: function(){
@@ -127,8 +182,8 @@ const App = React.createClass({
         </Navbar.Header>
 
         <Navbar.Collapse>
+          {this.locationSearchBar()}
           {this.navButtons()}
-          {this.locationSearch()}
         </Navbar.Collapse>
       </Navbar>
     );
@@ -157,20 +212,64 @@ const App = React.createClass({
             modalForm={this.state.modalForm} show={this.state.modalOpen} onHide={this.closeModal}/>
   },
 
-  userSeach: function(){
+  userTextChange: function(text){
+    this.setState({userText: text})
+  },
+
+  userSearchBar: function(){
     return (
-      <Navbar>
-        <Navbar.Collapse>
-          <Navbar.Form pullLeft>
+      <Nav>
+        <Navbar.Form  pullLeft>
+          <form >
             <FormGroup>
-              <FormControl type="text" placeholder="Search Users" />
+              <UserSearchBar textChange={this.userTextChange} text={this.state.userText} users={this.state.allUsers}/>
             </FormGroup>
-            <Button type="submit">Submit</Button>
-          </Navbar.Form>
-        </Navbar.Collapse>
-      </Navbar>
+          </form>
+        </Navbar.Form>
+        <NavItem onClick={this.searchUsers}>Search</NavItem>
+      </Nav>
     );
   },
+
+
+// searchPlaces: function(event){
+//   event.preventDefault();
+//   event.stopPropagation();
+//   console.log(this.state.locationText);
+//   if (this.state.locationText === ""){
+//     return;
+//   }
+//   let locationId = this.getLocationId(this.state.locationText);
+//   console.log(locationId);
+//   hashHistory.push(`locations/${locationId}`);
+//
+// },
+//
+// getLocationId: function(locationText){
+//   let id = 0;
+//   this.state.allLocations.forEach((location) =>{
+//     if (location.name.toLowerCase() === locationText.toLowerCase()){
+//       id = location.id
+//     }
+//   })
+//   return id;
+// },
+
+  // locationSearchBar: function(){
+  //   return (
+  //     <Nav>
+  //       <Navbar.Form  pullLeft>
+  //         <form >
+  //           <FormGroup>
+  //             <LocationSearchBar textChange={this.locationTextChange} text={this.state.locationText} locations={this.state.allLocations}/>
+  //           </FormGroup>
+  //         </form>
+  //       </Navbar.Form>
+  //       <NavItem onClick={this.searchPlaces}>Search</NavItem>
+  //     </Nav>
+  //   );
+  // },
+
 
   render: function(){
     return (
@@ -178,8 +277,7 @@ const App = React.createClass({
         {this.navBar()}
         {this.errors()}
         {this.modal(this.state.userErrors)}
-
-        {this.userSeach()}
+        {this.userSearch()}
         {this.props.children}
       </div>
     );

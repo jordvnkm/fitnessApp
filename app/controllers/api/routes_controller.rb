@@ -1,5 +1,18 @@
 class Api::RoutesController < ApplicationController
 
+  def index
+    @location = Api::Location.find(params[:location_id]);
+
+    if @location
+      @routes = @location.routes
+      render '/api/routes/index'
+    else
+      @errors = ['no location']
+      render '/api/shared/error', status: 404
+    end
+  end
+
+
   def show
     @route = Api::Route.find(params[:id])
 

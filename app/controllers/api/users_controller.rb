@@ -2,6 +2,17 @@
 
 class Api::UsersController < ApplicationController
 
+  def index
+    @users = Api::User.all
+
+    if @users
+      render '/api/users/index'
+    else
+      @errors = @users.errors.full_messages
+      render '/api/shared/error', status: 404
+    end
+  end
+
   def show
     @user = current_user
     if @user

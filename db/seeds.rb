@@ -24,7 +24,7 @@ route3 = Api::Route.create(author_id: 3, name: "route3", location_id: 1)
 
 # locations
 location1 =  Api::Location.create(name: "San Francisco", center_lat: 37.759036, center_lng: -122.449619)
-
+location2 = Api::Location.create(name: "Los Angeles", center_lat: 34.067974, center_lng: -118.340362)
 
 # waypoints for ROUTE 1
 waypoint1 = Api::Waypoint.create(lat: 37.788687, lng: -122.420328, route_id: 1, order: 0)
