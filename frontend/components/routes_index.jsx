@@ -7,7 +7,7 @@ const RoutesIndex = React.createClass({
 
   routesIndexItems: function(){
     if (this.props.routes.length === 0){
-      return <ListGroup><ListGroupItem>No Completed Routes</ListGroupItem></ListGroup>
+      return <ListGroup><ListGroupItem  header="No routes for this location"></ListGroupItem></ListGroup>
     }
     return (
       <ListGroup>
@@ -19,7 +19,7 @@ const RoutesIndex = React.createClass({
       </ListGroup>
     );
   },
-  
+
   render: function(){
     return (
       <div className="routesIndex">

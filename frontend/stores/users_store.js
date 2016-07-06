@@ -43,7 +43,7 @@ UserStore.currentUser = function(){
 
 
 const resetUsers = function(users){
-  _allUsers = users;
+  _allUsers = users.users;
 }
 
 const loginUser = function(user){

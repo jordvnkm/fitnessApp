@@ -20,6 +20,7 @@ const FormControl = require("react-bootstrap").FormControl;
 const LoginForm = require("./log_in_form");
 const SignUpForm = require("./sign_up_form");
 const LocationSearchBar = require("./location_search_bar");
+const UserSearchBar = require("./user_search_bar");
 
 const App = React.createClass({
   getInitialState: function(){
@@ -53,6 +54,10 @@ const App = React.createClass({
     this.locationListener = LocationStore.addListener(this.locationChange);
     UserActions.fetchAllUsers();
     LocationActions.fetchAllLocations();
+  },
+
+  componentWillReceiveProps: function(){
+    
   },
 
   componentWillUnmount: function(){
@@ -216,59 +221,43 @@ const App = React.createClass({
     this.setState({userText: text})
   },
 
-  userSearchBar: function(){
-    return (
-      <Nav>
-        <Navbar.Form  pullLeft>
-          <form >
-            <FormGroup>
-              <UserSearchBar textChange={this.userTextChange} text={this.state.userText} users={this.state.allUsers}/>
-            </FormGroup>
-          </form>
-        </Navbar.Form>
-        <NavItem onClick={this.searchUsers}>Search</NavItem>
-      </Nav>
-    );
+  getUserid: function(name){
+    let id = 0;
+    this.state.allUsers.forEach((user) => {
+      if (user.username === name){
+        id = user.id
+      }
+    });
+    return id;
   },
 
 
-// searchPlaces: function(event){
-//   event.preventDefault();
-//   event.stopPropagation();
-//   console.log(this.state.locationText);
-//   if (this.state.locationText === ""){
-//     return;
-//   }
-//   let locationId = this.getLocationId(this.state.locationText);
-//   console.log(locationId);
-//   hashHistory.push(`locations/${locationId}`);
-//
-// },
-//
-// getLocationId: function(locationText){
-//   let id = 0;
-//   this.state.allLocations.forEach((location) =>{
-//     if (location.name.toLowerCase() === locationText.toLowerCase()){
-//       id = location.id
-//     }
-//   })
-//   return id;
-// },
+  searchUsers: function(){
+    if (this.state.userText === ""){
+      return;
+    }
 
-  // locationSearchBar: function(){
-  //   return (
-  //     <Nav>
-  //       <Navbar.Form  pullLeft>
-  //         <form >
-  //           <FormGroup>
-  //             <LocationSearchBar textChange={this.locationTextChange} text={this.state.locationText} locations={this.state.allLocations}/>
-  //           </FormGroup>
-  //         </form>
-  //       </Navbar.Form>
-  //       <NavItem onClick={this.searchPlaces}>Search</NavItem>
-  //     </Nav>
-  //   );
-  // },
+    let userId = this.getUserid(this.state.userText);
+    hashHistory.push(`users/${userId}`);
+  },
+
+  userSearchBar: function(){
+    console.log(this.state.allUsers);
+    return (
+      <Navbar>
+        <Nav>
+          <Navbar.Form  pullLeft>
+            <form >
+              <FormGroup>
+                <UserSearchBar textChange={this.userTextChange} text={this.state.userText} users={this.state.allUsers}/>
+              </FormGroup>
+            </form>
+          </Navbar.Form>
+          <NavItem onClick={this.searchUsers}>Search</NavItem>
+        </Nav>
+      </Navbar>
+    );
+  },
 
 
   render: function(){
@@ -277,7 +266,7 @@ const App = React.createClass({
         {this.navBar()}
         {this.errors()}
         {this.modal(this.state.userErrors)}
-        {this.userSearch()}
+        {this.userSearchBar()}
         {this.props.children}
       </div>
     );

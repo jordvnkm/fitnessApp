@@ -33,12 +33,12 @@ const UserSearchBar = React.createClass({
 
   renderSuggestion: function(suggestion){
     return (
-      <span>{suggestion.name}</span>
+      <span>{suggestion.username}</span>
     );
   },
 
   getSuggestionValue: function(suggestion){
-    return suggestion.name
+    return suggestion.username
   },
 
   getSuggestions: function(value){
@@ -50,9 +50,9 @@ const UserSearchBar = React.createClass({
       return [];
     }
     else {
-      this.props.locations.forEach((location) => {
-        if (location.name.toLowerCase().startsWith(inputValue)){
-          suggestions.push(location);
+      this.props.users.forEach((user) => {
+        if (user.username.toLowerCase().startsWith(inputValue)){
+          suggestions.push(user);
         }
       })
     }

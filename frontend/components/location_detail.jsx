@@ -39,12 +39,10 @@ const LocationDetail = React.createClass({
   },
 
   routesIndex: function(){
-    if (this.state.routes && this.state.routes.length > 0){
+    if (this.state.routes){
       return <RoutesIndex routes={this.state.routes}/>
     }
-    else {
-      return <span>No routes for this location</span>
-    }
+
   },
   render: function(){
     if (parseInt(this.props.params.locationId) === 0){
