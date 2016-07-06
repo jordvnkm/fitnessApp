@@ -13,13 +13,24 @@ class Api::UsersController < ApplicationController
 
   def create
     @user = Api::User.new(user_params)
-    "debugger"
     if @user.save
       login_user(@user)
       render 'api/users/show'
     else
       @errors = @user.errors.full_messages
       render "api/shared/error", status: 422
+    end
+  end
+
+  def update
+    @user = Api::User.find(params[:id])
+    @user.update_attributes(user_params)
+
+    if @user.save
+      render '/api/users/show'
+    else
+      @errors = @user.errors.full_messages
+      render '/api/shared/error', status: 422
     end
   end
 

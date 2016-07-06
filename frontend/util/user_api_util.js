@@ -13,6 +13,21 @@ const UserApiUtil = {
     });
   },
 
+  updateUser: function(user, successCallback, errorCallback){
+    let params = {user: user};
+    $.ajax({
+      url: `/api/users/${user.id}`,
+      type: "PATCH",
+      data: params,
+      success: function(user){
+        successCallback(user);
+      },
+      error: function(errorResp){
+        errorCallback(errorResp);
+      }
+    });
+  },
+
   signUp: function(user, successCallback, errorCallback){
     let params = {user: user};
     $.ajax({

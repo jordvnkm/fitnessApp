@@ -19,6 +19,10 @@ const UserActions = {
     UserActions.logIn({username: "guest", password: "password"});
   },
 
+  updateUser: function(user){
+    UserApiUtil.updateUser(user, UserActions.receiveCurrentUser, UserActions.handleError);
+  },
+
   receiveCurrentUser: function(user){
     AppDispatcher.dispatch({
       actionType: UserConstants.LOGIN,

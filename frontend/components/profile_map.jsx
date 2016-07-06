@@ -21,7 +21,7 @@ const ProfileMap = React.createClass({
     this.markers.forEach((marker) => {
       marker.setMap(null);
     });
-
+    this.markers = [];
     this.placeCompletedMarkers(newProps.routes.completed);
     this.placeAuthoredMarkers(newProps.routes.authored);
     this.placeFavoritedMarkers(newProps.routes.favorited);
