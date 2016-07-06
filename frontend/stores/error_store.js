@@ -24,7 +24,7 @@ ErrorStore.all = function(){
 };
 
 const resetErrors = function(){
-  if (_errors.length === 0){
+  if (_errors && _errors.length === 0){
     return;
   }
   _errors = [];

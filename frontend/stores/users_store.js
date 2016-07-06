@@ -5,7 +5,7 @@ const UserConstants = require("../constants/user_constants");
 let UserStore = new Store(AppDispatcher);
 
 let _currentUser = null;
-
+let _allUsers = [];
 UserStore.__onDispatch = function(payload){
   switch (payload.actionType){
   case UserConstants.LOGIN:
@@ -14,6 +14,10 @@ UserStore.__onDispatch = function(payload){
     break;
   case UserConstants.LOGOUT:
     logoutUser();
+    UserStore.__emitChange();
+    break;
+  case UserConstants.USERS_RECEIVED:
+    resetUsers(payload.users);
     UserStore.__emitChange();
     break;
   }
@@ -26,6 +30,11 @@ UserStore.currentUser = function(){
   return null;
 };
 
+
+
+const resetUsers = function(users){
+  _allUsers = users;
+}
 
 const loginUser = function(user){
   _currentUser = user;

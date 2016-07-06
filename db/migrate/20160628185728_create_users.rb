@@ -4,9 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :username, null: false
       t.string :password_digest, null: false
       t.string :session_token, null: false
-      t.string :profile_img_url
-
-      t.timestamps
+      t.text :profile_img_url, null: false, default: "https://www.b1g1.com/assets/admin/images/no_image_user.png"
     end
   end
 end

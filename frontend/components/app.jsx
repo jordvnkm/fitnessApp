@@ -10,6 +10,7 @@ const Nav = require("react-bootstrap").Nav;
 const NavItem = require("react-bootstrap").NavItem;
 const NavDropdown = require("react-bootstrap").NavDropdown;
 const MenuItem = require("react-bootstrap").MenuItem;
+const Button = require("react-bootstrap").Button
 
 
 const LoginForm = require("./log_in_form");
@@ -111,6 +112,10 @@ const App = React.createClass({
     hashHistory.push("/");
   },
 
+  locationSeach: function(){
+    // TODO
+  },
+
   navBar: function(){
     return (
       <Navbar inverse>
@@ -123,6 +128,7 @@ const App = React.createClass({
 
         <Navbar.Collapse>
           {this.navButtons()}
+          {this.locationSearch()}
         </Navbar.Collapse>
       </Navbar>
     );
@@ -151,12 +157,29 @@ const App = React.createClass({
             modalForm={this.state.modalForm} show={this.state.modalOpen} onHide={this.closeModal}/>
   },
 
+  userSeach: function(){
+    return (
+      <Navbar>
+        <Navbar.Collapse>
+          <Navbar.Form pullLeft>
+            <FormGroup>
+              <FormControl type="text" placeholder="Search Users" />
+            </FormGroup>
+            <Button type="submit">Submit</Button>
+          </Navbar.Form>
+        </Navbar.Collapse>
+      </Navbar>
+    );
+  },
+
   render: function(){
     return (
       <div className="modal-container">
         {this.navBar()}
         {this.errors()}
         {this.modal(this.state.userErrors)}
+
+        {this.userSeach()}
         {this.props.children}
       </div>
     );

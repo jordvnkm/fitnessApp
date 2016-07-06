@@ -24,7 +24,8 @@ class Api::UsersController < ApplicationController
 
   def update
     @user = Api::User.find(params[:id])
-    @user.update_attributes(user_params)
+    @user.update(user_params)
+    # @user.profile_img_url = params[:user][:profile_img_url]
 
     if @user.save
       render '/api/users/show'
@@ -36,7 +37,7 @@ class Api::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:username, :password, :email, :profile_img_url)
+    params.require(:user).permit(:username, :profile_img_url, :email, :password)
   end
 
 

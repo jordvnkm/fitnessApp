@@ -7,6 +7,18 @@ const UserActions = {
     UserApiUtil.fetchCurrentUser(UserActions.receiveCurrentUser, UserActions.handleError);
   },
 
+  fetchAllUsers: function(){
+    UserApiUtil.fetchAllUsers(UserActions.receiveAllUsers, UserActions.handleError);
+  },
+
+  receiveAllUsers: function(users){
+    console.log(users);
+    AppDispatcher.dispatch({
+      actionType: UserConstants.USERS_RECEIVED,
+      users: users
+    })
+  },
+
   signUp: function(user){
     UserApiUtil.signUp(user, UserActions.receiveCurrentUser, UserActions.handleError);
   },

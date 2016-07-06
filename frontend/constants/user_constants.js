@@ -4,5 +4,6 @@
 module.exports = {
   LOGIN: "LOGIN",
   ERROR: "ERROR",
-  LOGOUT: "LOGOUT"
+  LOGOUT: "LOGOUT",
+  USERS_RECEIVED: "USERS_RECEIVED"
 }

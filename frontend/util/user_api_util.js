@@ -13,8 +13,21 @@ const UserApiUtil = {
     });
   },
 
+  fetchAllUser: function(successCallback, errorCallback){
+    $.ajax({
+      url: `/api/users`,
+      success: function(users){
+        successCallback(users);
+      },
+
+      error: function(error){
+        errorCallback(error);
+      }
+    })
+  },
+
   updateUser: function(user, successCallback, errorCallback){
-    let params = {user: user};
+    let params = {user: {username: user.username, password: user.password, email: user.email, profile_img_url: user.profile_img_url}};
     $.ajax({
       url: `/api/users/${user.id}`,
       type: "PATCH",

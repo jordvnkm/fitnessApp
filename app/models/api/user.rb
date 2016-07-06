@@ -64,10 +64,6 @@ class Api::User < ActiveRecord::Base
     end
   end
 
-  def profile_img_url=(url)
-    self.profile_img_url = url
-  end
-
   def ensure_session_token
 
    self.session_token ||= SecureRandom.urlsafe_base64
@@ -89,7 +85,7 @@ class Api::User < ActiveRecord::Base
   end
 
   def follower_count
-    self.followers.length
+    self.followings_as_user.length
   end
 
 end

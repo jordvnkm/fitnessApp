@@ -1,2 +1,2 @@
-json.extract! user, :username, :id, :profile_img_url, :email
-json.follower_count user.followers.length
+json.extract! user, :username, :id, :email, :profile_img_url
+json.follower_count user.followings_as_user.length

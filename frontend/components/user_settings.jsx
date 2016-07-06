@@ -3,6 +3,7 @@ const UserStore = require("../stores/users_store");
 const UserActions = require("../actions/user_actions");
 const UserConstants = require("../constants/user_constants");
 const hashHistory = require("react-router").hashHistory;
+const ErrorStore = require("../stores/error_store");
 
 const Button = require("react-bootstrap").Button;
 
@@ -15,16 +16,33 @@ const HelpBlock = require("react-bootstrap").HelpBlock;
 const UserSettings = React.createClass({
   getInitialState: function(){
     let user = UserStore.currentUser();
-    return {currentUser: user, username: user.username,
-            password: "", passwordConfirm: "", email: user.email, profileImgUrl: user.profile_img_url};
+
+    let name = "";
+    let myemail = "";
+    let myprofileImgUrl = "";
+    if (user){
+      name = user.username;
+      myemail = user.email;
+      myprofileImgUrl = user.profile_img_url;
+      this.profile_img_url = user.profile_img_url;
+      this.successfullSave = false;
+    }
+
+    return {currentUser: user, username: name, errors: ErrorStore.all(),
+            password: "", passwordConfirm: "", email: myemail, profileImgUrl: myprofileImgUrl};
   },
 
   componentDidMount: function(){
+    if (!this.state.currentUser){
+      hashHistory.push("/");
+    }
     this.userListener = UserStore.addListener(this.updateUser);
+    this.errorListener = ErrorStore.addListener(this.updateErrors);
   },
 
   componentWillUnmount: function(){
     this.userListener.remove();
+    this.errorListener.remove();
   },
 
   componentWillReceiveProps: function(newProps){
@@ -38,6 +56,10 @@ const UserSettings = React.createClass({
     }
   },
 
+  updateErrors: function(){
+    this.setState({errors: ErrorStore.all()});
+  },
+
   updateUser: function(){
     let user = UserStore.currentUser();
     if (parseInt(this.props.params.userId) !== user.id){
@@ -45,6 +67,9 @@ const UserSettings = React.createClass({
       hashHistory.push("/")
     }
     else {
+      if (this.profile_img_url !== UserStore.currentUser().profile_img_url){
+        this.successfullSave = true;
+      }
       this.setState({currentUser: UserStore.currentUser()});
     }
   },
@@ -80,29 +105,39 @@ const UserSettings = React.createClass({
   onSubmit: function(event){
     event.preventDefault();
     event.stopPropagation();
-    console.log("update account settings")
-    if (password !== passwordConfirm){
+    if (this.state.password !== this.state.passwordConfirm){
       UserActions.handleError({
         responseJSON: {errors: ["passwords must match"]}
       });
     }
     else {
-      UserActions.updateUser({
-        username: this.state.username,
-        email: this.state.email,
-        password: myPassword,
-        profile_img_url: this.state.profileImgUrl
-      })
+      if (this.state.password === ""){
+        UserActions.updateUser({
+          username: this.state.username,
+          email: this.state.email,
+          profile_img_url: this.state.profileImgUrl,
+          id: this.state.currentUser.id
+        })
+      }
+      else {
+        UserActions.updateUser({
+          username: this.state.username,
+          email: this.state.email,
+          password: this.state.password,
+          profile_img_url: this.state.profileImgUrl,
+          id: this.state.currentUser.id
+        })
+      }
     }
   },
 
   profileUpload: function(event){
     event.preventDefault();
+    let self = this;
     cloudinary.openUploadWidget(window.cloudinary_options,
-      (error, images) => {
+      function(error, images){
         if (error === null){
-          console.log(images[0].url);
-          this.setState({profileImgUrl: images[0].url})
+          self.setState({profileImgUrl: images[0].url})
         }
     });
   },
@@ -114,13 +149,6 @@ const UserSettings = React.createClass({
           <img className="image" src={this.state.profileImgUrl} />
         </div>
       );
-    }
-    else {
-      return (
-        <div className="profilePic">
-          <img className="image" src="https://www.b1g1.com/assets/admin/images/no_image_user.png" />
-        </div>
-      )
     }
   },
 
@@ -138,11 +166,18 @@ const UserSettings = React.createClass({
     </ul>);
   },
 
+  success: function(){
+    if (this.successfullSave){
+      return <div>Settings Saved!</div>
+    }
+  },
+
 
   render: function(){
     return (
       <div>
         {this.errors()}
+        {this.success()}
         {this.profilePicture()}
         <div className="modalForm">
           <form onSubmit={this.onSubmit}>
