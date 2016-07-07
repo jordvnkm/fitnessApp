@@ -24,6 +24,34 @@ UserStore.__onDispatch = function(payload){
   }
 };
 
+
+UserStore.popularUsers = function(){
+  _allUsers.sort(function(a,b){
+    let keya = a.follower_count;
+    let keyb = b.follower_count;
+
+    if (keya < keyb){
+      return -1;
+    }
+    if (keya > keyb){
+      return 1;
+    }
+    return 0;
+  });
+
+  _allUsers.reverse();
+  if (_allUsers.length <= 6){
+    return _allUsers.slice();
+  }
+  else {
+    return _allUsers.slice(0, 6);
+  }
+
+}
+
+
+
+
 UserStore.all = function(){
   if (_allUsers.length > 0){
     return _allUsers.slice();

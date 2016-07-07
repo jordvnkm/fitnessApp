@@ -8,11 +8,13 @@ const LocationSearchBar = React.createClass({
   },
 
   componentDidMount: function(){
+    let self = this;
     $('#locationSearchBar').on('keypress', function(e){
       let key = e.which;
       if (key== 13){
         event.preventDefault();
         event.stopPropagation();
+        self.props.onsubmit();
       }
     })
   },

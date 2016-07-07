@@ -20,14 +20,12 @@ const FormControl = require("react-bootstrap").FormControl;
 const LoginForm = require("./log_in_form");
 const SignUpForm = require("./sign_up_form");
 const LocationSearchBar = require("./location_search_bar");
-const UserSearchBar = require("./user_search_bar");
 
 const App = React.createClass({
   getInitialState: function(){
     return {currentUser: UserStore.currentUser(), modalOpen: false,
-            modalForm: null, userErrors: ErrorStore.all(), allUsers: UserStore.all(),
-            locationText: "", allLocations: LocationStore.all(),
-            userText: ""};
+            modalForm: null, userErrors: ErrorStore.all(),
+            locationText: "", allLocations: LocationStore.all()};
   },
 
   errors: function(myerrors){
@@ -52,7 +50,7 @@ const App = React.createClass({
     this.userListener = UserStore.addListener(this.onUserChange);
     this.errorListener = ErrorStore.addListener(this.onErrorChange);
     this.locationListener = LocationStore.addListener(this.locationChange);
-    UserActions.fetchAllUsers();
+    // UserActions.fetchAllUsers();
     LocationActions.fetchAllLocations();
   },
 
@@ -67,8 +65,7 @@ const App = React.createClass({
   },
 
   onUserChange: function(){
-    this.setState({modalOpen: false, currentUser: UserStore.currentUser(), userErrors: ErrorStore.all(),
-                  allUsers: UserStore.all()});
+    this.setState({modalOpen: false, currentUser: UserStore.currentUser(), userErrors: ErrorStore.all()});
   },
 
   onErrorChange: function(){
@@ -136,14 +133,16 @@ const App = React.createClass({
   },
 
   searchPlaces: function(event){
-    event.preventDefault();
-    event.stopPropagation();
+    if (event){
+      event.preventDefault();
+      event.stopPropagation();
+    }
     if (this.state.locationText === ""){
       return;
     }
     let locationId = this.getLocationId(this.state.locationText);
     hashHistory.push(`locations/${locationId}`);
-
+    this.setState({locationText: ""});
   },
 
   getLocationId: function(locationText){
@@ -162,7 +161,7 @@ const App = React.createClass({
         <Navbar.Form  pullLeft>
           <form >
             <FormGroup>
-              <LocationSearchBar textChange={this.locationTextChange} text={this.state.locationText} locations={this.state.allLocations}/>
+              <LocationSearchBar onsubmit={this.searchPlaces} textChange={this.locationTextChange} text={this.state.locationText} locations={this.state.allLocations}/>
             </FormGroup>
           </form>
         </Navbar.Form>
@@ -212,57 +211,16 @@ const App = React.createClass({
             modalForm={this.state.modalForm} show={this.state.modalOpen} onHide={this.closeModal}/>
   },
 
-  userTextChange: function(text){
-    this.setState({userText: text})
-  },
-
-  getUserid: function(name){
-    let id = 0;
-    this.state.allUsers.forEach((user) => {
-      if (user.username === name){
-        id = user.id
-      }
-    });
-    return id;
-  },
 
 
-  searchUsers: function(){
-    if (this.state.userText === ""){
-      return;
-    }
-
-    let userId = this.getUserid(this.state.userText);
-    hashHistory.push(`users/${userId}`);
-  },
-
-  userSearchBar: function(){
-    return (
-      <Navbar>
-        <Nav>
-          <Navbar.Form  pullLeft>
-            <form >
-              <FormGroup>
-                <UserSearchBar textChange={this.userTextChange} text={this.state.userText} users={this.state.allUsers}/>
-              </FormGroup>
-            </form>
-          </Navbar.Form>
-          <NavItem onClick={this.searchUsers}>Search</NavItem>
-        </Nav>
-      </Navbar>
-    );
-  },
 
 
   render: function(){
-    let children = React.cloneElement(this.props.children, {getStarted: this.signup})
-
     return (
       <div className="modal-container">
         {this.navBar()}
         {this.errors()}
         {this.modal(this.state.userErrors)}
-        {this.userSearchBar()}
         {this.props.children}
       </div>
     );
