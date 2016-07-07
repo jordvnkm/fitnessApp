@@ -255,6 +255,8 @@ const App = React.createClass({
 
 
   render: function(){
+    let children = React.cloneElement(this.props.children, {getStarted: this.signup})
+
     return (
       <div className="modal-container">
         {this.navBar()}

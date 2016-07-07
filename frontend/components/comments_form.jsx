@@ -76,13 +76,21 @@ const CommentsForm = React.createClass({
   },
 
   render: function(){
-    return(
-      <div>
-        hello from comments form
-        {this.comments()}
-        {this.form()}
-      </div>
-    );
+    if (this.state.currentUser){
+      return(
+        <div>
+          {this.comments()}
+          {this.form()}
+        </div>
+      );
+    }
+    else {
+      return (
+        <div>
+          sign in to comment
+        </div>
+      )
+    }
 
   }
 });

@@ -20,6 +20,7 @@ const LocationDetail = require("./components/location_detail");
 const HomePage = require("./components/home_page");
 
 
+
 let routes = (<Router history={hashHistory}>
   <Route path="/" component={App}>
     <IndexRoute component={HomePage}></IndexRoute>
