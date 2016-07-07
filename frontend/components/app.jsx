@@ -100,6 +100,11 @@ const App = React.createClass({
     hashHistory.push(url);
   },
 
+  goToCreate: function(){
+    hashHistory.push(`/routes/create`);
+
+  },
+
   navButtons: function(){
     if (this.state.currentUser === null){
       return (
@@ -113,7 +118,7 @@ const App = React.createClass({
       let title = this.state.currentUser.username;
       return (
         <Nav pullRight>
-          <Button className="navCreateRoute">Create Route</Button>
+          <NavItem onClick={this.goToCreate} className="navCreateRoute">Create Route</NavItem>
           <NavItem onClick={this.logout}>Log Out</NavItem>
           <NavDropdown eventkey={3} title={title} id="basic-nav-dropdown">
             <MenuItem onClick={this.profileButton}>Profile</MenuItem>
