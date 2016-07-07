@@ -1,8 +1,18 @@
 
+.homePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+}
+.splashContent {
+  width: 90%;
+  background: lightgrey;
+}
 
 .video-container {
-  width: 100%
-  height: 400px;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -12,6 +22,7 @@
 
 .splashHeader {
   position: relative;
+  height: 500px;
 }
 
 .jumboButton {
@@ -24,6 +35,54 @@
 
 .jumboButton:hover {
   opacity: .8 !important;
+}
+
+.thumbNail {
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 260px;
+  border: 2px solid grey;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0 , 0 , 0 , 0.8);
+  margin: 10px auto;
+}
+
+.thumbNail:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.popularName {
+  margin-left: 10px;
+}
+
+.popularInfo {
+  color: lightgrey;
+}
+
+.popularFollowers {
+  margin-left: 10px;
+}
+
+.popularIndex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.thumb-photo-container {
+  width: 100%;
+  height: 160px;
+  padding: 10px;
+}
+
+.thumb-photo {
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
 }
 
 .splashJumbo {

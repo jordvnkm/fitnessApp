@@ -1,17 +1,15 @@
 const React = require("react");
+const PopularIndexItem = require("./popular_index_item");
 
 const PopularProfilesIndex = React.createClass({
 
-  profiles: function(){
-
-  },
 
   render: function(){
     return (
-      <div>
+      <div className="popularIndex">
         {
           this.props.profiles.map((user) => {
-            return <div key={user.id}>{user.username} : follower count = {user.follower_count}</div>
+            return <PopularIndexItem key={user.id} user={user}/>
           })
         }
       </div>

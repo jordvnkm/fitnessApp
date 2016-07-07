@@ -132,8 +132,10 @@ const HomePage = React.createClass({
           {this.backgroundVideo()}
           {this.jumbotron()}
         </div>
-        {this.userSearchBar()}
-        {this.popularProfiles()}
+        <div className="splashContent">
+          {this.userSearchBar()}
+          {this.popularProfiles()}
+        </div>
       </div>
     )
   }
