@@ -174,7 +174,7 @@ const UserProfile = React.createClass({
 
   profileMap: function(){
     if (this.state.profile){
-      return <ProfileMap routes={this.aggregateRoutes()}/>
+      return <ProfileMap location={this.state.profile.home_location} routes={this.aggregateRoutes()}/>
     }
   },
 

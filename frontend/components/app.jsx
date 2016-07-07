@@ -56,10 +56,6 @@ const App = React.createClass({
     LocationActions.fetchAllLocations();
   },
 
-  componentWillReceiveProps: function(){
-    
-  },
-
   componentWillUnmount: function(){
     this.userListener.remove();
     this.errorListener.remove();
@@ -93,7 +89,7 @@ const App = React.createClass({
 
   signup: function(event){
     event.preventDefault();
-    this.setState({modalForm: <SignUpForm />, modalOpen: true});
+    this.setState({modalForm: <SignUpForm locations={this.state.allLocations}/>, modalOpen: true});
   },
 
   profileButton: function(event){
@@ -141,12 +137,10 @@ const App = React.createClass({
   searchPlaces: function(event){
     event.preventDefault();
     event.stopPropagation();
-    console.log(this.state.locationText);
     if (this.state.locationText === ""){
       return;
     }
     let locationId = this.getLocationId(this.state.locationText);
-    console.log(locationId);
     hashHistory.push(`locations/${locationId}`);
 
   },
@@ -242,7 +236,6 @@ const App = React.createClass({
   },
 
   userSearchBar: function(){
-    console.log(this.state.allUsers);
     return (
       <Navbar>
         <Nav>

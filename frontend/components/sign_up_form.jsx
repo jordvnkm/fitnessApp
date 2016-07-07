@@ -11,7 +11,7 @@ const HelpBlock = require("react-bootstrap").HelpBlock;
 
 const SignUpForm = React.createClass({
   getInitialState: function(){
-    return {username: "", password: "", email: ""};
+    return {username: "", password: "", email: "", homeLocation: null};
   },
 
   componentDidMount: function(){
@@ -52,7 +52,8 @@ const SignUpForm = React.createClass({
     UserActions.signUp({
       username: this.state.username,
       password: this.state.password,
-      email: this.state.email
+      email: this.state.email,
+      home_location_id: this.state.homeLocation
     });
   },
 
@@ -62,7 +63,6 @@ const SignUpForm = React.createClass({
     UserActions.logIn({
       username: "guest",
       password: "password",
-      email: "guest@guest.com"
     });
   },
 
@@ -74,6 +74,12 @@ const SignUpForm = React.createClass({
     else if (length > 0){
       return "error";
     }
+  },
+
+  locationChange: function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    this.setState({homeLocation: LocationStore.find(event.target.value)});
   },
 
   render: function(){
@@ -98,6 +104,16 @@ const SignUpForm = React.createClass({
               onChange={this.passwordChange} value={this.state.password}/>
             <FormControl.Feedback />
             <HelpBlock>Passwords must be at least 6 characters</HelpBlock>
+          </FormGroup>
+
+          <FormGroup controlId="formControlsSelect">
+            <ControlLabel>Select Home City</ControlLabel>
+            <FormControl onChange={this.locationChange} componentClass="select" placeholder="select">
+              <option key="start" value="0">select city</option>
+              {this.props.locations.map((location) => {
+                return <option key={location.id} value={location.id}>{location.name}</option> ;
+              })}
+            </FormControl>
           </FormGroup>
 
           <div className="formSubmit">

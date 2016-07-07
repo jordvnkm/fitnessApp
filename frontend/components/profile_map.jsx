@@ -4,9 +4,20 @@ const hashHistory = require("react-router").hashHistory;
 
 const ProfileMap = React.createClass({
   componentDidMount: function(){
+    let centerLat;
+    let centerLng;
+
+    if (this.props.location){
+      centerLat = parseFloat(this.props.location.center_lat);
+      centerLng = parseFloat(this.props.location.center_lng);
+    }
+    else {
+      centerLat = 34.0395;
+      centerLng = -118.288;
+    }
     const mapDOMNode = ReactDOM.findDOMNode(this.refs.profileMap);
     const mapOptions = {
-      center: {lat: 37.7758, lng: -122.435} , // this is SF
+      center: {lat: centerLat, lng: centerLng} , // this is SF
       zoom: 12
     };
 
@@ -18,6 +29,11 @@ const ProfileMap = React.createClass({
   },
 
   componentWillReceiveProps: function(newProps){
+    if (newProps.location){
+      let centerLat = parseFloat(newProps.location.center_lat);
+      let centerLng = parseFloat(newProps.location.center_lng);
+      this.map.setCenter({lat: centerLat, lng: centerLng});
+    }
     this.markers.forEach((marker) => {
       marker.setMap(null);
     });

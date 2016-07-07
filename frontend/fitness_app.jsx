@@ -17,9 +17,12 @@ const UserSettings = require("./components/user_settings");
 const RouteDetail = require("./components/route_detail");
 const RouteForm = require("./components/route_form");
 const LocationDetail = require("./components/location_detail");
+const HomePage = require("./components/home_page");
+
 
 let routes = (<Router history={hashHistory}>
   <Route path="/" component={App}>
+    <IndexRoute component={HomePage}></IndexRoute>
     <Route path="users/:userId/settings" component={UserSettings}></Route>
     <Route path="users/:userId" component={UserProfile}></Route>
     <Route path="locations/:locationId" component={LocationDetail}></Route>

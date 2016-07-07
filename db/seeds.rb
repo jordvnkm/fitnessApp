@@ -8,10 +8,10 @@
 
 # Users
 guest = Api::User.new(username: "guest", password: "password",
-                      email: "guest@guest.com")
+                      email: "guest@guest.com", home_location_id: 1)
 
-user1 = Api::User.new(username: "user1", password: "password", email: "user1@gmail.com")
-user2 = Api::User.new(username: "user2", password: "password", email: "user2@gmail.com")
+user1 = Api::User.new(username: "user1", password: "password", email: "user1@gmail.com", home_location_id: 1)
+user2 = Api::User.new(username: "user2", password: "password", email: "user2@gmail.com", home_location_id: 1)
 
 guest.save!
 user1.save!

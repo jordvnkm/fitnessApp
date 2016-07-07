@@ -58,7 +58,6 @@ const LoginForm = React.createClass({
     UserActions.logIn({
       username: "guest",
       password: "password",
-      email: "guest@guest.com"
     });
   },
 

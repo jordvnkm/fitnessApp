@@ -65,7 +65,7 @@ const UserSearchBar = React.createClass({
     const value = this.state.value;
     const suggestions = this.state.suggestions;
     const inputProps = {
-      placeholder: "Enter Location",
+      placeholder: "Enter Username",
       value,
       onChange: this.onChange
     }

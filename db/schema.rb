@@ -81,14 +81,16 @@ ActiveRecord::Schema.define(version: 20160704214343) do
   add_index "routes", ["location_id"], name: "index_routes_on_location_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string "username",                                                                               null: false
-    t.string "password_digest",                                                                        null: false
-    t.string "session_token",                                                                          null: false
-    t.text   "profile_img_url", default: "https://www.b1g1.com/assets/admin/images/no_image_user.png", null: false
-    t.string "email"
+    t.string  "username",                                                                                null: false
+    t.string  "password_digest",                                                                         null: false
+    t.string  "session_token",                                                                           null: false
+    t.text    "profile_img_url",  default: "https://www.b1g1.com/assets/admin/images/no_image_user.png", null: false
+    t.integer "home_location_id",                                                                        null: false
+    t.string  "email"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["home_location_id"], name: "index_users_on_home_location_id", using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "waypoints", force: :cascade do |t|

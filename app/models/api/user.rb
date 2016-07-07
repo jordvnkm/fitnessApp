@@ -1,10 +1,15 @@
 class Api::User < ActiveRecord::Base
   attr_reader :password
-  validates :username, :password_digest, :email, :session_token, presence: true
+  validates :username, :password_digest, :email, :home_location_id, :session_token, presence: true
   validates :password, length: {minimum: 6}, allow_nil: true
   validates :username, :email, uniqueness: true
 
   after_initialize :ensure_session_token
+
+  belongs_to :home_location,
+    class_name: :Location,
+    foreign_key: :home_location_id,
+    primary_key: :id
 
   has_many :authored_routes,
     class_name: :Route,
