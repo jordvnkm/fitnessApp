@@ -77,6 +77,7 @@ const App = React.createClass({
 
   logout: function(event){
     event.preventDefault();
+    UserActions.fetchAllUsers();
     UserActions.logout();
     hashHistory.push("/")
   },

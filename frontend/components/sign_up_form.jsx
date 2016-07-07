@@ -3,6 +3,7 @@ const UserStore = require("../stores/users_store");
 const UserActions = require("../actions/user_actions");
 const hashHistory = require("react-router").hashHistory;
 const Button = require("react-bootstrap").Button;
+const LocationStore = require("../stores/location_store");
 
 const FormGroup = require("react-bootstrap").FormGroup;
 const ControlLabel = require("react-bootstrap").ControlLabel;
@@ -48,12 +49,16 @@ const SignUpForm = React.createClass({
   },
 
   onSubmit: function(event){
+    let homeLocationId = null;
+    if (this.state.homeLocation && this.state.homeLocation.id !== null){
+      homeLocationId = this.state.homeLocation.id
+    }
     event.preventDefault();
     UserActions.signUp({
       username: this.state.username,
       password: this.state.password,
       email: this.state.email,
-      home_location_id: this.state.homeLocation
+      home_location_id: homeLocationId
     });
   },
 
