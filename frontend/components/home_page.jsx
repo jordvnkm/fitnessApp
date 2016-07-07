@@ -96,7 +96,7 @@ const HomePage = React.createClass({
 
   userSearchBar: function(){
     return (
-      <Navbar>
+      <Navbar inverse>
         <Nav>
           <Navbar.Form  pullLeft>
             <form >
@@ -132,8 +132,9 @@ const HomePage = React.createClass({
           {this.backgroundVideo()}
           {this.jumbotron()}
         </div>
+        {this.userSearchBar()}
         <div className="splashContent">
-          {this.userSearchBar()}
+          <h2 className="popularHeading">Popular Profiles</h2>
           {this.popularProfiles()}
         </div>
       </div>

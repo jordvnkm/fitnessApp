@@ -40,11 +40,11 @@ UserStore.popularUsers = function(){
   });
 
   _allUsers.reverse();
-  if (_allUsers.length <= 6){
+  if (_allUsers.length <= 10){
     return _allUsers.slice();
   }
   else {
-    return _allUsers.slice(0, 6);
+    return _allUsers.slice(0, 10);
   }
 
 }

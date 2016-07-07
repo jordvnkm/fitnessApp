@@ -113,6 +113,7 @@ const App = React.createClass({
       let title = this.state.currentUser.username;
       return (
         <Nav pullRight>
+          <Button className="navCreateRoute">Create Route</Button>
           <NavItem onClick={this.logout}>Log Out</NavItem>
           <NavDropdown eventkey={3} title={title} id="basic-nav-dropdown">
             <MenuItem onClick={this.profileButton}>Profile</MenuItem>
