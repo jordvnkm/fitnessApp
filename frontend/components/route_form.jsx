@@ -8,6 +8,7 @@ const ErrorStore = require("../stores/error_store");
 const UserStore = require("../stores/users_store");
 const WaypointActions = require("../actions/waypoint_actions");
 const WaypointStore = require("../stores/waypoint_store");
+const WaypointsIndexItem = require("./waypoints_index_item");
 
 const hashHistory = require("react-router").hashHistory;
 const Button = require("react-bootstrap").Button;
@@ -90,7 +91,7 @@ const RouteForm = React.createClass({
   locationChange: function(event){
     event.preventDefault();
     event.stopPropagation();
-    this.setState({currentLocation: LocationStore.find(event.target.value)});
+    this.setState({currentLocation: LocationStore.find(event.target.value), waypoints: []});
   },
 
   selectItems: function(){
@@ -138,25 +139,44 @@ const RouteForm = React.createClass({
   },
 
   addWaypoint: function(latLng){
-    let myWaypoints = this.state.waypoints.concat([latLng]);
-    this.setState({waypoints: myWaypoints});
+    if (this.state.waypoints.length <= 9){
+      let myWaypoints = this.state.waypoints.concat([latLng]);
+      this.setState({waypoints: myWaypoints});
+    }
   },
 
   waypointsAdded: function(){
+    if (!this.state.currentLocation) {
+      return <div className = "waypointsIndex">
+        <h4>Please Select Location</h4>
+      </div>
+    }
+
+
     if (this.state.waypoints.length > 0){
+      let waypoints = this.state.waypoints;;
+      if (this.state.waypoints.length > 10){
+        waypoints = this.state.waypoints.slice( 0, 10);
+      }
       let index = 0;
       return (
-        <div>
-          <ul>
+        <div className="waypointsIndex">
+          <h4>Waypoints (maximum 10)</h4>
             {
-              this.state.waypoints.map((latLng) => {
+              waypoints.map((latLng) => {
                 index += 1;
-                return <li key={index}> Lat : {latLng.lat()}, Lng : {latLng.lng()}</li>
+                return <WaypointsIndexItem key={index} order={index} latLng={latLng} />
               })
             }
-          </ul>
         </div>
       );
+    }
+    else {
+      return(
+        <div className="waypointsIndex">
+          <h4>Click on the Map to start adding waypoints</h4>
+        </div>
+      )
     }
   },
 
@@ -183,28 +203,36 @@ const RouteForm = React.createClass({
 
 
   render: function(){
+    let routeMap;
+    if (this.state.currentLocation){
+      routeMap = <div className="routeMap">
+                {this.routeCreateMap()}
+              </div>
+    }
     return(
       <div id="routeCreate">
-        {this.errors()}
-        <form className="routeForm" onSubmit={this.onSubmit}>
-          <FormGroup controlId="formControlsText">
-            <ControlLabel>Route Name</ControlLabel>
-            <FormControl type="text" placeholder="Enter Route Name"
-              value={this.state.name} onChange={this.nameChange}/>
-          </FormGroup>
-
-          <FormGroup controlId="formControlsText">
-            <ControlLabel>Description</ControlLabel>
-            <FormControl type="text" placeholder="Enter Route Description"
-              value={this.state.notes} onChange={this.noteChange}/>
-          </FormGroup>
-
-          {this.selectItems()}
-
-          <Button type="submit">Create Route</Button>
-        </form>
-        {this.waypointsAdded()}
         {this.routeCreateMap()}
+        <div className="routeCreateInfo">
+          <form className="routeForm" onSubmit={this.onSubmit}>
+            {this.errors()}
+            <FormGroup controlId="formControlsText">
+              <ControlLabel>Route Name</ControlLabel>
+              <FormControl type="text" placeholder="Enter Route Name"
+                value={this.state.name} onChange={this.nameChange}/>
+            </FormGroup>
+
+            <FormGroup controlId="formControlsText">
+              <ControlLabel>Description</ControlLabel>
+              <FormControl type="text" placeholder="Enter Route Description"
+                value={this.state.notes} onChange={this.noteChange}/>
+            </FormGroup>
+
+            {this.selectItems()}
+
+            <Button type="submit">Create Route</Button>
+          </form>
+          {this.waypointsAdded()}
+        </div>
       </div>
     );
   }

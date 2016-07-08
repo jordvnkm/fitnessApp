@@ -149,18 +149,17 @@ const RouteDetail = React.createClass({
   },
 
   render: function(){
-    let text;
-    if (this.state.route){
-      text = this.state.route.name;
-    }
     return (
-      <div>
-        hello from route detail {text}
-        {this.deleteButton()}
-        {this.favoriteButton()}
-        {this.completedButton()}
+      <div className="routeDetail">
         {this.map()}
-        {this.commentsForm()}
+        <div className="routeDetailComments">
+          <div className="routeDetailButtons">
+            {this.deleteButton()}
+            {this.favoriteButton()}
+            {this.completedButton()}
+          </div>
+          {this.commentsForm()}
+        </div>
       </div>
     );
   }

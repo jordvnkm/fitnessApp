@@ -102,8 +102,7 @@ const RouteCreateMap = React.createClass({
 
   render: function(){
     return (
-      <div className="map" ref="routeCreateMap">
-      </div>
+      <div id="routeCreateMap" className="map" ref="routeCreateMap"></div>
     );
   }
 });

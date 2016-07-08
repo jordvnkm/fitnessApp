@@ -20,8 +20,6 @@ html {
 
 
 .errors li {
-  margin-left: 40%;
-  margin-top: 10px;
   list-style-type: none;
 }
 
@@ -30,9 +28,6 @@ html {
   padding: 0px !important;
 }
 
-.navCreateRoute {
-  color: orange !important;
-}
 
 nav.navbar.navbar-inverse {
   width: 100%;
@@ -134,5 +129,4 @@ body {
 #content {
   height: 100%;
   width: 100%;
-  background: lightgrey;
 }

@@ -32,7 +32,8 @@ const RouteDetailMap = React.createClass({
     const mapDOMNode = ReactDOM.findDOMNode(this.refs.routeMap);
     const mapOptions = {
       center: {lat: 37.7758, lng: -122.435} , // this is LA
-      zoom: 13
+      zoom: 13,
+      scrollwheel: false
     };
 
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
@@ -65,8 +66,8 @@ const RouteDetailMap = React.createClass({
 
   render: function(){
     return(
-      <div className='map' ref='routeMap'>
-        hello from map
+      <div className="routeDetailMap" ref='routeMap'>
+
       </div>
     );
   }

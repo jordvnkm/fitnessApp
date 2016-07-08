@@ -1,0 +1,68 @@
+
+
+.routeDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.routeDetailMap {
+  width: 100%;
+  height: 500px;
+}
+
+.commentHeader {
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.commentText {
+  margin-bottom: 0;
+  word-wrap: break-word;
+}
+
+.form-control {
+  word-wrap: break-word;
+}
+
+.routeDetailComments {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.commentsForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+
+
+
+.commentContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.commentItem {
+  width: 100%;
+  display: flex;
+  border: 1px solid #ddd;
+  align-items: center;
+}
+
+.commentListImage {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+}

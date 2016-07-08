@@ -1,7 +1,8 @@
 #routeCreate {
   display: flex;
   flex-direction: column;
-  width: 90%;
+  align-items: center;
+  width: 100%;
   height: 100%;
   margin: 0 auto;
   background: white;
@@ -11,16 +12,46 @@ ul {
   padding: 0px;
 }
 
-/*ul li {
+ul li {
   list-style-type: none;
-  width: 100%;
-  margin: 40%;
-}*/
+}
 
-.routeForm {
-  width: 100%;
-  padding-left: 30px;
-  padding-right: 30px;
+.routeCreateInfo {
+  display: flex;
+  justify-content: flex-start;
+  width: 90%;
   padding-bottom: 30px;
   padding-top: 10px;
+}
+
+.waypointIndexItem {
+  width: 100%;
+  padding-left: 20px;
+}
+
+
+.waypointsIndex {
+  width: 50%;
+  /*height: 250px;*/
+  display: flex;
+  flex-direction: column;
+  /*flex-wrap: wrap;*/
+  align-items: center;
+  /*overflow: scroll;*/
+  /*border-bottom: 1px solid grey;*/
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  margin-left: 10px;
+  margin-bottom: 30px;
+}
+
+.routeForm {
+  width: 50%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#routeCreateMap {
+  width: 100%;
+  height: 500px;
 }

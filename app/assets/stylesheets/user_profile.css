@@ -42,6 +42,9 @@
   display: flex;
   width: 90%;
   justify-content: center;
+  height: 400px;
+  overflow: scroll;
+  padding-bottom: 100px;
 }
 
 .buttonToolbar {
@@ -64,7 +67,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: lightgrey;
   position: relative;
 }
 
