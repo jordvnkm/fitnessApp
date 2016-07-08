@@ -54,9 +54,12 @@ const LocationDetail = React.createClass({
     }
     else{
       return (
-        <div>
+        <div className="locationDetail">
           <DiscoverMap location={this.state.location} routes={this.state.routes} />
-          {this.routesIndex()}
+          <div className="locationRoutes">
+
+            {this.routesIndex()}
+          </div>
         </div>
       );
     }

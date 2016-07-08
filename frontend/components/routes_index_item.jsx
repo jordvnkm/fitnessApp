@@ -8,8 +8,15 @@ const RouteIndexItem = React.createClass({
   },
 
   render: function(){
+    console.log(this.props.route);
     return (
-      <ListGroupItem onClick={this.showDetail} header={this.props.route.name}>{this.props.route.location}</ListGroupItem>
+      <div className="routeInfo">
+        <img className="routeAuthorImage" src={this.props.route.author.profile_img_url}/>
+        <div className="miniRouteInfo" onClick={this.showDetail}>
+          <h4>{this.props.route.name}</h4>
+          <p>{this.props.route.location}  Favorite Count: {this.props.route.favorite_count}</p>
+        </div>
+      </div>
     );
   }
 });
