@@ -1,0 +1,26 @@
+#routeCreate {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  background: white;
+}
+
+ul {
+  padding: 0px;
+}
+
+/*ul li {
+  list-style-type: none;
+  width: 100%;
+  margin: 40%;
+}*/
+
+.routeForm {
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  padding-top: 10px;
+}

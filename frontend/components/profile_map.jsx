@@ -18,7 +18,8 @@ const ProfileMap = React.createClass({
     const mapDOMNode = ReactDOM.findDOMNode(this.refs.profileMap);
     const mapOptions = {
       center: {lat: centerLat, lng: centerLng} , // this is SF
-      zoom: 12
+      zoom: 12,
+      scrollwheel: false
     };
 
     this.map = new google.maps.Map(mapDOMNode, mapOptions);

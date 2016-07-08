@@ -18,6 +18,13 @@ html {
   height: 100%;
 }
 
+
+.errors li {
+  margin-left: 40%;
+  margin-top: 10px;
+  list-style-type: none;
+}
+
 .container {
   width: 90% !important;
   padding: 0px !important;
@@ -46,6 +53,8 @@ nav.navbar.navbar-default {
 
 .modal-container {
   position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .modal-container .modal, .modal-container .modal-backdrop {
@@ -68,6 +77,8 @@ nav.navbar.navbar-default {
 
 body {
   font-family: Helvetica, sans-serif;
+  width: 100%;
+  height: 100%;
 }
 
 .react-autosuggest__container {
@@ -118,4 +129,10 @@ body {
 
 .react-autosuggest__suggestion--focused {
   background-color: #ddd;
+}
+
+#content {
+  height: 100%;
+  width: 100%;
+  background: lightgrey;
 }

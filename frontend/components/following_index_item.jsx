@@ -10,7 +10,13 @@ const FollowingIndexItem = React.createClass({
 
   render: function(){
     return (
-      <ListGroupItem onClick={this.goToProfile} header={this.props.user.username}>FollowCount: {this.props.user.follower_count}</ListGroupItem>
+      <div onClick={this.goToProfile} className="userListGroup">
+        <img className="userListImage" src={this.props.user.profile_img_url} />
+        <div className="miniUserInfo">
+          <h4>{this.props.user.username}</h4>
+          <p>{this.props.user.follower_count} followers</p>
+        </div>
+      </div>
     );
   }
 });

@@ -120,10 +120,10 @@ const UserProfile = React.createClass({
   followButton: function(){
     if (this.state.currentUser && this.state.profile){
       if (this.state.currentUser.id !== parseInt(this.props.params.userId) && !this.state.following){
-        return <Button onClick={this.createFollow}>Follow this profile</Button>
+        return <Button className="followButton" onClick={this.createFollow}>Follow this profile</Button>
       }
       else if (this.state.currentUser.id !== parseInt(this.props.params.userId)){
-        return <Button onClick={this.removeFollow}>Unfollow this profile</Button>
+        return <Button className="followButton" onClick={this.removeFollow}>Unfollow this profile</Button>
       }
     }
   },
@@ -184,7 +184,6 @@ const UserProfile = React.createClass({
     }
     return (
       <div className="userProfile">
-        {this.createRouteButton()}
         {this.followButton()}
         {this.profileMap()}
         <div className="userInfo">

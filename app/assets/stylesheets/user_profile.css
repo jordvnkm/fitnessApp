@@ -22,15 +22,25 @@
    border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
 }
 
+.list-group-item {
+  transition: border-left, 0.2s, ease;
+}
+
+.list-group-item:hover {
+  border-left: 4px solid black;
+}
+
 .userToolbar {
   display: flex;
   justify-content: center;
   width: 80%;
+  background: white;
+  padding-right: 5px;
 }
 
 .userInfo {
   display: flex;
-  width: 80%;
+  width: 90%;
   justify-content: center;
 }
 
@@ -45,6 +55,8 @@
   justify-content: center;
   align-items: flex-start;
   width: 80%;
+  background: white;
+  padding-left: 5px;
 }
 
 .userProfile {
@@ -52,6 +64,25 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: lightgrey;
+  position: relative;
+}
+
+.followButton {
+  position: absolute;
+  top: 0px;
+  z-index: 1;
+  left: 40%;
+
+  background-color: black ;
+  border-color: black ;
+  border-color: grey ;
+  color: white ;
+  opacity: 0.8 ;
+}
+
+.followButton:hover {
+  opacity: 0.9;
 }
 
 .list-group {
@@ -59,8 +90,9 @@
 }
 
 .profileMap {
-  width: 80%;
+  width: 100%;
   height: 500px;
+  z-index: 0;
 }
 
 .routesIndex {
@@ -71,6 +103,58 @@
 
 .routeIndexItem {
   cursor: pointer;
+}
+
+.userListGroup {
+  width: 100%;
+  height: 90px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  transition: border-left, 0.2s, ease;
+}
+
+.miniUserInfo {
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.userListGroup:hover {
+  cursor: pointer;
+  background-color: #f5f5f5;
+  border-left: 4px solid black;
+}
+
+.userListImage {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+}
+
+#routesIndexTabs {
+  width: 100%;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+#routesIndexTabs-tab-1 {
+  border-left: 4px solid #00ff00 ;
+}
+
+#routesIndexTabs-tab-2 {
+  border-left: 4px solid #ff6666;
+}
+
+
+#routesIndexTabs-tab-3 {
+  border-left: 4px solid #4d88ff;
+}
+
+#followingTab {
+  width: 100%;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 #completedRoutesTitle {

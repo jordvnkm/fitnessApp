@@ -171,7 +171,7 @@ const RouteForm = React.createClass({
       return;
     }
     var self = this;
-    return (<ul>
+    return (<ul className="errors">
     {
       Object.keys(self.state.errors).map(function(key, i){
         return (<li key={i}>{self.state.errors[key]}</li>);
@@ -184,9 +184,9 @@ const RouteForm = React.createClass({
 
   render: function(){
     return(
-      <div>
+      <div id="routeCreate">
         {this.errors()}
-        <form onSubmit={this.onSubmit}>
+        <form className="routeForm" onSubmit={this.onSubmit}>
           <FormGroup controlId="formControlsText">
             <ControlLabel>Route Name</ControlLabel>
             <FormControl type="text" placeholder="Enter Route Name"
