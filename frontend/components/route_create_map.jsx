@@ -12,8 +12,18 @@ const RouteCreateMap = React.createClass({
       let centerLat = parseFloat(newProps.location.center_lat);
       let centerLng = parseFloat(newProps.location.center_lng);
       this.map.setCenter({lat: centerLat, lng: centerLng});
+      this.map.setZoom(12);
     }
+
+    if (newProps.location.id !== this.location.id){
+      this.location = newProps.location;
+      this.startMarker.setMap(null);
+
+      this.waypoints = [];
+    }
+
   },
+
 
   createLatLngs: function(array){
     let points = [];
@@ -40,9 +50,12 @@ const RouteCreateMap = React.createClass({
     }
     else {
       this.startMarker.setMap(null);
-      let directionsDisplay = new google.maps.DirectionsRenderer();
+      if (this.directionsDisplay){
+        this.directionsDisplay.setMap(null);
+      }
+      this.directionsDisplay = new google.maps.DirectionsRenderer();
       let directionsService = new google.maps.DirectionsService();
-      directionsDisplay.setMap(this.map);
+      this.directionsDisplay.setMap(this.map);
 
       this.waypoints.push(latLng);
 
@@ -63,9 +76,12 @@ const RouteCreateMap = React.createClass({
         waypoints: middleLatLngArray,
         travelMode: google.maps.TravelMode.WALKING
       };
+
+      let self = this;
+
       directionsService.route(request, function(result, status){
         if (status == google.maps.DirectionsStatus.OK){
-          directionsDisplay.setDirections(result);
+          self.directionsDisplay.setDirections(result);
         }
       });
 
@@ -79,6 +95,7 @@ const RouteCreateMap = React.createClass({
     let centerLng;
 
     if (this.props.location){
+      this.location = this.props.location;
       centerLat = parseFloat(this.props.location.center_lat);
       centerLng = parseFloat(this.props.location.center_lng);
     }
@@ -88,7 +105,8 @@ const RouteCreateMap = React.createClass({
     }
     const mapOptions = {
       center: {lat: centerLat, lng: centerLng},
-      zoom: 12
+      zoom: 12,
+      scrollwheel: false
     };
 
     this.waypoints = [];

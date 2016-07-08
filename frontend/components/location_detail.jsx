@@ -40,7 +40,12 @@ const LocationDetail = React.createClass({
 
   routesIndex: function(){
     if (this.state.routes){
-      return <RoutesIndex routes={this.state.routes}/>
+      return (
+        <div>
+          <h2>{this.state.routes[0].location}</h2>
+          <RoutesIndex routes={this.state.routes}/>
+        </div>
+      )
     }
 
   },
@@ -57,7 +62,6 @@ const LocationDetail = React.createClass({
         <div className="locationDetail">
           <DiscoverMap location={this.state.location} routes={this.state.routes} />
           <div className="locationRoutes">
-
             {this.routesIndex()}
           </div>
         </div>

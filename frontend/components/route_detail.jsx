@@ -81,7 +81,7 @@ const RouteDetail = React.createClass({
     if (this.state.route && this.state.currentUser){
       if (this.state.route.author.id === this.state.currentUser.id){
         return (
-          <Button onClick={this.deleteRoute}>Delete Route</Button>
+          <Button className="detailButton" onClick={this.deleteRoute}>Delete Route</Button>
         );
       }
     }
@@ -102,12 +102,12 @@ const RouteDetail = React.createClass({
     if (this.state.route && this.state.currentUser){
       if (this.state.favorite){
         return (
-          <Button onClick={this.removeFavorite}>Unfavorite</Button>
+          <Button className="detailButton" onClick={this.removeFavorite}>Unfavorite</Button>
         );
       }
       else {
         return (
-          <Button onClick={this.addFavorite}>Favorite route</Button>
+          <Button className="detailButton" onClick={this.addFavorite}>Favorite route</Button>
         );
       }
     }
@@ -131,12 +131,12 @@ const RouteDetail = React.createClass({
     if (this.state.route && this.state.currentUser){
       if (this.state.completed){
         return (
-          <Button onClick={this.removeCompleted}>Mark as not completed</Button>
+          <Button className="detailButton" onClick={this.removeCompleted}>Mark as not completed</Button>
         );
       }
       else {
         return (
-          <Button onClick={this.addCompleted}>Mark route as completed</Button>
+          <Button className="detailButton" onClick={this.addCompleted}>Mark route as completed</Button>
         );
       }
     }
@@ -152,12 +152,12 @@ const RouteDetail = React.createClass({
     return (
       <div className="routeDetail">
         {this.map()}
+        <div className="routeDetailButtons">
+          {this.deleteButton()}
+          {this.favoriteButton()}
+          {this.completedButton()}
+        </div>
         <div className="routeDetailComments">
-          <div className="routeDetailButtons">
-            {this.deleteButton()}
-            {this.favoriteButton()}
-            {this.completedButton()}
-          </div>
           {this.commentsForm()}
         </div>
       </div>

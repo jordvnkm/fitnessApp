@@ -120,10 +120,10 @@ const UserProfile = React.createClass({
   followButton: function(){
     if (this.state.currentUser && this.state.profile){
       if (this.state.currentUser.id !== parseInt(this.props.params.userId) && !this.state.following){
-        return <Button className="followButton" onClick={this.createFollow}>Follow this profile</Button>
+        return <Button className="followButton" onClick={this.createFollow}>Follow this runner</Button>
       }
       else if (this.state.currentUser.id !== parseInt(this.props.params.userId)){
-        return <Button className="followButton" onClick={this.removeFollow}>Unfollow this profile</Button>
+        return <Button className="followButton" onClick={this.removeFollow}>Unfollow this runner</Button>
       }
     }
   },

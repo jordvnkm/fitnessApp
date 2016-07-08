@@ -13,7 +13,8 @@ const DiscoverMap = React.createClass({
     const mapDOMNode = ReactDOM.findDOMNode(this.refs.discoverMap);
     const mapOptions = {
       center: centerMap , // this is SF
-      zoom: 12
+      zoom: 12,
+      scrollwheel: false
     };
 
     this.map = new google.maps.Map(mapDOMNode, mapOptions);

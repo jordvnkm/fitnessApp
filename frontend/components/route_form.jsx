@@ -20,9 +20,8 @@ const HelpBlock = require("react-bootstrap").HelpBlock;
 
 const RouteForm = React.createClass({
   getInitialState: function(){
-    return {currentUser: UserStore.currentUser(), name: "", notes: "",
-            locations: LocationStore.all(), currentLocation: null,
-            errors: ErrorStore.all(), waypoints: []};
+    return {currentUser: UserStore.currentUser(), name: "", notes: "", errors: null,
+            locations: LocationStore.all(), currentLocation: null, waypoints: []};
   },
 
   componentDidMount: function(){
@@ -73,25 +72,25 @@ const RouteForm = React.createClass({
   },
 
   updateLocations: function(){
-    this.setState({locations: LocationStore.all()});
+    this.setState({locations: LocationStore.all(), errors: null});
   },
 
   nameChange: function(event){
     event.preventDefault();
     event.stopPropagation();
-    this.setState({name: event.target.value});
+    this.setState({name: event.target.value, errors: null});
   },
 
   noteChange: function(event){
     event.preventDefault();
     event.stopPropagation();
-    this.setState({notes: event.target.value});
+    this.setState({notes: event.target.value, errors: null});
   },
 
   locationChange: function(event){
     event.preventDefault();
     event.stopPropagation();
-    this.setState({currentLocation: LocationStore.find(event.target.value), waypoints: []});
+    this.setState({currentLocation: LocationStore.find(event.target.value), waypoints: [], errors: null});
   },
 
   selectItems: function(){
@@ -182,7 +181,7 @@ const RouteForm = React.createClass({
 
   routeCreateMap: function(){
     if (this.state.currentLocation){
-      return <RouteCreateMap location={this.state.currentLocation} clickHandler={this.addWaypoint}/> ;
+      return <RouteCreateMap waypoints={this.state.waypoints} location={this.state.currentLocation} clickHandler={this.addWaypoint}/> ;
     }
   },
 

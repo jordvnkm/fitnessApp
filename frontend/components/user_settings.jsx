@@ -31,7 +31,7 @@ const UserSettings = React.createClass({
       this.successfullSave = false;
     }
 
-    return {currentUser: user, username: name, errors: ErrorStore.all(),
+    return {currentUser: user, username: name,
             password: "", passwordConfirm: "", email: myemail, profileImgUrl: myprofileImgUrl};
   },
 
@@ -151,7 +151,6 @@ const UserSettings = React.createClass({
     if (this.state.profileImgUrl){
       return (
         <div className="profilePic">
-          <h1 className="settingsHeader">Settings</h1>
           <img className="image" src={this.state.profileImgUrl} />
           <Button onClick={this.profileUpload}>Upload Profile Picture</Button>
         </div>
@@ -186,42 +185,44 @@ const UserSettings = React.createClass({
         {this.errors()}
         {this.success()}
         <div className="settingsContainer">
+          <h2 className="settingsHeader">Settings</h2>
+          <div className="settingsInfo">
+            {this.profilePicture()}
+            <div className="modalForm">
+              <form className="settingsForm" onSubmit={this.onSubmit}>
+                <FormGroup controlId="formControlsText">
+                  <ControlLabel>Username</ControlLabel>
+                  <FormControl type="text" placeholder="Enter Username"
+                    onChange={this.usernameChange} value={this.state.username} />
+                </FormGroup>
 
-          {this.profilePicture()}
-          <div className="modalForm">
-            <form className="settingsForm" onSubmit={this.onSubmit}>
-              <FormGroup controlId="formControlsText">
-                <ControlLabel>Username</ControlLabel>
-                <FormControl type="text" placeholder="Enter Username"
-                  onChange={this.usernameChange} value={this.state.username} />
-              </FormGroup>
+                <FormGroup controlId="formControlsEmail">
+                  <ControlLabel>Email</ControlLabel>
+                  <FormControl type="email" placeholder="Enter Email"
+                    onChange={this.emailChange} value={this.state.email} />
+                </FormGroup>
 
-              <FormGroup controlId="formControlsEmail">
-                <ControlLabel>Email</ControlLabel>
-                <FormControl type="email" placeholder="Enter Email"
-                  onChange={this.emailChange} value={this.state.email} />
-              </FormGroup>
+                <FormGroup controlId="formControlsPassword" validationState={this.passwordValidation()}>
+                  <ControlLabel>New Password</ControlLabel>
+                  <FormControl type="password" placeholder="Enter Password"
+                    onChange={this.passwordChange} value={this.state.password}/>
+                  <FormControl.Feedback />
+                  <HelpBlock>Passwords must be at least 6 characters</HelpBlock>
+                </FormGroup>
 
-              <FormGroup controlId="formControlsPassword" validationState={this.passwordValidation()}>
-                <ControlLabel>New Password</ControlLabel>
-                <FormControl type="password" placeholder="Enter Password"
-                  onChange={this.passwordChange} value={this.state.password}/>
-                <FormControl.Feedback />
-                <HelpBlock>Passwords must be at least 6 characters</HelpBlock>
-              </FormGroup>
+                <FormGroup controlId="formControlsPassword" validationState={this.passwordValidation()}>
+                  <ControlLabel>Password Confirmation</ControlLabel>
+                  <FormControl type="password" placeholder="Re enter password"
+                    onChange={this.passwordConfirmChange} value={this.state.passwordConfirm}/>
+                  <FormControl.Feedback />
+                  <HelpBlock>Passwords must be at least 6 characters</HelpBlock>
+                </FormGroup>
 
-              <FormGroup controlId="formControlsPassword" validationState={this.passwordValidation()}>
-                <ControlLabel>Password Confirmation</ControlLabel>
-                <FormControl type="password" placeholder="Re enter password"
-                  onChange={this.passwordConfirmChange} value={this.state.passwordConfirm}/>
-                <FormControl.Feedback />
-                <HelpBlock>Passwords must be at least 6 characters</HelpBlock>
-              </FormGroup>
-
-              <div className="formSubmit">
-                <Button type="submit">Update Settings</Button>
-              </div>
-            </form>
+                <div className="formSubmit">
+                  <Button type="submit">Update Settings</Button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>

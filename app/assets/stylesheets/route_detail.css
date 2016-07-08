@@ -24,6 +24,43 @@
   word-wrap: break-word;
 }
 
+.routeDetailButtons {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 7%;
+  left: 1%;
+
+}
+
+.detailDelete {
+
+}
+
+.detailDelete:hover {
+
+}
+
+.detailFavorite {
+
+}
+
+.detailFavorite {
+
+}
+
+.detailButton {
+  background-color: black ;
+  border-color: black ;
+  border-color: grey ;
+  color: white ;
+  opacity: 0.8 ;
+}
+
+.detailButton:hover {
+  opacity: 0.9
+}
+
 .form-control {
   word-wrap: break-word;
 }
