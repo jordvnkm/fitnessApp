@@ -52,17 +52,24 @@ const HomePage = React.createClass({
     let button;
     if (this.state && this.state.currentUser){
       button = <Button className="jumboButton" onClick={this.goToCreate}>Create Route</Button>
+      return (
+        <div className="splashJumbo">
+          <h1 className="jumboHeader">Hello {this.state.currentUser.username}</h1>
+          <p className="jumboContent">Share your favorite routes with the world</p>
+          {button}
+        </div>
+      )
     }
     else {
       button = <Button className="jumboButton" onClick={this.login}>Guest login</Button>
+      return (
+        <div className="splashJumbo">
+          <h1 className="jumboHeader">Go The Distance</h1>
+          <p className="jumboContent">Find, create, and share running routes</p>
+          {button}
+        </div>
+      )
     }
-    return (
-      <div className="splashJumbo">
-        <h1 className="jumboHeader">hello</h1>
-        <p className="jumboContent">world</p>
-        {button}
-      </div>
-    )
   },
 
 
@@ -120,7 +127,7 @@ const HomePage = React.createClass({
   backgroundVideo: function(){
     return (
       <div className="video-container">
-        <video id="splashVideo" src="http://res.cloudinary.com/dyfgfvczc/video/upload/ac_none/v1467913952/runningvideo_zfuslx.mp4" loop></video>
+        <video id="splashVideo" src="http://res.cloudinary.com/dyfgfvczc/video/upload/ac_none/v1468021570/runningvideo_ot0usc.mp4" preload="auto" loop></video>
       </div>
     )
   },

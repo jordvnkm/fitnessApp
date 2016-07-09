@@ -188,7 +188,7 @@ const UserSettings = React.createClass({
           <h2 className="settingsHeader">Settings</h2>
           <div className="settingsInfo">
             {this.profilePicture()}
-            <div className="modalForm">
+            <div className="mySettingsForm">
               <form className="settingsForm" onSubmit={this.onSubmit}>
                 <FormGroup controlId="formControlsText">
                   <ControlLabel>Username</ControlLabel>
