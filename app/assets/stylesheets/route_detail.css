@@ -79,7 +79,7 @@
 .commentItem {
   width: 100%;
   display: flex;
-  border: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   align-items: center;
 }
 

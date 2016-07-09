@@ -48,7 +48,7 @@ const RouteCreateMap = React.createClass({
 
       this.waypoints.push(latLng);
     }
-    else {
+    else if (this.waypoints.length <= 9){
       this.startMarker.setMap(null);
       if (this.directionsDisplay){
         this.directionsDisplay.setMap(null);

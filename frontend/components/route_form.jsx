@@ -17,6 +17,7 @@ const FormGroup = require("react-bootstrap").FormGroup;
 const ControlLabel = require("react-bootstrap").ControlLabel;
 const FormControl = require("react-bootstrap").FormControl;
 const HelpBlock = require("react-bootstrap").HelpBlock;
+const Panel = require("react-bootstrap").Panel;
 
 const RouteForm = React.createClass({
   getInitialState: function(){
@@ -158,15 +159,23 @@ const RouteForm = React.createClass({
         waypoints = this.state.waypoints.slice( 0, 10);
       }
       let index = 0;
+      let myHeader = <h4>Waypoints (maximum 10)</h4>;
+      // {
+      //   waypoints.map((latLng) => {
+      //     index += 1;
+      //     return <WaypointsIndexItem key={index} order={index} latLng={latLng} />
+      //   })
+      // }
       return (
         <div className="waypointsIndex">
-          <h4>Waypoints (maximum 10)</h4>
+          <Panel header={myHeader}>
             {
               waypoints.map((latLng) => {
                 index += 1;
                 return <WaypointsIndexItem key={index} order={index} latLng={latLng} />
               })
             }
+          </Panel>
         </div>
       );
     }
