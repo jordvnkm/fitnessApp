@@ -183,7 +183,6 @@ const UserProfile = React.createClass({
 
   profileMap: function(){
     if (this.state.profile){
-      console.log(this.state.profile);
       return <ProfileMap location={this.state.profile.home_location} routes={this.aggregateRoutes()}/>
     }
   },
@@ -195,7 +194,7 @@ const UserProfile = React.createClass({
 
   render: function(){
     if (parseInt(this.props.params.userId) == 0){
-      return <div className="profileError">User not found</div>
+      return <div className="profileError"><h1>User not found</h1></div>
     }
     return (
       <div className="userProfile">

@@ -34,6 +34,7 @@ const ProfileMap = React.createClass({
       let centerLat = parseFloat(newProps.location.center_lat);
       let centerLng = parseFloat(newProps.location.center_lng);
       this.map.setCenter({lat: centerLat, lng: centerLng});
+      this.map.setZoom(12);
     }
     this.markers.forEach((marker) => {
       marker.setMap(null);
