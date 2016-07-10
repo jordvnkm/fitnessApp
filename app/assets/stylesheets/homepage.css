@@ -21,6 +21,10 @@
   justify-content: center;
 }
 
+.carouselImage {
+  width: 100%;
+  max-height: 500px;
+}
 
 .popularHeading {
   width: 100%;

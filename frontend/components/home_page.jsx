@@ -16,6 +16,7 @@ const NavDropdown = require("react-bootstrap").NavDropdown;
 const MenuItem = require("react-bootstrap").MenuItem;
 const FormGroup = require("react-bootstrap").FormGroup;
 const FormControl = require("react-bootstrap").FormControl;
+const Carousel = require("react-bootstrap").Carousel;
 
 const HomePage = React.createClass({
   getInitialState: function(){
@@ -25,7 +26,6 @@ const HomePage = React.createClass({
   componentDidMount: function(){
     this.userListener = UserStore.addListener(this.updateUser);
     UserActions.fetchAllUsers();
-    $("video")[0].play();
   },
 
   componentWillUnmount: function(){
@@ -49,27 +49,27 @@ const HomePage = React.createClass({
   },
 
   jumbotron: function(){
+    let content;
     let button;
     if (this.state && this.state.currentUser){
-      button = <Button className="jumboButton" onClick={this.goToCreate}>Create Route</Button>
-      return (
-        <div className="splashJumbo">
+      content = (
+        <Carousel.Caption>
           <h1 className="jumboHeader">Hello {this.state.currentUser.username}</h1>
           <p className="jumboContent">Share your favorite routes with the world</p>
-          {button}
-        </div>
+          <Button className="jumboButton" onClick={this.goToCreate}>Create Route</Button>
+        </Carousel.Caption>
       )
     }
     else {
-      button = <Button className="jumboButton" onClick={this.login}>Guest login</Button>
-      return (
-        <div className="splashJumbo">
+      content = (
+        <Carousel.Caption>
           <h1 className="jumboHeader">Go The Distance</h1>
           <p className="jumboContent">Find, create, and share running routes</p>
-          {button}
-        </div>
+          <Button className="jumboButton" onClick={this.login}>Guest login</Button>
+        </Carousel.Caption>
       )
     }
+    return content;
   },
 
 
@@ -125,19 +125,30 @@ const HomePage = React.createClass({
   },
 
   backgroundCarousel: function(){
+    // <div className="video-container">
+    // </div>
     return (
-      <div className="video-container">
-        <video id="splashVideo" src="http://res.cloudinary.com/dyfgfvczc/video/upload/ac_none/v1468021570/runningvideo_ot0usc.mp4" preload="auto" loop></video>
-      </div>
+      <Carousel>
+        <Carousel.Item>
+          {this.jumbotron()}
+          <img className="carouselImage" src="http://res.cloudinary.com/dyfgfvczc/image/upload/c_crop,q_100,w_1141,x_0,y_330/v1468110768/running_in_the_sunset_wallpaper_hd_xu9ir9.jpg"/>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="carouselImage" src="http://res.cloudinary.com/dyfgfvczc/image/upload/q_100/v1468110609/Running_Wallpaper_yjnwio.jpg"/>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="carouselImage" src="http://res.cloudinary.com/dyfgfvczc/image/upload/c_crop,q_100,w_1357,x_547,y_645/v1468110609/Running_Wallpaper_yjnwio.jpg"/>
+        </Carousel.Item>
+      </Carousel>
     )
   },
 
   render: function(){
+    // {this.jumbotron()}
     return (
       <div className="homePage">
         <div className="splashHeader">
           {this.backgroundCarousel()}
-          {this.jumbotron()}
         </div>
         {this.userSearchBar()}
         <div className="splashContent">
