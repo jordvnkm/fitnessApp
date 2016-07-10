@@ -1,6 +1,11 @@
 class Api::ProfilesController < ApplicationController
 
   def show
+    if params[:id] == 0.to_s
+      @errors = ['invalid user id']
+      render 'api/shared/error', status: 404
+      return
+    end
     @user = Api::User.find(params[:id])
 
     if @user

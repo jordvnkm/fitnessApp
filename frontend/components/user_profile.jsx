@@ -194,8 +194,8 @@ const UserProfile = React.createClass({
   },
 
   render: function(){
-    if (this.props.params.userId === 0){
-      return <div>User not found</div>
+    if (parseInt(this.props.params.userId) == 0){
+      return <div className="profileError">User not found</div>
     }
     return (
       <div className="userProfile">

@@ -33,7 +33,7 @@ const HomePage = React.createClass({
   },
 
   updateUser: function(){
-    this.setState({currentUser: UserStore.currentUser(), allUsers: UserStore.all()});
+    this.setState({currentUser: UserStore.currentUser(), allUsers: UserStore.all(), popularUsers: UserStore.popularUsers()});
   },
 
   goToCreate: function(){
@@ -48,9 +48,8 @@ const HomePage = React.createClass({
     });
   },
 
-  jumbotron: function(){
+  jumbotron1: function(){
     let content;
-    let button;
     if (this.state && this.state.currentUser){
       content = (
         <Carousel.Caption>
@@ -64,13 +63,70 @@ const HomePage = React.createClass({
       content = (
         <Carousel.Caption>
           <h1 className="jumboHeader">Go The Distance</h1>
-          <p className="jumboContent">Find, create, and share running routes</p>
+          <p className="jumboContent">Find running routes in your hometown</p>
           <Button className="jumboButton" onClick={this.login}>Guest login</Button>
         </Carousel.Caption>
       )
     }
     return content;
   },
+
+
+  goToProfile: function(){
+    hashHistory.push(`/users/${this.state.currentUser.id}`)
+  },
+
+  jumbotron2: function(){
+    let content;
+    if (this.state && this.state.currentUser){
+      content = (
+        <Carousel.Caption>
+          <h1 className="jumboHeader">Always Improve</h1>
+          <p className="jumboContent">Check your progress</p>
+          <Button className="jumboButton" onClick={this.goToProfile}>View Profile</Button>
+        </Carousel.Caption>
+      )
+    }
+    else {
+      content = (
+        <Carousel.Caption>
+          <h1 className="jumboHeader">Discover</h1>
+          <p className="jumboContent">Follow fellow runners and track their adventures</p>
+          <Button className="jumboButton" onClick={this.login}>Guest login</Button>
+        </Carousel.Caption>
+      )
+    }
+    return content;
+  },
+
+  goToHomeCity: function(){
+    hashHistory.push(`/locations/${this.state.currentUser.home_location.id}`)
+  },
+
+  jumbotron3: function(){
+    let content;
+    if (this.state && this.state.currentUser){
+      content = (
+        <Carousel.Caption>
+          <h1 className="jumboHeader">Stay up to date</h1>
+          <p className="jumboContent">See what's going on in your city</p>
+          <Button className="jumboButton" onClick={this.goToHomeCity}>Search {this.state.currentUser.home_location.name}</Button>
+        </Carousel.Caption>
+      )
+    }
+    else {
+      content = (
+        <Carousel.Caption>
+          <h1 className="jumboHeader">Share</h1>
+          <p className="jumboContent">Post your favorite runs for the world to see</p>
+          <Button className="jumboButton" onClick={this.login}>Guest login</Button>
+        </Carousel.Caption>
+      )
+    }
+    return content;
+  },
+
+
 
 
   userTextChange: function(text){
@@ -119,27 +175,37 @@ const HomePage = React.createClass({
   },
 
   popularProfiles: function(){
-    return (
-      <PopularProfilesIndex profiles={UserStore.popularUsers()}/>
-    )
+    if (this.state.popularUsers){
+      return (
+        <PopularProfilesIndex profiles={this.state.popularUsers}/>
+      )
+    }
   },
 
   backgroundCarousel: function(){
-    // <div className="video-container">
-    // </div>
+    // <img className="carouselImage" src="http://res.cloudinary.com/dyfgfvczc/image/upload/c_crop,q_100,w_1736,x_90,y_180/v1468116260/Running_Desktop_Wallpaper_cikv4f.jpg"/>
+
     return (
       <Carousel>
         <Carousel.Item>
-          {this.jumbotron()}
           <img className="carouselImage" src="http://res.cloudinary.com/dyfgfvczc/image/upload/c_crop,q_100,w_1141,x_0,y_330/v1468110768/running_in_the_sunset_wallpaper_hd_xu9ir9.jpg"/>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="carouselImage" src="http://res.cloudinary.com/dyfgfvczc/image/upload/q_100/v1468110609/Running_Wallpaper_yjnwio.jpg"/>
+          <Carousel.Caption>
+            {this.jumbotron1()}
+          </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img className="carouselImage" src="http://res.cloudinary.com/dyfgfvczc/image/upload/c_crop,q_100,w_1357,x_547,y_645/v1468110609/Running_Wallpaper_yjnwio.jpg"/>
+          <Carousel.Caption>
+            {this.jumbotron2()}
+          </Carousel.Caption>
         </Carousel.Item>
-      </Carousel>
+        <Carousel.Item>
+          <img className="carouselImage" src="http://res.cloudinary.com/dyfgfvczc/image/upload/c_crop,q_100,w_1681,x_409,y_180/v1468116260/Running_Desktop_Wallpaper_cikv4f.jpg"/>
+          <Carousel.Caption>
+            {this.jumbotron3()}
+          </Carousel.Caption>
+      </Carousel.Item>
+    </Carousel>
     )
   },
 

@@ -16,6 +16,21 @@
   background: white;
 }
 
+.carousel {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-inner {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-inner .item {
+  width: 100%;
+  height: 100%;
+}
+
 .homePage .navbar .container {
   display: flex;
   justify-content: center;
@@ -23,7 +38,6 @@
 
 .carouselImage {
   width: 100%;
-  max-height: 500px;
 }
 
 .popularHeading {
