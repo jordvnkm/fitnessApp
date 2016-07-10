@@ -24,7 +24,7 @@ const UserSearchBar = React.createClass({
   },
 
   componentWillReceiveProps: function(newProps){
-    this.setState({value: newProps.text, suggestions: this.getSuggestions(newProps.text)});
+    this.setState({value: newProps.text});
   },
 
   onSuggestionsUpdateRequested: function({value, reason}){

@@ -39,10 +39,10 @@ const LocationDetail = React.createClass({
   },
 
   routesIndex: function(){
-    if (this.state.routes){
+    if (this.state.location){
       return (
         <div>
-          <h2>{this.state.routes[0].location}</h2>
+          <h2>{this.state.location.name}</h2>
           <RoutesIndex routes={this.state.routes}/>
         </div>
       )

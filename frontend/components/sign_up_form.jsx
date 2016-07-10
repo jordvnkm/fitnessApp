@@ -66,7 +66,7 @@ const SignUpForm = React.createClass({
     event.preventDefault();
     event.stopPropagation();
     UserActions.logIn({
-      username: "guest",
+      username: "Guest",
       password: "password",
     });
   },

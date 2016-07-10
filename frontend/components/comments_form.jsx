@@ -23,11 +23,17 @@ const CommentsForm = React.createClass({
 
   componentDidMount: function(){
     this.commentListener = CommentsStore.addListener(this.commentChange);
+    this.userListener = UserStore.addListener(this.updateUser);
     CommentActions.fetchCommentsForRoute(this.props.routeId);
+  },
+
+  updateUser: function(){
+    this.setState({currentUser: UserStore.currentUser()});
   },
 
   componentWillUnmount: function(){
     this.commentListener.remove();
+    this.userListener.remove();
   },
 
   commentChange: function(){
@@ -77,24 +83,38 @@ const CommentsForm = React.createClass({
           </form>
         </Panel>
       )
-    };
-  },
-
-  render: function(){
-    if (this.state.currentUser){
-      return(
-        <div className="commentsForm">
-          {this.form()}
-        </div>
-      );
     }
     else {
       return (
-        <div className= "commentsForm">
-          <h4>sign in to comment</h4>
-        </div>
+        <Panel className="commentPanel" header="Comments">
+          {this.comments()}
+          <h4>Sign in to comment</h4>
+        </Panel>
       )
     }
+  },
+
+  render: function(){
+
+    return(
+      <div className="commentsForm">
+        {this.form()}
+      </div>
+    )
+    // if (this.state.currentUser){
+    //   return(
+    //     <div className="commentsForm">
+    //       {this.form()}
+    //     </div>
+    //   );
+    // }
+    // else {
+    //   return (
+    //     <div className= "commentsForm">
+    //       <h4>sign in to comment</h4>
+    //     </div>
+    //   )
+    // }
 
   }
 });

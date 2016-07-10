@@ -25,6 +25,7 @@ const RouteDetail = React.createClass({
     this.routeListener = RouteStore.addListener(this.updateRoute);
     this.favoriteListener = FavoriteStore.addListener(this.updateFavorite);
     this.completedListener = CompletedStore.addListener(this.updateCompleted);
+    this.userListener = UserStore.addListener(this.updateUser);
     RouteActions.fetchRoute(this.props.params.routeId);
   },
 
@@ -67,6 +68,7 @@ const RouteDetail = React.createClass({
     this.routeListener.remove();
     this.favoriteListener.remove();
     this.completedListener.remove();
+    this.userListener.remove();
   },
 
   map: function(){
