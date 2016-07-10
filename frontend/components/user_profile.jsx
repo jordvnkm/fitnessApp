@@ -69,6 +69,7 @@ const UserProfile = React.createClass({
     let routesIndexes = null;
     if (this.state.profile){
       routesIndexes = <div className="routesIndexes">
+        <div className="routesHeader"><h2>Routes</h2></div>
         <Tabs defaultActiveKey={1} id="routesIndexTabs">
           <Tab eventKey={1} title="Completed">
             <CompletedRoutesIndex routes={this.state.profile.completed_routes}/>
@@ -154,15 +155,23 @@ const UserProfile = React.createClass({
   },
 
   userNavButtons: function(){
+    if (this.state.profile){
+      // console.log(this.state.profile);
+      let profileName = this.state.profile.user.username + "'s Profile"
+      // <img className="profilePicture" src={this.state.profile.user.profile_img_url}/>
+      return (
+        <div className="userToolbar">
+          <div className="personalInfo">
+            <h2 id="profileUsername">{profileName}</h2>
+          </div>
+          <Tabs defaultActiveKey={1} id="followingTab">
+            <Tab eventKey={1} title="Following"><FollowersIndex emptyText="Followed Profiles" users={this.followingsList()}/></Tab>
+            <Tab eventKey={2} title="Followers"><FollowersIndex emptyText="Followers"users={this.followersList()}/></Tab>
+          </Tabs>
+        </div>
+      );
+    }
 
-    return (
-      <div className="userToolbar">
-        <Tabs defaultActiveKey={1} id="followingTab">
-          <Tab eventKey={1} title="Following"><FollowersIndex emptyText="Followed Profiles" users={this.followingsList()}/></Tab>
-          <Tab eventKey={2} title="Followers"><FollowersIndex emptyText="Followers"users={this.followersList()}/></Tab>
-        </Tabs>
-      </div>
-    );
   },
 
   aggregateRoutes: function(){
@@ -174,8 +183,14 @@ const UserProfile = React.createClass({
 
   profileMap: function(){
     if (this.state.profile){
+      console.log(this.state.profile);
       return <ProfileMap location={this.state.profile.home_location} routes={this.aggregateRoutes()}/>
     }
+  },
+
+
+  profileInfo: function(){
+
   },
 
   render: function(){
@@ -186,6 +201,7 @@ const UserProfile = React.createClass({
       <div className="userProfile">
         {this.followButton()}
         {this.profileMap()}
+        {this.profileInfo()}
         <div className="userInfo">
           {this.routes()}
           {this.userNavButtons()}

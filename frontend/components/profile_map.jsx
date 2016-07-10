@@ -50,11 +50,10 @@ const ProfileMap = React.createClass({
     routes.forEach((route) => {
       const contentString = `<div class="infoWindow" id="route${route.id}" ref="infowindow">`  +
               `<h3 class="iw-header">Completed Route</h3>` +
-              `<h4>Route name : ${route.name}</h4>` +
-              `<h4>Route author : ${route.author.username}</h4>` +
-              `<div>` +
-                `<h5>Starting waypoint latitude: ${route.waypoints[0].lat}</h5>` +
-                `<h5>Starting waypoint longitude: ${route.waypoints[0].lng}</h5>` +
+              `<div class="iw-content">` +
+                `<h5>Route name : ${route.name}</h5>` +
+                `<h5>Route author : ${route.author.username}</h5>` +
+                `<p class="iw-description">Description: ${route.notes}</p>` +
               `</div>` +
             `</div>`;
 
@@ -90,12 +89,11 @@ const ProfileMap = React.createClass({
     let iconImage = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
     routes.forEach((route) => {
       const contentString = `<div class="infoWindow" id="route${route.id}" ref="infowindow">`  +
-              `<h3 class="iw-header">My Route</h3>` +
-              `<h4>Route name : ${route.name}</h4>` +
-              `<h4>Created at : ${route.created_at}</h4>` +
-              `<div>` +
-                `<h5>Starting waypoint latitude: ${route.waypoints[0].lat}</h5>` +
-                `<h5>Starting waypoint longitude: ${route.waypoints[0].lng}</h5>` +
+              `<h3 class="iw-header">Completed Route</h3>` +
+              `<div class="iw-content">` +
+                `<h5>Route name : ${route.name}</h5>` +
+                `<h5>Favorited ${route.favorite_count} times</h5>` +
+                `<p class="iw-description">Description: ${route.notes}</p>` +
               `</div>` +
             `</div>`;
 
@@ -131,12 +129,11 @@ const ProfileMap = React.createClass({
     let iconImage = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
     routes.forEach((route) => {
       const contentString = `<div class="infoWindow" id="route${route.id}" ref="infowindow">`  +
-              `<h3 class="iw-header">Favorited Route</>` +
-              `<h4>Route name : ${route.name}</h4>` +
-              `<h4>Route author : ${route.author.username} </h4>` +
-              `<div>` +
-                `<h5>Starting waypoint latitude: ${route.waypoints[0].lat}</h5>` +
-                `<h5>Starting waypoint longitude: ${route.waypoints[0].lng}</h5>` +
+              `<h3 class="iw-header">Completed Route</h3>` +
+              `<div class="iw-content">` +
+                `<h5>Route name : ${route.name}</h5>` +
+                `<h5>Route author : ${route.author.username}</h5>` +
+                `<p class="iw-description">Description: ${route.notes}</p>` +
               `</div>` +
             `</div>`;
 

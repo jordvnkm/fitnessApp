@@ -81,6 +81,7 @@ const RouteCreateMap = React.createClass({
 
       directionsService.route(request, function(result, status){
         if (status == google.maps.DirectionsStatus.OK){
+          console.log(result);
           self.directionsDisplay.setDirections(result);
         }
       });

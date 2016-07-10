@@ -7,6 +7,8 @@ const UserStore = require('../stores/users_store');
 const UserActions = require("../actions/user_actions");
 const hashHistory = require("react-router").hashHistory;
 
+const Panel = require("react-bootstrap").Panel;
+
 const CommentsForm = require("./comments_form");
 const FavoriteActions = require("../actions/favorite_actions");
 const FavoriteStore = require("../stores/favorites_store");
@@ -148,6 +150,28 @@ const RouteDetail = React.createClass({
     }
   },
 
+  routeInfo: function(){
+    if (this.state.route){
+      let routeName = <h2>{this.state.route.name}</h2>
+      return (
+        <div className="routeStats">
+          <Panel className="routeStatsPanel" header={routeName}>
+            <div className="routePanelInformation">
+              <div className="routeAuthorInformation">
+                <img className="routeAuthorPic" src={this.state.route.author.profile_img_url}/>
+                <h5>{this.state.route.author.username}</h5>
+              </div>
+              <div className="routeDescription">
+                <p>Description: {this.state.route.notes}</p>
+                <p>Favorite count: {this.state.route.favorite_count}</p>
+              </div>
+            </div>
+          </Panel>
+        </div>
+      )
+    }
+  },
+
   render: function(){
     return (
       <div className="routeDetail">
@@ -158,6 +182,7 @@ const RouteDetail = React.createClass({
           {this.completedButton()}
         </div>
         <div className="routeDetailComments">
+          {this.routeInfo()}
           {this.commentsForm()}
         </div>
       </div>

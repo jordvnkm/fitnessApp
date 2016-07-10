@@ -124,7 +124,7 @@ const HomePage = React.createClass({
     )
   },
 
-  backgroundVideo: function(){
+  backgroundCarousel: function(){
     return (
       <div className="video-container">
         <video id="splashVideo" src="http://res.cloudinary.com/dyfgfvczc/video/upload/ac_none/v1468021570/runningvideo_ot0usc.mp4" preload="auto" loop></video>
@@ -136,7 +136,7 @@ const HomePage = React.createClass({
     return (
       <div className="homePage">
         <div className="splashHeader">
-          {this.backgroundVideo()}
+          {this.backgroundCarousel()}
           {this.jumbotron()}
         </div>
         {this.userSearchBar()}

@@ -2,7 +2,8 @@ const React = require("react");
 const Waypoint = require("./waypoint");
 const hashHistory = require("react-router").hashHistory;
 const ListGroupItem = require("react-bootstrap").ListGroupItem;
-const RouteIndexItem = React.createClass({
+
+const ProfileRouteItem = React.createClass({
   showDetail: function(){
     hashHistory.push(`/routes/${this.props.route.id}`)
   },
@@ -13,7 +14,7 @@ const RouteIndexItem = React.createClass({
         <img className="routeAuthorImage" src={this.props.route.author.profile_img_url}/>
         <div className="miniRouteInfo" >
           <h4>{this.props.route.name}</h4>
-          <p>Author: {this.props.route.author.username} , Favorite Count: {this.props.route.favorite_count}</p>
+          <p>Location: {this.props.route.location} , Favorite Count: {this.props.route.favorite_count}</p>
         </div>
       </div>
     );
@@ -21,4 +22,4 @@ const RouteIndexItem = React.createClass({
 });
 
 
-module.exports = RouteIndexItem;
+module.exports = ProfileRouteItem;

@@ -11,7 +11,7 @@
 
 .routeDetailMap {
   width: 100%;
-  height: 500px;
+  min-height: 500px;
 }
 
 .commentHeader {
@@ -30,7 +30,10 @@
   flex-direction: column;
   top: 7%;
   left: 1%;
+}
 
+.routeInformation {
+  width: 90%;
 }
 
 
@@ -39,11 +42,11 @@
   border-color: black ;
   border-color: grey ;
   color: white ;
-  opacity: 0.8 ;
+  opacity: 0.9 ;
 }
 
 .detailButton:hover {
-  opacity: 0.9
+  opacity: 1;
 }
 
 .form-control {
@@ -53,20 +56,52 @@
 .routeDetailComments {
   width: 90%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  /*flex-direction: column;*/
   justify-content: center;
 }
 
 .commentsForm {
-  width: 100%;
+  width: 48%;
   display: flex;
   flex-direction: column;
   margin-top: 15px;
+  margin-left: 1%;
+}
+
+.routeAuthorPic {
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+}
+
+.routeStatsPanel .panel-body p {
+  margin: 10px;
+}
+
+.routeStatsPanel .panel-heading {
+  background: rgba(0, 0, 0, 0.8) !important;
+  color: white !important;
+}
+
+.routeStats {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+  margin-top: 15px;
+  margin-right: 1%;
+}
+
+.routeAuthorInformation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 
+.routePanelInformation {
+  display: flex;
 
+}
 
 .commentContent {
   display: flex;

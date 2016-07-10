@@ -16,9 +16,15 @@
   background: white;
 }
 
+.homePage .navbar .container {
+  display: flex;
+  justify-content: center;
+}
+
+
 .popularHeading {
   width: 100%;
-  padding-left: 20%;
+  text-align: center;
 }
 
 .video-container {

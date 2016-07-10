@@ -11,8 +11,19 @@
   cursor: pointer;
 }
 
+.iw-content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.iw-description {
+  text-wrap: break-word;
+}
+
 .iw-header {
    font-family: 'Open Sans Condensed', sans-serif;
+   width: 100%;
    font-size: 22px;
    font-weight: 400;
    padding: 10px;
@@ -36,10 +47,29 @@
 
 .userToolbar {
   display: flex;
-  justify-content: center;
-  width: 80%;
+  /*justify-content: center;*/
+  flex-direction: column;
+  width: 100%;
   background: white;
   padding-right: 5px;
+}
+
+.profilePicture {
+  height: 60px;
+  width: 60px;
+  margin-left: 5px;
+}
+
+#profileUsername {
+  font-weight: bold;
+  padding-left: 5px;
+}
+
+.personalInfo {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: flex-end;
 }
 
 .userInfo {
@@ -49,6 +79,14 @@
   padding-bottom: 100px;
 }
 
+.routesHeader {
+  display: flex;
+  align-items: flex-end;
+  font-weight: bold;
+  height: 70px;
+}
+
+
 .buttonToolbar {
   display: flex;
   width: 100%;
@@ -57,9 +95,10 @@
 
 .routesIndexes {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  width: 80%;
+  flex-direction: column;
+  /*justify-content: center;
+  align-items: flex-start;*/
+  width: 100%;
   background: white;
   padding-left: 5px;
 }
@@ -82,11 +121,11 @@
   border-color: black ;
   border-color: grey ;
   color: white ;
-  opacity: 0.8 ;
+  opacity: 0.9 ;
 }
 
 .followButton:hover {
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .list-group {
@@ -96,7 +135,7 @@
 
 .profileMap {
   width: 100%;
-  height: 500px;
+  min-height: 500px;
   z-index: 0;
 }
 

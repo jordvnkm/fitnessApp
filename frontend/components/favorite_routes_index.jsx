@@ -1,5 +1,5 @@
 const React = require("react");
-const RoutesIndexItem = require("./routes_index_item");
+const ProfileRouteItem = require("./profile_route_item");
 const ListGroup = require("react-bootstrap").ListGroup;
 const ListGroupItem = require("react-bootstrap").ListGroupItem
 
@@ -12,7 +12,7 @@ const FavoriteRoutesIndex = React.createClass({
       <ListGroup>
         {
           this.props.routes.map((route) => {
-            return <RoutesIndexItem key={route.id} route={route}/>
+            return <ProfileRouteItem key={route.id} route={route}/>
           })
         }
       </ListGroup>

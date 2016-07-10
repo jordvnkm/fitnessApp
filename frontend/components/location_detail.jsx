@@ -52,8 +52,8 @@ const LocationDetail = React.createClass({
   render: function(){
     if (parseInt(this.props.params.locationId) === 0){
       return (
-        <div>
-          no routes for this location
+        <div className="locationError">
+          <h1>no routes for this location</h1>
         </div>
       )
     }
