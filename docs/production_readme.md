@@ -21,6 +21,19 @@ GoTheDistance has all content delivered by a single static page. All requests ar
 
   Users specify waypoints by clicking on a google maps element.  The waypoints are stored on the frontend and routes are created using the google maps direction service api.  Once the user has specified the waypoints and clicks the "Create Route" button, a new database entry is stored for the route.  The route store is updated, and then the waypoints are created, using the route_id of the most recently added route in the route store.
 
+### following of users
+
+  Followings are stored in the database using a join table that stores the user_id, and the fan_id.  The user_id corresponds to the user that is being followed, and the fan_id corresponds to the user that is doing the following.  Users follow each other by visiting profiles and clicking the follow button.  The followings store holds the different followings throughout the application.  The "follow" button changes to "unfollow" if the user is following the current profile.  No follow button is displayed if the profile belongs to the current user.
+
+### comments on routes
+
+  Users can comment on running routes.  Comments are stored in the database with columns for content, route_id, user_id, and date.  The date column is currently not being used.  The content contains the text for the comment. The route_id corresponds to the route that the comment is on, and the user_id corresponds to the user that posted the comment.
+
+
+### dashboard displays completed, authored, favorited routes
+
+  Users can mark routes as completed and
+
 ![image of notebook index](https://github.com/appacademy/sample-project-proposal/blob/master/docs/noteIndex.png)
 
 Note editing is implemented using the Quill.js library, allowing for a Word-processor-like user experience.
