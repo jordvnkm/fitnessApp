@@ -2,7 +2,8 @@
 # Ultimate Fitness Challenge
 
 [GoTheDistance live][heroku]
-[heroku]: http://www.gothedistance.herokuapp.com
+
+[heroku]: http://gothedistance.herokuapp.com
 
 GoTheDistance is a full stack web application that utilizes React.js with a Flux architectural framework for the frontend, and Ruby on Rails with a PostgreSQL database on the backend.
 
@@ -21,7 +22,7 @@ GoTheDistance has all content delivered by a single static page. All requests ar
 
   Users specify waypoints by clicking on a google maps element.  The waypoints are stored on the frontend and routes are created using the google maps direction service api.  Once the user has specified the waypoints and clicks the `Create Route` button, a new database entry is stored for the route.  The route store is updated, and then the waypoints are created, using the route_id of the most recently added route in the route store.
 
-![route_form](https://github.com/jordvnkm/fitnessApp/docs/route_form.png)
+![route_form](https://github.com/jordvnkm/fitnessApp/blob/master/docs/route_form.png)
 
 ### following of users
 
@@ -33,9 +34,9 @@ GoTheDistance has all content delivered by a single static page. All requests ar
 
   When viewing a routes detail component, a user can comment on the route if they are signed in.  If they are not signed in, the form will instruct them to sign in.
 
-![sign in instructions](https://github.com/jordvnkm/fitnessApp/docs/comment_sign_in.png)
+![sign in instructions](https://github.com/jordvnkm/fitnessApp/blob/master/docs/comment_sign_in.png)
 
-![comment form](https://github.com/jordvnkm/fitnessApp/docs/comment_sign_in.png)
+![comment form](https://github.com/jordvnkm/fitnessApp/blob/master/docs/comment_sign_in.png)
 
 
 ### dashboard displays completed, authored, favorited routes
@@ -50,7 +51,7 @@ GoTheDistance has all content delivered by a single static page. All requests ar
 
   When viewing a routes details, `favorite` and `mark as completed` buttons are shown based on the favorite and completed table entries that are saved in the front end stores.
 
-![routes dashboard](https://github.com/jordvnkm/fitnessApp/docs/routes_index.png)
+![routes dashboard](https://github.com/jordvnkm/fitnessApp/blob/master/docs/routes_index.png)
 
 ### view routes based on location
 
