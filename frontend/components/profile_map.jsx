@@ -24,9 +24,9 @@ const ProfileMap = React.createClass({
 
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
     this.markers = [];
-    this.placeCompletedMarkers(this.props.routes.completed);
     this.placeAuthoredMarkers(this.props.routes.authored);
     this.placeFavoritedMarkers(this.props.routes.favorited);
+    this.placeCompletedMarkers(this.props.routes.completed);
   },
 
   componentWillReceiveProps: function(newProps){
@@ -40,9 +40,9 @@ const ProfileMap = React.createClass({
       marker.setMap(null);
     });
     this.markers = [];
-    this.placeCompletedMarkers(newProps.routes.completed);
     this.placeAuthoredMarkers(newProps.routes.authored);
     this.placeFavoritedMarkers(newProps.routes.favorited);
+    this.placeCompletedMarkers(newProps.routes.completed);
   },
 
   placeCompletedMarkers: function(routes){
