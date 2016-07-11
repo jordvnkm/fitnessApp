@@ -90,7 +90,7 @@ const ProfileMap = React.createClass({
     let iconImage = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
     routes.forEach((route) => {
       const contentString = `<div class="infoWindow" id="route${route.id}" ref="infowindow">`  +
-              `<h3 class="iw-header">Completed Route</h3>` +
+              `<h3 class="iw-header">Authored Route</h3>` +
               `<div class="iw-content">` +
                 `<h5>Route name : ${route.name}</h5>` +
                 `<h5>Favorited ${route.favorite_count} times</h5>` +
@@ -130,7 +130,7 @@ const ProfileMap = React.createClass({
     let iconImage = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
     routes.forEach((route) => {
       const contentString = `<div class="infoWindow" id="route${route.id}" ref="infowindow">`  +
-              `<h3 class="iw-header">Completed Route</h3>` +
+              `<h3 class="iw-header">Favorited Route</h3>` +
               `<div class="iw-content">` +
                 `<h5>Route name : ${route.name}</h5>` +
                 `<h5>Route author : ${route.author.username}</h5>` +

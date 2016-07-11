@@ -38,7 +38,9 @@ GoTheDistance has all content delivered by a single static page. All requests ar
 
   Favorite routes are stored in the database as a join table between routes and users.  
 
-  The completed and favorited routes are stored in their own respective stores on the front end.
+  The completed and favorited table entries are stored in their own respective stores on the front end.  When viewing a user profile, the completed, authored, and favorited routes and passed to the profile component from an ajax request.  
+
+  When viewing a routes details, "favorite" and "mark as completed" buttons are shown based on the favorite and completed table entries that are saved in the front end stores.
 
 ![image of notebook index](https://github.com/appacademy/sample-project-proposal/blob/master/docs/noteIndex.png)
 
