@@ -32,7 +32,13 @@ GoTheDistance has all content delivered by a single static page. All requests ar
 
 ### dashboard displays completed, authored, favorited routes
 
-  Users can mark routes as completed and
+  Users can mark routes as completed and favorited, and the dashboard automatically displays any routes that have been authored by the current profile.  
+
+  Completed routes are stored in the database as a join table between routes and users,  with a few extra columns for date, and notes.  The dates and notes columns are currently not in use but will be implemented in future updates.
+
+  Favorite routes are stored in the database as a join table between routes and users.  
+
+  The completed and favorited routes are stored in their own respective stores on the front end.
 
 ![image of notebook index](https://github.com/appacademy/sample-project-proposal/blob/master/docs/noteIndex.png)
 

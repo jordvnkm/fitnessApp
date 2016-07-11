@@ -184,6 +184,7 @@ const HomePage = React.createClass({
 
   backgroundCarousel: function(){
     // <img className="carouselImage" src="http://res.cloudinary.com/dyfgfvczc/image/upload/c_crop,q_100,w_1736,x_90,y_180/v1468116260/Running_Desktop_Wallpaper_cikv4f.jpg"/>
+    // <img className="carouselImage" src="http://res.cloudinary.com/dyfgfvczc/image/upload/c_crop,q_100,w_1681,x_409,y_180/v1468116260/Running_Desktop_Wallpaper_cikv4f.jpg"/>
 
     return (
       <Carousel>
@@ -194,13 +195,13 @@ const HomePage = React.createClass({
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img className="carouselImage" src="http://res.cloudinary.com/dyfgfvczc/image/upload/c_crop,q_100,w_1357,x_547,y_645/v1468110609/Running_Wallpaper_yjnwio.jpg"/>
+          <img className="carouselImage" src="http://res.cloudinary.com/dyfgfvczc/image/upload/c_crop,q_100,w_2397,x_0,y_307/v1468110481/keep_running-wallpaper-3200x2400_vxqkwj.jpg"/>
           <Carousel.Caption>
             {this.jumbotron2()}
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img className="carouselImage" src="http://res.cloudinary.com/dyfgfvczc/image/upload/c_crop,q_100,w_1681,x_409,y_180/v1468116260/Running_Desktop_Wallpaper_cikv4f.jpg"/>
+          <img className="carouselImage" src="http://res.cloudinary.com/dyfgfvczc/image/upload/c_crop,q_100,w_1357,x_547,y_645/v1468110609/Running_Wallpaper_yjnwio.jpg"/>
           <Carousel.Caption>
             {this.jumbotron3()}
           </Carousel.Caption>
