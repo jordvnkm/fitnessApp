@@ -43,7 +43,7 @@ const HomePage = React.createClass({
   login: function(event){
     event.preventDefault();
     UserActions.logIn({
-      username: "guest",
+      username: "Guest",
       password: "password"
     });
   },
