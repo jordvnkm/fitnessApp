@@ -36,7 +36,7 @@ GoTheDistance has all content delivered by a single static page. All requests ar
 
 ![sign in instructions](https://github.com/jordvnkm/fitnessApp/blob/master/docs/comment_sign_in.png)
 
-![comment form](https://github.com/jordvnkm/fitnessApp/blob/master/docs/comment_sign_in.png)
+![comment form](https://github.com/jordvnkm/fitnessApp/blob/master/docs/comment_form.png)
 
 
 ### dashboard displays completed, authored, favorited routes
