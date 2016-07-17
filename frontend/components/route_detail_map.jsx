@@ -56,8 +56,10 @@ const RouteDetailMap = React.createClass({
       travelMode: google.maps.TravelMode.WALKING
     };
 
+    let self = this;
     directionsService.route(request, function(result, status){
       if (status == google.maps.DirectionsStatus.OK){
+        self.props.updateLegs(result.routes[0].legs[0]);
         directionsDisplay.setDirections(result);
       }
     });

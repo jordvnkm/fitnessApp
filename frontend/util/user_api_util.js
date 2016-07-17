@@ -27,7 +27,10 @@ const UserApiUtil = {
   },
 
   updateUser: function(user, successCallback, errorCallback){
-    let params = {user: {username: user.username, password: user.password, email: user.email, profile_img_url: user.profile_img_url}};
+    let params = {user: {username: user.username,
+                  password: user.password, email: user.email,
+                  profile_img_url: user.profile_img_url,
+                  home_location_id: user.home_location_id}};
     $.ajax({
       url: `/api/users/${user.id}`,
       type: "PATCH",

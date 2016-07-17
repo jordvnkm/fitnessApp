@@ -1,4 +1,6 @@
-
+.routeDescription p{
+  word-break: break-word;
+}
 
 .routeDetail {
   display: flex;

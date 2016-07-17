@@ -9,6 +9,9 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  width: 200px;
+  max-height: 200px;
+  word-break: break-word;
 }
 
 .profileError {
@@ -27,6 +30,7 @@
 
 .iw-description {
   text-wrap: break-word;
+  word-break: break-word;
 }
 
 .iw-header {

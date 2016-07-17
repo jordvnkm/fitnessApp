@@ -15,9 +15,11 @@ const RouteCreateMap = React.createClass({
       this.map.setZoom(12);
     }
 
-    if (newProps.location.id !== this.location.id){
+    if (this.location && newProps.location.id !== this.location.id){
       this.location = newProps.location;
-      this.startMarker.setMap(null);
+      if (this.startMarker){
+        this.startMarker.setMap(null);
+      }
 
       this.waypoints = [];
     }
@@ -81,6 +83,7 @@ const RouteCreateMap = React.createClass({
 
       directionsService.route(request, function(result, status){
         if (status == google.maps.DirectionsStatus.OK){
+          self.props.updateLegs(result.routes[0].legs[0]);
           self.directionsDisplay.setDirections(result);
         }
       });

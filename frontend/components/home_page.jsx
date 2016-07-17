@@ -168,7 +168,7 @@ const HomePage = React.createClass({
               </FormGroup>
             </form>
           </Navbar.Form>
-          <NavItem onClick={this.searchUsers}>Search</NavItem>
+          <NavItem onClick={this.searchUsers}>Search Runners</NavItem>
         </Nav>
       </Navbar>
     );

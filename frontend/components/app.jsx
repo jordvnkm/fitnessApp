@@ -171,7 +171,7 @@ const App = React.createClass({
             </FormGroup>
           </form>
         </Navbar.Form>
-        <NavItem onClick={this.searchPlaces}>Search</NavItem>
+        <NavItem onClick={this.searchPlaces}>Search Cities</NavItem>
       </Nav>
     );
   },

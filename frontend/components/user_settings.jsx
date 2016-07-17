@@ -4,6 +4,8 @@ const UserActions = require("../actions/user_actions");
 const UserConstants = require("../constants/user_constants");
 const hashHistory = require("react-router").hashHistory;
 const ErrorStore = require("../stores/error_store");
+const LocationStore = require("../stores/location_store");
+const LocationActions = require("../actions/location_actions");
 
 const Button = require("react-bootstrap").Button;
 
@@ -28,10 +30,11 @@ const UserSettings = React.createClass({
       this.username = user.username;
       this.email = user.email;
       this.password = "";
+      this.home_location = user.home_location
       this.successfullSave = false;
     }
 
-    return {currentUser: user, username: name,
+    return {currentUser: user, username: name, currentLocation: 0,
             password: "", passwordConfirm: "", email: myemail, profileImgUrl: myprofileImgUrl};
   },
 
@@ -41,11 +44,14 @@ const UserSettings = React.createClass({
     }
     this.userListener = UserStore.addListener(this.updateUser);
     this.errorListener = ErrorStore.addListener(this.updateErrors);
+    this.locationListener = LocationStore.addListener(this.updateLocation);
+    LocationActions.fetchAllLocations();
   },
 
   componentWillUnmount: function(){
     this.userListener.remove();
     this.errorListener.remove();
+    this.locationListener.remove();
   },
 
   componentWillReceiveProps: function(newProps){
@@ -57,6 +63,10 @@ const UserSettings = React.createClass({
     else {
       this.setState({currentUser: UserStore.currentUser()});
     }
+  },
+
+  updateLocation: function(){
+    this.setState({currentLocation: LocationStore.find(this.state.currentUser.home_location.id).id});
   },
 
   updateErrors: function(){
@@ -72,7 +82,7 @@ const UserSettings = React.createClass({
     else {
       if (this.profile_img_url !== UserStore.currentUser().profile_img_url
           || this.password !== this.state.password || this.email !== UserStore.currentUser().email
-          || this.username !== UserStore.currentUser().username){
+          || this.username !== UserStore.currentUser().username || this.home_location !== UserStore.currentUser().home_location){
         this.successfullSave = true;
       }
       this.setState({currentUser: UserStore.currentUser()});
@@ -121,7 +131,8 @@ const UserSettings = React.createClass({
           username: this.state.username,
           email: this.state.email,
           profile_img_url: this.state.profileImgUrl,
-          id: this.state.currentUser.id
+          id: this.state.currentUser.id,
+          home_location_id: this.state.currentLocation
         })
       }
       else {
@@ -130,7 +141,8 @@ const UserSettings = React.createClass({
           email: this.state.email,
           password: this.state.password,
           profile_img_url: this.state.profileImgUrl,
-          id: this.state.currentUser.id
+          id: this.state.currentUser.id,
+          home_location_id: this.state.currentLocation
         })
       }
     }
@@ -178,6 +190,10 @@ const UserSettings = React.createClass({
     }
   },
 
+  locationChange: function(event){
+    this.setState({currentLocation: event.target.value});
+  },
+
 
   render: function(){
     return (
@@ -216,6 +232,16 @@ const UserSettings = React.createClass({
                     onChange={this.passwordConfirmChange} value={this.state.passwordConfirm}/>
                   <FormControl.Feedback />
                   <HelpBlock>Passwords must be at least 6 characters</HelpBlock>
+                </FormGroup>
+
+                <FormGroup controlId="formControlsSelect">
+                  <ControlLabel>Select Home City</ControlLabel>
+                  <FormControl value={this.state.currentLocation} onChange={this.locationChange} componentClass="select" placeholder="select">
+                    <option key="start" value="0">select city</option>
+                    {LocationStore.all().map((location) => {
+                      return <option key={location.id} value={location.id}>{location.name}</option> ;
+                    })}
+                  </FormControl>
                 </FormGroup>
 
                 <div className="formSubmit">

@@ -5,6 +5,13 @@
   align-items: center;
 }
 
+.routeLegs {
+  width: 100%;
+  padding-left: 30px;
+  text-align: left;
+  word-break: break-word;
+}
+
 
 .discoverMap {
   width: 100%;

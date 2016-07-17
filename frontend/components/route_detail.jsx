@@ -6,6 +6,7 @@ const Button = require("react-bootstrap").Button;
 const UserStore = require('../stores/users_store');
 const UserActions = require("../actions/user_actions");
 const hashHistory = require("react-router").hashHistory;
+const RouteLegIndex = require("./route_leg_index");
 
 const Panel = require("react-bootstrap").Panel;
 
@@ -18,7 +19,7 @@ const CompletedStore = require("../stores/completed_store");
 const RouteDetail = React.createClass({
   getInitialState: function(){
     return {route: null, currentUser: UserStore.currentUser(),
-            favorite: null, completed: null};
+            favorite: null, completed: null, info: null};
   },
 
   componentDidMount: function(){
@@ -73,8 +74,12 @@ const RouteDetail = React.createClass({
 
   map: function(){
     if (this.state.route){
-      return <RouteDetailMap waypoints={this.state.route.waypoints} />;
+      return <RouteDetailMap updateLegs={this.updateLegs} waypoints={this.state.route.waypoints} />;
     }
+  },
+
+  updateLegs: function(routeLegs){
+    this.setState({info: routeLegs});
   },
 
   deleteRoute: function(){
@@ -167,6 +172,10 @@ const RouteDetail = React.createClass({
                 <p>Description: {this.state.route.notes}</p>
                 <p>Favorite count: {this.state.route.favorite_count}</p>
               </div>
+            </div>
+            <div>
+              <h4>Route Information</h4>
+              <RouteLegIndex info={this.state.info}/>
             </div>
           </Panel>
         </div>

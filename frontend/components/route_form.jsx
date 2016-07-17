@@ -9,6 +9,7 @@ const UserStore = require("../stores/users_store");
 const WaypointActions = require("../actions/waypoint_actions");
 const WaypointStore = require("../stores/waypoint_store");
 const WaypointsIndexItem = require("./waypoints_index_item");
+const RouteLegIndex = require("./route_leg_index");
 
 const hashHistory = require("react-router").hashHistory;
 const Button = require("react-bootstrap").Button;
@@ -22,7 +23,7 @@ const Panel = require("react-bootstrap").Panel;
 const RouteForm = React.createClass({
   getInitialState: function(){
     return {currentUser: UserStore.currentUser(), name: "", notes: "", errors: null,
-            locations: LocationStore.all(), currentLocation: null, waypoints: []};
+            locations: LocationStore.all(), currentLocation: null, waypoints: [], routeInfo: null};
   },
 
   componentDidMount: function(){
@@ -68,12 +69,16 @@ const RouteForm = React.createClass({
     }
   },
 
+  updateLegs: function(routeLegs){
+    this.setState({routeInfo: routeLegs});
+  },
+
   errorChange: function(){
     this.setState({errors: ErrorStore.all()});
   },
 
   updateLocations: function(){
-    this.setState({locations: LocationStore.all(), errors: null});
+    this.setState({currentLocation: LocationStore.find(this.state.currentUser.home_location.id), locations: LocationStore.all(), errors: null});
   },
 
   nameChange: function(event){
@@ -95,14 +100,14 @@ const RouteForm = React.createClass({
   },
 
   selectItems: function(){
-    if (this.state.locations){
+    if (this.state.locations && this.state.currentLocation){
       return (
         <FormGroup controlId="formControlsSelect">
           <ControlLabel>Select Location</ControlLabel>
-          <FormControl onChange={this.locationChange} componentClass="select" placeholder="select">
+          <FormControl value={this.state.currentLocation.id} onChange={this.locationChange} componentClass="select" placeholder="select">
             <option key="start" value="0">select city</option>
             {this.state.locations.map((location) => {
-              return <option key={location.id} value={location.id}>{location.name}</option> ;
+              return <option key={location.id} value={location.id}>{location.name}</option>
             })}
           </FormControl>
         </FormGroup>
@@ -153,7 +158,7 @@ const RouteForm = React.createClass({
     }
 
 
-    if (this.state.waypoints.length > 0){
+    if (this.state.waypoints.length > 1){
       let waypoints = this.state.waypoints;;
       if (this.state.waypoints.length > 10){
         waypoints = this.state.waypoints.slice( 0, 10);
@@ -166,16 +171,20 @@ const RouteForm = React.createClass({
       //     return <WaypointsIndexItem key={index} order={index} latLng={latLng} />
       //   })
       // }
+      // <Panel header={myHeader}>
+      //   {
+      //     waypoints.map((latLng) => {
+      //       index += 1;
+      //       return <WaypointsIndexItem key={index} order={index} latLng={latLng} />
+      //     })
+      //   }
+      // </Panel>
       return (
         <div className="waypointsIndex">
-          <Panel header={myHeader}>
-            {
-              waypoints.map((latLng) => {
-                index += 1;
-                return <WaypointsIndexItem key={index} order={index} latLng={latLng} />
-              })
-            }
-          </Panel>
+          <div className="routeLegs">
+            <h4>Route Information</h4>
+            <RouteLegIndex info={this.state.routeInfo}/>
+          </div>
         </div>
       );
     }
@@ -189,9 +198,7 @@ const RouteForm = React.createClass({
   },
 
   routeCreateMap: function(){
-    if (this.state.currentLocation){
-      return <RouteCreateMap waypoints={this.state.waypoints} location={this.state.currentLocation} clickHandler={this.addWaypoint}/> ;
-    }
+    return <RouteCreateMap updateLegs={this.updateLegs} waypoints={this.state.waypoints} location={this.state.currentLocation} clickHandler={this.addWaypoint}/> ;
   },
 
   errors: function(){
