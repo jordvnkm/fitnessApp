@@ -48,6 +48,8 @@
 
 .list-group-item {
   transition: border-left, 0.2s, ease;
+  border: 0px !important;
+  border-bottom: 1px solid #ddd !important;
 }
 
 .list-group-item:hover {
@@ -188,6 +190,11 @@
 
 .routeIndexItem {
   cursor: pointer;
+}
+
+.tab-content {
+  height: 400px;
+  overflow: scroll;
 }
 
 .userListGroup {

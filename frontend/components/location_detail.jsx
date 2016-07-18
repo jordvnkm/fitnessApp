@@ -15,14 +15,20 @@ const LocationDetail = React.createClass({
   },
   componentDidMount: function(){
     this.routeListener = RouteStore.addListener(this.updateRoutes);
-    RouteActions.fetchRoutesForLocation(this.props.params.locationId);
     this.locationListener = LocationStore.addListener(this.updateLocations);
-    LocationActions.fetchAllLocations();
+    if (parseInt(this.props.params.locationId) !== 0){
+      console.log("did mount")
+      RouteActions.fetchRoutesForLocation(this.props.params.locationId);
+      LocationActions.fetchAllLocations();
+    }
   },
 
   componentWillReceiveProps: function(newProps){
-    RouteActions.fetchRoutesForLocation(newProps.params.locationId);
-    LocationActions.fetchAllLocations();
+    if (parseInt(newProps.params.locationId) !== 0){
+      console.log('will receive props')
+      RouteActions.fetchRoutesForLocation(newProps.params.locationId);
+      LocationActions.fetchAllLocations();
+    }
   },
 
   componentWillUnmount: function(){

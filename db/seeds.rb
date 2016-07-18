@@ -186,27 +186,27 @@ comment13 = Api::Comment.create(author_id: 3, content: "hello from comment13", r
 
 
 
-# 7 kobe
-# 23 hilary swank
-# 24 steph curry
-# 25 ben simmons
-# 26 serena williams
-# 27 joe rogan
-# 32 klay thompson
-# 33 david banner
+# 8 kobe
+# 24 hilary swank
+# 25 steph curry
+# 26 ben simmons
+# 27 serena williams
+# 28 joe rogan
+# 33 klay thompson
+# 34 david banner
 follows1 = Api::Following.create(user_id: 1, fan_id: 2)
 follows2 = Api::Following.create(user_id: 1, fan_id: 3)
 follows3 = Api::Following.create(user_id: 1, fan_id: 4)
 follows4 = Api::Following.create(user_id: 1, fan_id: 5)
 follows5 = Api::Following.create(user_id: 1, fan_id: 6)
-follows6 = Api::Following.create(user_id: 1, fan_id: 7)
-follows7 = Api::Following.create(user_id: 1, fan_id: 23)
-follows8 = Api::Following.create(user_id: 1, fan_id: 24)
-follows9 = Api::Following.create(user_id: 1, fan_id: 25)
-follows10 = Api::Following.create(user_id: 1, fan_id: 26)
-follows11 = Api::Following.create(user_id: 1, fan_id: 27)
-follows12 = Api::Following.create(user_id: 1, fan_id: 32)
-follows13 = Api::Following.create(user_id: 1, fan_id: 33)
+follows6 = Api::Following.create(user_id: 1, fan_id: 8)
+follows7 = Api::Following.create(user_id: 1, fan_id: 24)
+follows8 = Api::Following.create(user_id: 1, fan_id: 25)
+follows9 = Api::Following.create(user_id: 1, fan_id: 26)
+follows10 = Api::Following.create(user_id: 1, fan_id: 27)
+follows11 = Api::Following.create(user_id: 1, fan_id: 28)
+follows12 = Api::Following.create(user_id: 1, fan_id: 33)
+follows13 = Api::Following.create(user_id: 1, fan_id: 34)
 
 
 follows14 = Api::Following.create(user_id: 7, fan_id: 1)

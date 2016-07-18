@@ -40,7 +40,7 @@ const UserProfile = React.createClass({
 
   componentWillReceiveProps: function(newProps){
     ProfileActions.fetchProfile(newProps.params.userId);
-    UserActions.fetchCurrentUser();
+    // UserActions.fetchCurrentUser();
     FollowActions.fetchFollowsForUser(newProps.params.userId)
   },
 
