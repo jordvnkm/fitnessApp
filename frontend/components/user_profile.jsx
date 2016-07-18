@@ -70,6 +70,11 @@ const UserProfile = React.createClass({
     if (this.state.profile){
       routesIndexes = <div className="routesIndexes">
         <div className="routesHeader"><h2>Routes</h2></div>
+        <div className="routesSpecialInline">
+          <h5>Completed Count: {this.state.profile.completed_routes.length}</h5>
+          <h5>Favorited Count: {this.state.profile.favorite_routes.length}</h5>
+        </div>
+        <h5>Authored Count: {this.state.profile.authored_routes.length}</h5>
         <Tabs defaultActiveKey={1} id="routesIndexTabs">
           <Tab eventKey={1} title="Completed">
             <CompletedRoutesIndex routes={this.state.profile.completed_routes}/>
@@ -137,36 +142,49 @@ const UserProfile = React.createClass({
 
 
   followersList: function(){
-    let followings = FollowsStore.allUserFollowers();
-    let followers = [];
-    followings.forEach((following) => {
-      followers.push(following.fan);
-    })
-    return followers;
+    if (this.state.currentUser){
+      let followings = FollowsStore.allUserFollowers();
+      let followers = [];
+      followings.forEach((following) => {
+        followers.push(following.fan);
+      })
+      return followers;
+    }
+    else if (this.state.profile){
+      return this.state.profile.followers;
+    }
   },
 
   followingsList: function(){
-    let followings = FollowsStore.allFollowingsAsFan();
-    let followed = [];
-    followings.forEach((following) => {
-      followed.push(following.user);
-    })
-    return followed;
+    if (this.state.currentUser){
+      let followings = FollowsStore.allFollowingsAsFan();
+      let followed = [];
+      followings.forEach((following) => {
+        followed.push(following.user);
+      })
+      return followed;
+    }
+    else if (this.state.profile){
+      return this.state.profile.followed_users;
+    }
   },
 
   userNavButtons: function(){
     if (this.state.profile){
-      // console.log(this.state.profile);
-      let profileName = this.state.profile.user.username + "'s Profile"
-      // <img className="profilePicture" src={this.state.profile.user.profile_img_url}/>
+      let profileName = this.state.profile.user.username;
       return (
         <div className="userToolbar">
           <div className="personalInfo">
-            <h2 id="profileUsername">{profileName}</h2>
+            <img className="mainProfilePic" src={this.state.profile.user.profile_img_url}/>
+            <div className="profileStatistics">
+              <h2 id="profileUsername">{profileName}</h2>
+              <h5>Follower Count: {this.followersList().length}</h5>
+              <h5>Followed Profile Count: {this.followingsList().length}</h5>
+            </div>
           </div>
           <Tabs defaultActiveKey={1} id="followingTab">
             <Tab eventKey={1} title="Following"><FollowersIndex emptyText="Followed Profiles" users={this.followingsList()}/></Tab>
-            <Tab eventKey={2} title="Followers"><FollowersIndex emptyText="Followers"users={this.followersList()}/></Tab>
+            <Tab eventKey={2} title="Followers"><FollowersIndex emptyText="Followers" users={this.followersList()}/></Tab>
           </Tabs>
         </div>
       );
@@ -188,10 +206,6 @@ const UserProfile = React.createClass({
   },
 
 
-  profileInfo: function(){
-
-  },
-
   render: function(){
     if (parseInt(this.props.params.userId) == 0){
       return <div className="profileError"><h1>User not found</h1></div>
@@ -200,7 +214,6 @@ const UserProfile = React.createClass({
       <div className="userProfile">
         {this.followButton()}
         {this.profileMap()}
-        {this.profileInfo()}
         <div className="userInfo">
           {this.routes()}
           {this.userNavButtons()}
