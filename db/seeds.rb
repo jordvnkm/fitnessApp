@@ -36,7 +36,7 @@ user23 = Api::User.create(username: "Hilary Swank", password: "password3", email
 user24 = Api::User.create(username: "Stephen Curry", password: "password4", email: "user24@gmail.com", home_location_id: 62, profile_img_url: "https://s-media-cache-ak0.pinimg.com/564x/6f/85/5f/6f855f6b82f9da6f924789063bb63a05.jpg")
 user25 = Api::User.create(username: "Ben Simmons", password: "password5", email: "user25@gmail.com", home_location_id: 62, profile_img_url: "http://images.performgroup.com/di/library/omnisport/a0/58/ben-simmons-120615-usnews-getty-ftr_17loxnyhcmerv1hm62smm3ed4j.jpg?t=2016465945")
 user26 = Api::User.create(username: "Serena Williams", password: "password6", email: "user26@gmail.com", home_location_id: 68, profile_img_url: "http://www.ew.com/sites/default/files/i/2015/07/11/serena-williams.jpg")
-user27 = Api::User.create(username: "Joe Roegan", password: "password7", email: "user27@gmail.com", home_location_id: 49, profile_img_url: "http://assets.fightland.com/content-images/contentimage/55558/rogan650.jpg")
+user27 = Api::User.create(username: "Joe Rogan", password: "password7", email: "user27@gmail.com", home_location_id: 49, profile_img_url: "http://assets.fightland.com/content-images/contentimage/55558/rogan650.jpg")
 user28 = Api::User.create(username: "Brittany Zumie", password: "password8", email: "user28@gmail.com", home_location_id: 49, profile_img_url: "http://images.shape.mdpcdn.com/sites/shape.com/files/styles/story_detail/public/story/runninghill_0.jpg?itok=PaZHBJnw")
 user29 = Api::User.create(username: "Dylan Tomita", password: "password9", email: "user29@gmail.com", home_location_id: 36, profile_img_url: "https://expertbeacon.com/sites/default/files/take_your_running_to_another_level_and_hire_a_running_coach.jpg")
 user30 = Api::User.create(username: "Andrew Cole", password: "password0", email: "user30@gmail.com", home_location_id: 49, profile_img_url: "http://images.wisegeek.com/athlete-takes-off-running.jpg")
@@ -185,7 +185,40 @@ comment12 = Api::Comment.create(author_id: 3, content: "hello from comment12", r
 comment13 = Api::Comment.create(author_id: 3, content: "hello from comment13", route_id: 1)
 
 
+
+# 7 kobe
+# 23 hilary swank
+# 24 steph curry
+# 25 ben simmons
+# 26 serena williams
+# 27 joe rogan
+# 32 klay thompson
+# 33 david banner
 follows1 = Api::Following.create(user_id: 1, fan_id: 2)
 follows2 = Api::Following.create(user_id: 1, fan_id: 3)
-follows3 = Api::Following.create(user_id: 2, fan_id: 1)
-follows4 = Api::Following.create(user_id: 3, fan_id: 1)
+follows3 = Api::Following.create(user_id: 1, fan_id: 4)
+follows4 = Api::Following.create(user_id: 1, fan_id: 5)
+follows5 = Api::Following.create(user_id: 1, fan_id: 6)
+follows6 = Api::Following.create(user_id: 1, fan_id: 7)
+follows7 = Api::Following.create(user_id: 1, fan_id: 23)
+follows8 = Api::Following.create(user_id: 1, fan_id: 24)
+follows9 = Api::Following.create(user_id: 1, fan_id: 25)
+follows10 = Api::Following.create(user_id: 1, fan_id: 26)
+follows11 = Api::Following.create(user_id: 1, fan_id: 27)
+follows12 = Api::Following.create(user_id: 1, fan_id: 32)
+follows13 = Api::Following.create(user_id: 1, fan_id: 33)
+
+
+follows14 = Api::Following.create(user_id: 7, fan_id: 1)
+follows15 = Api::Following.create(user_id: 23, fan_id: 1)
+follows16 = Api::Following.create(user_id: 24, fan_id: 1)
+follows17 = Api::Following.create(user_id: 25, fan_id: 1)
+follows18 = Api::Following.create(user_id: 26, fan_id: 1)
+follows19 = Api::Following.create(user_id: 27, fan_id: 1)
+follows20 = Api::Following.create(user_id: 32, fan_id: 1)
+follows21 = Api::Following.create(user_id: 33, fan_id: 1)
+follows22 = Api::Following.create(user_id: 4, fan_id: 1)
+follows23 = Api::Following.create(user_id: 9, fan_id: 1)
+follows24 = Api::Following.create(user_id: 12, fan_id: 1)
+follows25 = Api::Following.create(user_id: 15, fan_id: 1)
+follows26 = Api::Following.create(user_id: 2, fan_id: 1)
