@@ -1,144 +1,70 @@
-# Ultimate Fitness Challenge
 
-[Heroku link][heroku] **Note:** This should be a link to your production site
+# GoTheDistance
 
-[heroku]: http://www.herokuapp.com
+[GoTheDistance live][heroku]
 
-## Minimum Viable Product
+[heroku]: http://gothedistance.herokuapp.com
 
-Ultimate Fitness Challenge is a web application inspired by MapMyRun wthat will be build using Ruby on Rails and React.js.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
-
-- [ ] Hosting on Heroku
-- [ ] New account creation, login, and guest/demo login
-- [ ] A production README, replacing this README (**NB**: check out the [sample production README](docs/production_readme.md) -- you'll write this later)
-- [ ] Make running routes using google maps
-  - [ ] Smooth, bug-free navigation
-  - [ ] Adequate seed data to demonstrate the site's features
-  - [ ] Adequate CSS styling
-- [ ] Allow users to "follow" other users
-  - [ ] Smooth, bug-free navigation
-  - [ ] Adequate seed data to demonstrate the site's features
-  - [ ] Adequate CSS styling
-- [ ] Allow users to comment on runs
-  - [ ] Smooth, bug-free navigation
-  - [ ] Adequate seed data to demonstrate the site's features
-  - [ ] Adequate CSS styling
-- [ ] Include a dashboard that tracks completed runs
-  - [ ] Smooth, bug-free navigation
-  - [ ] Adequate seed data to demonstrate the site's features
-  - [ ] Adequate CSS styling
-
-## Design Docs
-* [View Wireframes][views]
-* [React Components][components]
-* [Flux Cycles][flux-cycles]
-* [API endpoints][api-endpoints]
-* [DB schema][schema]
-
-[views]: docs/views.md
-[components]: docs/components.md
-[flux-cycles]: docs/flux-cycles.md
-[api-endpoints]: docs/api-endpoints.md
-[schema]: docs/schema.md
-
-## Implementation Timeline
-
-### Phase 1: user authentication and user profile(1 days, W1 Wed 6pm)
-
-**Objective:** Functioning rails project with Authentication
-
-- [ ] create new project
-- [ ] create `User` model
-- [ ] authentication
-- [ ] user signup/signin pages
-- [ ] front end auth
-- [ ] guest demo login
-- [ ] user profiles
-- [ ] user settings
+GoTheDistance is a full stack web application that utilizes React.js with a Flux architectural framework for the frontend, and Ruby on Rails with a PostgreSQL database on the backend.
 
 
-### Phase 2: Routes Model, API, and basic APIUtil (2 days, W1 fri 6pm)
+## Features & Implementation
 
-**Objective:** Routes can be created, read, edited and destroyed through
-the API.
-
-- [ ] create `Route` model
-- [ ] seed the database with a small amount of test data
-- [ ] CRUD API for notes (`RoutesController`)
-- [ ] jBuilder views for notes
-- [ ] setup Webpack & Flux scaffold
-- [ ] setup `APIUtil` to interact with the API
-- [ ] test out API interaction in the console.
-- [ ] style route index, route detail, map and profile page
-- [ ] navbar
-- [ ] be able to favorite routes
+### Single-Page-App
+GoTheDistance has all content delivered by a single static page. All requests are redirected using a react router which renders react components based on the different urls.
 
 
+### Route Creation
 
-### Phase 3: Route creation(3 days, W2 M 6pm)
+  Routes are stored on the database with columns that contain a user_id, name, and location_id.  The user_id column references a users table and corresponds to the author of the route.  The name just corresponds to the name of the route. The location_id references a locations table and corresponds to the city that the route is in.  
 
-**Objective:** Routes can be created, read, edited and destroyed with the
-user interface.
+  Waypoints are stored in a database with a latitude, longitude, and route_id column.  The latitude and longitude columns correspond to geographic locations and the route_id column references the routes table.  
 
-- [ ] setup waypoints table and model
-- [ ] setup the flux loop with skeleton files
-- [ ] setup React Router
-- implement each Route component, building out the flux loop as needed.
-  - [ ] `RoutesIndex`
-  - [ ] `RouteIndexItem`
-  - [ ] `RouteForm`
-  - [ ] `MapComponent`
-- [ ] save Routes to the DB when the form loses focus or is left idle
-  after editing.
-- [ ] style routes components
+  Users specify waypoints by clicking on a google maps element.  The waypoints are stored on the frontend and routes are created using the google maps direction service api.  Once the user has specified the waypoints and clicks the `Create Route` button, a new database entry is stored for the route.  The route store is updated, and then the waypoints are created, using the route_id of the most recently added route in the route store.
 
+![route_form](https://github.com/jordvnkm/fitnessApp/blob/master/docs/route_form.png)
 
-### Phase 4: followers and comments (1 days, W2 Tu 6pm)
+### following of users
 
-**Objective:** allow users to follow other users and create comments on routes
+  Followings are stored in the database using a join table that stores the user_id, and the fan_id.  The user_id corresponds to the user that is being followed, and the fan_id corresponds to the user that is doing the following.  Users follow each other by visiting profiles and clicking the follow button.  The followings store holds the different followings throughout the application.  The `follow` button changes to `unfollow` if the user is following the current profile.  No follow button is displayed if the profile belongs to the current user.
 
-- [ ] create following join table
-- [ ] create follow button on user profiles
-- [ ] implement user search bar
-- [ ] allow routes to be commented on
-- [ ] style comments nad seed routes and comments with data
+### comments on routes
+
+  Users can comment on running routes.  Comments are stored in the database with columns for content, route_id, user_id, and date.  The date column is currently not being used.  The content contains the text for the comment. The route_id corresponds to the route that the comment is on, and the user_id corresponds to the user that posted the comment.
+
+  When viewing a routes detail component, a user can comment on the route if they are signed in.  If they are not signed in, the form will instruct them to sign in.
+
+![sign in instructions](https://github.com/jordvnkm/fitnessApp/blob/master/docs/comment_sign_in.png)
+
+![comment form](https://github.com/jordvnkm/fitnessApp/blob/master/docs/comment_form.png)
 
 
-### Phase 5: discover routes page (1 days day, W2 Wed 6pm)
+### dashboard displays completed, authored, favorited routes
 
-**Objective:** allow users to search for routes by city or name
+  Users can mark routes as completed and favorited, and the dashboard automatically displays any routes that have been authored by the current profile.  
 
-- [ ] implement search bar component
-- [ ] implement routes index
-- [ ] style discover page
+  Completed routes are stored in the database as a join table between routes and users,  with a few extra columns for date, and notes.  The dates and notes columns are currently not in use but will be implemented in future updates.
 
-### Phase 6: homepage (1 days, W2 Thu 6pm)
+  Favorite routes are stored in the database as a join table between routes and users.  
 
-**Objective:** create homepage component
+  The completed and favorited table entries are stored in their own respective stores on the front end.  When viewing a user profile, the completed, authored, and favorited routes and passed to the profile component from an ajax request.  
 
-- [ ] create homepage component
-- [ ] discover routes component inside homepage
-- [ ] style homepage
+  When viewing a routes details, `favorite` and `mark as completed` buttons are shown based on the favorite and completed table entries that are saved in the front end stores.
 
+![routes dashboard](https://github.com/jordvnkm/fitnessApp/blob/master/docs/routes_index.png)
 
-### Phase 1: production readme(1 days, W2 F 6pm)
+### view routes based on location
 
-**objective:** create a production readme
+  users may search all routes that given in a certain location.  At this moment, the location must be in the database, but may be switched to use google maps autocomplete eventually.  Once a user chooses a location, An ajax request will be made to find all the routes for that location.  The routes are then displayed on the location detail map.
 
-- [ ] to be determined
+## Future Directions for the Project
 
+In addition to the features already implemented, I plan to continue work on this project.  The next steps for FresherNote are outlined below.
 
+### More route information in the route detail
 
+I plan to show more route information, such as the steps for each leg of the route and the route distance.  I already know how to pull this information out of the google maps api, so rendering the right content should not be too difficult.
 
-### Bonus Features (TBD)
-- [ ] Search through notes for blocks of text
-- [ ] Pagination / infinite scroll for Notes Index
-- [ ] Set reminders on notes
-- [ ] Changelogs for Notes
-- [ ] Multiple sessions
+### logging workouts other than running routes.
 
-[phase-one]: docs/phases/phase1.md
-[phase-two]: docs/phases/phase2.md
-[phase-three]: docs/phases/phase3.md
-[phase-four]: docs/phases/phase4.md
-[phase-five]: docs/phases/phase5.md
+I plan to implement more components that will allow a user to create, share, and comment on other workouts besides running routes.  These may include gym workouts, hiking trails.  

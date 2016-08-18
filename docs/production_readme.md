@@ -1,5 +1,5 @@
 
-# Ultimate Fitness Challenge
+# GoTheDistance
 
 [GoTheDistance live][heroku]
 

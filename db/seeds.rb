@@ -1,4 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
+anc# This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
 # Examples:
@@ -10,8 +10,9 @@
 guest = Api::User.create(username: "Guest", password: "password",
                       email: "guest@guest.com", home_location_id: 62, profile_img_url: "http://www.runninginjury.co.uk/community/wp-content/uploads/2014/01/Rocky-runs-up-the-stairs-.jpg")
 
-user1 = Api::User.create(username: "James Smith", password: "password1", email: "user1@gmail.com", home_location_id: 62, profile_img_url: "https://static01.nyt.com/images/2009/10/21/magazine/21physed_barefoot/blogSpan.jpg")
-user2 = Api::User.create(username: "Jon Jones", password: "password2", email: "user2@gmail.com", home_location_id: 62, profile_img_url: "http://www.craziestsportsfights.com/wp-content/uploads/2016/04/jon-jones.jpg")
+user1 = Api::User.create(username: "Adam Smith", password: "password1", email: "user1@gmail.com", home_location_id: 62, profile_img_url: "https://static01.nyt.com/images/2009/10/21/magazine/21physed_barefoot/blogSpan.jpg")
+# user2 = Api::User.create(username: "Jon Jones", password: "password2", email: "user2@gmail.com", home_location_id: 62, profile_img_url: "http://www.craziestsportsfights.com/wp-content/uploads/2016/04/jon-jones.jpg")
+user2 = Api::User.create(username: "Joe Jackson", password: "password2", email: "user2@gmail.com", home_location_id: 62, profile_img_url: "http://www.buzzle.com/images/sports/athlete-running.jpg")
 user3 = Api::User.create(username: "Bob Johnson", password: "password3", email: "user3@gmail.com", home_location_id: 62, profile_img_url: "https://i.guim.co.uk/img/media/febd05d5d3553b0e0a48772c20194bd6ac5d5990/0_231_5472_3283/master/5472.jpg?w=620&q=55&auto=format&usm=12&fit=max&s=3a89e9df2667a538a7a3a46b5b6b6537")
 user4 = Api::User.create(username: "Amanda Todd", password: "password4", email: "user4@gmail.com", home_location_id: 62, profile_img_url: "https://everydaylisamae.files.wordpress.com/2015/02/running.jpg")
 user5 = Api::User.create(username: "Jordan Michaels", password: "password5", email: "user5@gmail.com", home_location_id: 62, profile_img_url: "http://yesofcorsa.com/wp-content/uploads/2015/08/4453_running.jpg")
@@ -166,14 +167,14 @@ date1 = Date.parse('18-12-2015')
 completed1 = Api::CompletedRoute.create(date: date1, route_id: 3, user_id: 1)
 
 # comments for user id 1
-comment1 = Api::Comment.create(author_id: 1, content: "hello from comment1", route_id: 1)
-comment2 = Api::Comment.create(author_id: 1, content: "hello from comment2", route_id: 2)
-comment3 = Api::Comment.create(author_id: 1, content: "hello from comment3", route_id: 3)
+comment1 = Api::Comment.create(author_id: 1, content: "Really nice route if your're in the city. 8/10 would recommend", route_id: 1)
+comment2 = Api::Comment.create(author_id: 1, content: "Just ran through this route the other day. Was just the right distance for me. I loved it", route_id: 2)
+comment3 = Api::Comment.create(author_id: 1, content: "Wasn't sure about this run before I started, but it turned out to be a lot nicer than expected.", route_id: 3)
 
 # comments for user id 2
-comment4 = Api::Comment.create(author_id: 2, content: "hello from comment4", route_id: 1)
-comment5 = Api::Comment.create(author_id: 2, content: "hello from comment5", route_id: 2)
-comment6 = Api::Comment.create(author_id: 2, content: "hello from comment6", route_id: 3)
+comment4 = Api::Comment.create(author_id: 2, content: "Thats what I call a good morning run", route_id: 1)
+comment5 = Api::Comment.create(author_id: 2, content: "^ I definitely agree", route_id: 2)
+comment6 = Api::Comment.create(author_id: 2, content: "", route_id: 3)
 comment7 = Api::Comment.create(author_id: 2, content: "hello from comment7", route_id: 1)
 comment8 = Api::Comment.create(author_id: 2, content: "hello from comment8", route_id: 2)
 comment9 = Api::Comment.create(author_id: 2, content: "hello from comment9", route_id: 3)
@@ -194,6 +195,8 @@ comment13 = Api::Comment.create(author_id: 3, content: "hello from comment13", r
 # 28 joe rogan
 # 33 klay thompson
 # 34 david banner
+
+#Guest  stuff
 follows1 = Api::Following.create(user_id: 1, fan_id: 2)
 follows2 = Api::Following.create(user_id: 1, fan_id: 3)
 follows3 = Api::Following.create(user_id: 1, fan_id: 4)
@@ -221,4 +224,32 @@ follows22 = Api::Following.create(user_id: 4, fan_id: 1)
 follows23 = Api::Following.create(user_id: 9, fan_id: 1)
 follows24 = Api::Following.create(user_id: 12, fan_id: 1)
 follows25 = Api::Following.create(user_id: 15, fan_id: 1)
-follows26 = Api::Following.create(user_id: 2, fan_id: 1)
+follows26 = Api::Following.create(user_id: 3, fan_id: 1)
+
+
+
+# 8 kobe
+# 24 hilary swank
+# 25 steph curry
+# 26 ben simmons
+# 27 serena williams
+# 28 joe rogan
+# 33 klay thompson
+# 34 david banner
+
+#jon jones stuff
+follows = Api::Following.create(user_id: 3: fan_id: 24)
+follows = Api::Following.create(user_id: 3: fan_id: 25)
+follows = Api::Following.create(user_id: 3: fan_id: 26)
+follows = Api::Following.create(user_id: 3: fan_id: 27)
+follows = Api::Following.create(user_id: 3: fan_id: 28)
+follows = Api::Following.create(user_id: 3: fan_id: 29)
+follows = Api::Following.create(user_id: 3: fan_id: 33)
+follows = Api::Following.create(user_id: 3: fan_id: 34)
+follows = Api::Following.create(user_id: 3: fan_id: 12)
+follows = Api::Following.create(user_id: 3: fan_id: 11)
+
+follows = Api::Following.create(user_id: 25: fan_id: 3)
+follows = Api::Following.create(user_id: 24: fan_id: 3)
+follows = Api::Following.create(user_id: 34: fan_id: 3)
+follows = Api::Following.create(user_id: 8: fan_id: 3)
