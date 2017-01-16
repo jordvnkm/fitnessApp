@@ -109,7 +109,7 @@ const HomePage = React.createClass({
       content = (
         <Carousel.Caption>
           <h1 className="jumboHeader">Stay up to date</h1>
-          <p className="jumboContent">See what's going on in your city</p>
+          <p className="jumboContent">See whats going on in your city</p>
           <Button className="jumboButton" onClick={this.goToHomeCity}>Search {this.state.currentUser.home_location.name}</Button>
         </Carousel.Caption>
       )
